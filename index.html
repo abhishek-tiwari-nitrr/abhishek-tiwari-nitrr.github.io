@@ -3,11 +3,11 @@
    <head>
       <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width,initial-scale=1"/>
-      <title>Abhishek Tiwari - ML Engineer & Data Scientist</title>
+      <title>Abhishek Tiwari - ML Engineer &amp; Data Scientist</title>
       <link rel="icon" href="icon/logo.png" type="image/png"/>
-      <meta name="description" content="ML Engineer & Data Scientist. Building intelligent systems with Python, XGBoost, Scikit-Learn, and Agentic AI. Appian Developer at EXL Service."/>
+      <meta name="description" content="ML Engineer &amp; Data Scientist. Building intelligent systems with Python, XGBoost, Scikit-Learn, and Agentic AI. Appian Developer at EXL Service."/>
       <link rel="preconnect" href="https://fonts.googleapis.com"/>
-      <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet"/>
+      <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&amp;display=swap" rel="stylesheet"/>
       <style>
          :root{
          --bg:#08090e;--bg2:#0f1018;--bg3:#161724;
@@ -314,7 +314,6 @@
          @media(max-width:768px){
          .nav-inner{padding:.65rem 1.25rem}
          .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:998}
-         .cert-grid{grid-template-columns:repeat(2,1fr)}
          .nav-links.open{display:flex}
          .nav-links a{font-size:1.4rem}
          .hamburger{display:flex;z-index:999}
@@ -322,12 +321,58 @@
          .hamburger.open span:nth-child(2){opacity:0}
          .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
          .nav-cta{display:none}
+         /* prevent horizontal scroll */
+         html,body{overflow-x:hidden;max-width:100vw}
+         /* hero */
+         #hero{padding:0 1.25rem}
+         .hero-content{padding-top:90px}
+         .hero-desc{font-size:.95rem}
+         .hero-btns{flex-direction:column;align-items:flex-start;gap:.65rem}
+         .btn-primary{width:100%;max-width:270px;text-align:center;padding:.7rem 1.25rem;font-size:.9rem}
+         .btn-ghost{width:100%;max-width:270px;text-align:center;justify-content:center;padding:.7rem 1.25rem;font-size:.9rem}
+         .hero-stats{gap:.9rem 1.4rem;flex-wrap:wrap}
+         .stat{min-width:calc(50% - .75rem)}
+         .stat-num{font-size:1.5rem}
+         /* sections with explicit padding overrides */
+         section{padding:4rem 1.25rem}
+         #skills{padding:4rem 0}
+         #achievements{padding:4rem 0}
+         #contact{padding:4rem 1.25rem;max-width:100%}
+         /* about */
          #about .about-grid{grid-template-columns:1fr}
-         .hero-stats{gap:1.5rem}
+         /* skills */
+         .skills-grid{grid-template-columns:1fr}
+         /* projects */
+         .projects-grid{grid-template-columns:1fr}
+         .proj-card{padding:1.25rem}
+         .proj-actions{flex-wrap:wrap}
+         /* achievements */
+         .achv-grid{grid-template-columns:1fr}
+         /* certifications */
+         .cert-grid{grid-template-columns:repeat(2,1fr);gap:.75rem}
+         /* timeline */
+         .tl-header{flex-direction:column;align-items:flex-start;gap:.35rem}
+         .tl-date{white-space:normal}
+         /* contact */
+         .contact-card{padding:1.75rem 1.25rem}
+         .contact-email{font-size:1.1rem;word-break:break-all}
+         .social-row{flex-wrap:wrap;gap:.6rem;justify-content:center}
+         .social-btn{flex:1 1 140px;justify-content:center;min-width:140px}
+         /* cursor & terminal */
          .cursor,.cursor-ring{display:none}
          #terminal{width:calc(100vw - 2rem);right:1rem;bottom:1rem}
          .term-hint{right:1rem;bottom:1rem}
-         section{padding:4rem 1.25rem}
+         }
+         /* extra small phones */
+         @media(max-width:420px){
+         .hero-name{font-size:2.6rem}
+         .cert-grid{grid-template-columns:1fr}
+         .btn-primary,.btn-ghost{max-width:100%}
+         .social-btn{flex:1 1 100%;min-width:0}
+         .tl-card{padding:1.25rem 1rem}
+         .hero-stats{gap:.65rem 1rem}
+         .proj-metrics{gap:.35rem}
+         .metric-badge{font-size:.65rem}
          }
       </style>
    </head>
@@ -346,7 +391,7 @@
                <li><a href="#achievements">Achievements</a></li>
                <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="https://github.com/abhishek-tiwari-nitrr" target="_blank" class="nav-cta">GitHub ↗</a>
+            <a href="https://github.com/abhishek-tiwari-nitrr" target="_blank" class="nav-cta">GitHub &#8599;</a>
             <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
          </div>
       </nav>
@@ -366,7 +411,7 @@
             </p>
             <div class="hero-btns">
                <a href="#projects" class="btn-primary">View My Work</a>
-               <a href="https://drive.google.com/file/d/1Ukbhty31lL0Ls-LOu5K3zrbgaD4IH_Ky/view?usp=sharing" download class="btn-ghost" target="_blank"  style="display:flex;align-items:center;gap:.5rem">⬇ Download Resume</a>
+               <a href="https://drive.google.com/file/d/1Ukbhty31lL0Ls-LOu5K3zrbgaD4IH_Ky/view?usp=sharing" download class="btn-ghost" target="_blank"  style="display:flex;align-items:center;gap:.5rem">&#11015; Download Resume</a>
                <a href="#contact" class="btn-ghost">Get In Touch</a>
             </div>
             <div class="hero-stats">
@@ -383,7 +428,7 @@
          <h2 class="section-title fade-up">Turning data into decisions.</h2>
          <div class="about-grid fade-up">
             <div class="about-text">
-               <p>I'm a Data Science practitioner on a deliberate journey from <strong>Process Automation to ML Engineering</strong>. Nearly 4 years at EXL Service delivering enterprise Appian BPM and Agentic AI solutions - promoted twice, awarded 4× for impact.</p>
+               <p>I&#39;m a Data Science practitioner on a deliberate journey from <strong>Process Automation to ML Engineering</strong>. Nearly 4 years at EXL Service delivering enterprise Appian BPM and Agentic AI solutions - promoted twice, awarded 4&times; for impact.</p>
                <p style="margin-top:1rem">Outside work I build <strong>personal ML projects</strong> End-to-End</p>
                <p style="margin-top:1rem">Currently targeting <strong>ML Engineer / Applied AI / Data Scientist</strong> roles at product companies and AI-native startups.</p>
             </div>
@@ -392,37 +437,37 @@
                <div class="fact-card" onclick="this.classList.toggle('flipped')">
                   <div class="fact-front">
                      <div class="fact-label">Institute</div>
-                     <div class="fact-val">NIT Raipur — B.Tech Mining Engineering</div>
+                     <div class="fact-val">NIT Raipur &#8212; B.Tech Mining Engineering</div>
                   </div>
-                  <div class="fact-back">Class of 2022 · GATE 2025 Qualified · AWS ML Scholarship 🎯</div>
+                  <div class="fact-back">Class of 2022 &middot; GATE 2025 Qualified &middot; AWS ML Scholarship &#127919;</div>
                </div>
                <div class="fact-card" onclick="this.classList.toggle('flipped')">
                   <div class="fact-front">
                      <div class="fact-label">Current Role</div>
                      <div class="fact-val">Lead Asst. Manager @ EXL Service, Noida</div>
                   </div>
-                  <div class="fact-back">Leading Insurance Domain Appian BPM as Primary Developer since Jan 2026 ⚡</div>
+                  <div class="fact-back">Leading Insurance Domain Appian BPM as Primary Developer since Jan 2026 &#9889;</div>
                </div>
                <div class="fact-card" onclick="this.classList.toggle('flipped')">
                   <div class="fact-front">
                      <div class="fact-label">Best Competition Result</div>
                      <div class="fact-val">Global Rank #8 - Analytics Vidhya HR Analytics</div>
                   </div>
-                  <div class="fact-back">Also: #67 Power Plant Energy AI, #299 AmExpert ML Hackathon 🏆</div>
+                  <div class="fact-back">Also: #67 Power Plant Energy AI, #299 AmExpert ML Hackathon &#127942;</div>
                </div>
                <div class="fact-card" onclick="this.classList.toggle('flipped')">
                   <div class="fact-front">
                      <div class="fact-label">Tech Stack Philosophy</div>
-                     <div class="fact-val">Python-first. Scikit-learn → XGBoost → Streamlit → prod.</div>
+                     <div class="fact-val">Python-first. Scikit-learn &#8594; XGBoost &#8594; Streamlit &#8594; prod.</div>
                   </div>
-                  <div class="fact-back">currently_learning = ['LangChain','RAG','MLflow'] 🚀</div>
+                  <div class="fact-back">currently_learning = [&#39;LangChain&#39;,&#39;RAG&#39;,&#39;MLflow&#39;] &#128640;</div>
                </div>
                <div class="fact-card" onclick="this.classList.toggle('flipped')">
                   <div class="fact-front">
                      <div class="fact-label">HackerRank Badge</div>
-                     <div class="fact-val">5★ Golden Badge in Python & SQL</div>
+                     <div class="fact-val">5&#9733; Golden Badge in Python &amp; SQL</div>
                   </div>
-                  <div class="fact-back">Also: Codeforces Rating 784 · 2× Kaggle Bronze Notebook Medals 🥉</div>
+                  <div class="fact-back">Also: Codeforces Rating 784 &middot; 2&times; Kaggle Bronze Notebook Medals &#129353;</div>
                </div>
             </div>
          </div>
@@ -434,7 +479,7 @@
             <h2 class="section-title fade-up">Technical Arsenal</h2>
             <div class="skills-grid">
                <div class="skill-group fade-up">
-                  <div class="skill-group-title">⚡ Core ML / Python</div>
+                  <div class="skill-group-title">&#9889; Core ML / Python</div>
                   <div class="skill-item">
                      <div class="skill-header"><span>Python</span><span class="skill-pct">90%</span></div>
                      <div class="skill-bar-bg">
@@ -467,7 +512,7 @@
                   </div>
                </div>
                <div class="skill-group fade-up">
-                  <div class="skill-group-title">🗄️ Data & SQL</div>
+                  <div class="skill-group-title">&#128196; Data &amp; SQL</div>
                   <div class="skill-item">
                      <div class="skill-header"><span>SQL (MariaDB / MySQL)</span><span class="skill-pct">80%</span></div>
                      <div class="skill-bar-bg">
@@ -494,7 +539,7 @@
                   </div>
                </div>
                <div class="skill-group fade-up">
-                  <div class="skill-group-title">🚀 MLOps & Deployment</div>
+                  <div class="skill-group-title">&#128640; MLOps &amp; Deployment</div>
                   <div class="skill-item">
                      <div class="skill-header"><span>Streamlit</span><span class="skill-pct">80%</span></div>
                      <div class="skill-bar-bg">
@@ -521,7 +566,7 @@
                   </div>
                </div>
                <div class="skill-group fade-up">
-                  <div class="skill-group-title">🤖 AI & Enterprise</div>
+                  <div class="skill-group-title">&#129302; AI &amp; Enterprise</div>
                   <div class="skill-item">
                      <div class="skill-header"><span>Appian BPM / Agentic AI</span><span class="skill-pct">90%</span></div>
                      <div class="skill-bar-bg">
@@ -555,16 +600,16 @@
                   <span class="pill">A/B Testing</span><span class="pill">Drift Monitoring</span><span class="pill">Covariate Shift</span>
                   <span class="pill">Pickle</span><span class="pill">AdaBoost</span><span class="pill">QDA</span><span class="pill">LightGBM</span>
                   <span class="pill">Supabase</span><span class="pill">Asana</span><span class="pill">Git</span><span class="pill">RPA</span>
-                  <span class="pill">LangChain ★</span><span class="pill">RAG ★</span><span class="pill">MLflow ★</span>
+                  <span class="pill">LangChain &#9733;</span><span class="pill">RAG &#9733;</span><span class="pill">MLflow &#9733;</span>
                </div>
-               <p style="font-family:var(--mono);font-size:.7rem;color:var(--text3);margin-top:.75rem">★ Currently learning</p>
+               <p style="font-family:var(--mono);font-size:.7rem;color:var(--text3);margin-top:.75rem">&#9733; Currently learning</p>
             </div>
          </div>
       </section>
       <!-- EXPERIENCE -->
       <section id="experience">
          <p class="section-tag fade-up">03. Experience</p>
-         <h2 class="section-title fade-up">Where I've Worked</h2>
+         <h2 class="section-title fade-up">Where I&#39;ve Worked</h2>
          <p class="section-sub fade-up">From Junior Developer to Lead - building enterprise AI, Agentic systems and ML pipelines across 4 years at EXL Service.</p>
          <div class="timeline">
             <div class="tl-item">
@@ -573,7 +618,7 @@
                   <div class="tl-header">
                      <div>
                         <div class="tl-role">Lead Assistant Manager - Developer</div>
-                        <div class="tl-company">EXL Service · Noida</div>
+                        <div class="tl-company">EXL Service &middot; Noida</div>
                      </div>
                      <span class="tl-date">Jan 2026 - Present</span>
                   </div>
@@ -596,18 +641,18 @@
                <div class="tl-card">
                   <div class="tl-header">
                      <div>
-                        <div class="tl-role">Assistant Manager - R&D & AI POC Lab</div>
-                        <div class="tl-company">EXL Service · Noida</div>
+                        <div class="tl-role">Assistant Manager - R&amp;D &amp; AI POC Lab</div>
+                        <div class="tl-company">EXL Service &middot; Noida</div>
                      </div>
                      <span class="tl-date">Jan 2024 - Dec 2025</span>
                   </div>
                   <ul class="tl-bullets">
-                     <li>Led Agentic AI POC for Short-Term Disability Claims using Appian Agentic AI - <strong>+15% productivity gain</strong>; served as early-access collaborator providing direct feedback to Appian's Product Team.</li>
+                     <li>Led Agentic AI POC for Short-Term Disability Claims using Appian Agentic AI - <strong>+15% productivity gain</strong>; served as early-access collaborator providing direct feedback to Appian&#39;s Product Team.</li>
                      <li>Architected DQA (Digital Quality Assurance) Enterprise MVP in Appian with calendar management and audit forms, <strong>cutting delivery time 10%</strong> and eliminating manual errors across the team.</li>
-                     <li>Engineered <strong>15+ Demos & POC applications</strong> showcasing GenAI/Agentic AI capabilities to internal and external stakeholders in EXL's R&D Lab.</li>
-                     <li>Received <strong>4× Super Squad Awards</strong> (Apr 2024, Jul 2024, Oct 2024, Oct 2025) for outstanding project and POC contributions across two years.</li>
+                     <li>Engineered <strong>15+ Demos &amp; POC applications</strong> showcasing GenAI/Agentic AI capabilities to internal and external stakeholders in EXL&#39;s R&amp;D Lab.</li>
+                     <li>Received <strong>4&times; Super Squad Awards</strong> (Apr 2024, Jul 2024, Oct 2024, Oct 2025) for outstanding project and POC contributions across two years.</li>
                   </ul>
-                  <div class="tl-tags"><span class="tl-tag">Agentic AI</span><span class="tl-tag">GenAI</span><span class="tl-tag">R&D</span><span class="tl-tag">POC/MVP</span></div>
+                  <div class="tl-tags"><span class="tl-tag">Agentic AI</span><span class="tl-tag">GenAI</span><span class="tl-tag">R&amp;D</span><span class="tl-tag">POC/MVP</span></div>
                </div>
             </div>
             <div class="tl-item">
@@ -616,13 +661,13 @@
                   <div class="tl-header">
                      <div>
                         <div class="tl-role">Senior Executive - Junior Appian Developer</div>
-                        <div class="tl-company">EXL Service · Noida</div>
+                        <div class="tl-company">EXL Service &middot; Noida</div>
                      </div>
                      <span class="tl-date">Jul 2022 - Dec 2023</span>
                   </div>
                   <ul class="tl-bullets">
                      <li>Designed and deployed Real Estate domain BPM application as part of 9-member team; built Process Models, SAIL interfaces, Records and MariaDB integrations from ground up.</li>
-                     <li>Built Anomaly Detection POC using Appian, contributing to EXL's internal innovation pipeline - one of the earliest POC contributors on the team.</li>
+                     <li>Built Anomaly Detection POC using Appian, contributing to EXL&#39;s internal innovation pipeline - one of the earliest POC contributors on the team.</li>
                      <li>Improved team velocity by standardising reusable Appian component libraries, cutting recurring development effort and onboarding time for new modules.</li>
                   </ul>
                   <div class="tl-tags"><span class="tl-tag">Appian BPM</span><span class="tl-tag">SAIL</span><span class="tl-tag">MariaDB</span></div>
@@ -634,7 +679,7 @@
                   <div class="tl-header">
                      <div>
                         <div class="tl-role">Data Analyst Intern</div>
-                        <div class="tl-company">Suven Consultants & Technology Pvt. Ltd. · Mumbai</div>
+                        <div class="tl-company">Suven Consultants &amp; Technology Pvt. Ltd. &middot; Mumbai</div>
                      </div>
                      <span class="tl-date">Sep 2021 - Oct 2021</span>
                   </div>
@@ -650,17 +695,17 @@
       <!-- PROJECTS -->
       <section id="projects">
          <p class="section-tag fade-up">04. Projects</p>
-         <h2 class="section-title fade-up">Things I've Built</h2>
+         <h2 class="section-title fade-up">Things I&#39;ve Built</h2>
          <p class="section-sub fade-up">End-to-End ML systems with real Business Impact - production-grade code, CI/CD, drift monitoring and explainability.</p>
          <div class="projects-grid">
             <div class="proj-card" id="pc1">
                <div class="proj-top">
                   <div style="display:flex;align-items:center;gap:.6rem">
-                     <div class="proj-icon" style="background:rgba(255,107,107,.1);color:#ff6b6b">🛡️</div>
+                     <div class="proj-icon" style="background:rgba(255,107,107,.1);color:#ff6b6b">&#128737;&#65039;</div>
                      <span class="proj-live-dot">LIVE</span>
                   </div>
                   <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/PhishGuard" target="_blank" class="proj-link" title="GitHub">⎇</a>
+                     <a href="https://github.com/abhishek-tiwari-nitrr/PhishGuard" target="_blank" class="proj-link" title="GitHub">&#8907;</a>
                   </div>
                </div>
                <div class="proj-title">PhishGuard</div>
@@ -669,7 +714,7 @@
                   <span class="metric-badge">30 URL/Page Features</span>
                   <span class="metric-badge">5-Stage MLOps Pipeline</span>
                   <span class="metric-badge">Multi-model + GridSearchCV</span>
-                  <span class="metric-badge">F1 >= 2% Production Gating</span>
+                  <span class="metric-badge">F1 &gt;= 2% Production Gating</span>
                   <span class="metric-badge">KS Drift Detection</span>
                </div>
                <div class="proj-stack">
@@ -683,18 +728,18 @@
                   <span class="stack-tag">GitHub Actions</span>
                </div>
                <div class="proj-actions">
-                  <a href="https://abhishek-tiwari-nitrr-phishguard.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">↗ Live App</a>
-                  <a href="https://www.youtube.com/watch?v=2LUZ8VoyMQY" target="_blank" class="proj-btn proj-btn-yt">▶ Watch Demo</a>
+                  <a href="https://abhishek-tiwari-nitrr-phishguard.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">&#8599; Live App</a>
+                  <a href="https://www.youtube.com/watch?v=2LUZ8VoyMQY" target="_blank" class="proj-btn proj-btn-yt">&#9654; Watch Demo</a>
                </div>
             </div>
             <div class="proj-card" id="pc2">
                <div class="proj-top">
                   <div style="display:flex;align-items:center;gap:.6rem">
-                     <div class="proj-icon" style="background:rgba(0,212,255,.1);color:#00d4ff">🖥️</div>
+                     <div class="proj-icon" style="background:rgba(0,212,255,.1);color:#00d4ff">&#128421;&#65039;</div>
                      <span class="proj-live-dot">LIVE</span>
                   </div>
                   <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/System-Performance-Analyzer" target="_blank" class="proj-link" title="GitHub">⎇</a>
+                     <a href="https://github.com/abhishek-tiwari-nitrr/System-Performance-Analyzer" target="_blank" class="proj-link" title="GitHub">&#8907;</a>
                   </div>
                </div>
                <div class="proj-title">System Performance Analyzer</div>
@@ -718,26 +763,26 @@
                   <span class="stack-tag">Psutil</span>
                </div>
                <div class="proj-actions">
-                  <a href="https://abhishek-tiwari-nitrr-system-performance-analyzer.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">↗ Live App</a>
-                  <a href="https://www.youtube.com/watch?v=JKns0b45UX8" target="_blank" class="proj-btn proj-btn-yt">▶ Watch Demo</a>
+                  <a href="https://abhishek-tiwari-nitrr-system-performance-analyzer.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">&#8599; Live App</a>
+                  <a href="https://www.youtube.com/watch?v=JKns0b45UX8" target="_blank" class="proj-btn proj-btn-yt">&#9654; Watch Demo</a>
                </div>
             </div>
             <div class="proj-card" id="pc3">
                <div class="proj-top">
                   <div style="display:flex;align-items:center;gap:.6rem">
-                     <div class="proj-icon" style="background:rgba(16,185,129,.12);color:#10b981">📉</div>
+                     <div class="proj-icon" style="background:rgba(16,185,129,.12);color:#10b981">&#128201;</div>
                      <span class="proj-live-dot">LIVE</span>
                   </div>
                   <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/Telco-Customer-Churn-Prediction" target="_blank" class="proj-link" title="GitHub">⎇</a>
+                     <a href="https://github.com/abhishek-tiwari-nitrr/Telco-Customer-Churn-Prediction" target="_blank" class="proj-link" title="GitHub">&#8907;</a>
                   </div>
                </div>
                <div class="proj-title">Telco Customer Churn Prediction</div>
-               <div class="proj-desc">AdaBoost classifier predicting telecom churn before customers leave protecting ₹19.4L/cycle net ROI on 7032 customers. SMOTE boosted recall by 41.6%, SHAP narrows inference to top-20 features. Includes drift monitoring dashboard, SQLite audit trail and CI/CD with pytest.</div>
+               <div class="proj-desc">AdaBoost classifier predicting telecom churn before customers leave protecting &#8377;19.4L/cycle net ROI on 7032 customers. SMOTE boosted recall by 41.6%, SHAP narrows inference to top-20 features. Includes drift monitoring dashboard, SQLite audit trail and CI/CD with pytest.</div>
                <div class="proj-metrics">
                   <span class="metric-badge">AUC-ROC 0.8403</span>
                   <span class="metric-badge">Recall 0.7727 (+41.6% SMOTE lift)</span>
-                  <span class="metric-badge">₹19.4L/cycle Net ROI</span>
+                  <span class="metric-badge">&#8377;19.4L/cycle Net ROI</span>
                   <span class="metric-badge">CV AUC 0.8480 (5-fold)</span>
                </div>
                <div class="proj-stack">
@@ -751,18 +796,18 @@
                   <span class="stack-tag">GitHub Actions</span>
                </div>
                <div class="proj-actions">
-                  <a href="https://abhishek-tiwari-nitrr-churn-prediction.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">↗ Live App</a>
-                  <a href="https://www.youtube.com/watch?v=LfmpoiXrcko" target="_blank" class="proj-btn proj-btn-yt">▶ Watch Demo</a>
+                  <a href="https://abhishek-tiwari-nitrr-churn-prediction.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">&#8599; Live App</a>
+                  <a href="https://www.youtube.com/watch?v=LfmpoiXrcko" target="_blank" class="proj-btn proj-btn-yt">&#9654; Watch Demo</a>
                </div>
             </div>
             <div class="proj-card" id="pc4">
                <div class="proj-top">
                   <div style="display:flex;align-items:center;gap:.6rem">
-                     <div class="proj-icon" style="background:rgba(124,58,237,.12);color:#7c3aed">⛈️</div>
+                     <div class="proj-icon" style="background:rgba(124,58,237,.12);color:#7c3aed">&#9928;&#65039;</div>
                      <span class="proj-live-dot">LIVE</span>
                   </div>
                   <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/Thunderstorm-Forecasting" target="_blank" class="proj-link" title="GitHub">⎇</a>
+                     <a href="https://github.com/abhishek-tiwari-nitrr/Thunderstorm-Forecasting" target="_blank" class="proj-link" title="GitHub">&#8907;</a>
                   </div>
                </div>
                <div class="proj-title">Thunderstorm Forecasting</div>
@@ -783,15 +828,15 @@
                   <span class="stack-tag">imbalanced-learn</span>
                </div>
                <div class="proj-actions">
-                  <a href="https://abhishek-tiwari-nitrr-thunderstorm-forecasting.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">↗ Live App</a>
-                  <a href="https://www.youtube.com/watch?v=l6QeBEMpkJ4" target="_blank" class="proj-btn proj-btn-yt">▶ Watch Demo</a>
+                  <a href="https://abhishek-tiwari-nitrr-thunderstorm-forecasting.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">&#8599; Live App</a>
+                  <a href="https://www.youtube.com/watch?v=l6QeBEMpkJ4" target="_blank" class="proj-btn proj-btn-yt">&#9654; Watch Demo</a>
                </div>
             </div>
             <div class="proj-card" id="pc5">
                <div class="proj-top">
-                  <div class="proj-icon" style="background:rgba(250,199,75,.1);color:#fac74b">🛒</div>
+                  <div class="proj-icon" style="background:rgba(250,199,75,.1);color:#fac74b">&#128722;</div>
                   <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/Retail-Data-Insight-Application" target="_blank" class="proj-link" title="GitHub">⎇</a>
+                     <a href="https://github.com/abhishek-tiwari-nitrr/Retail-Data-Insight-Application" target="_blank" class="proj-link" title="GitHub">&#8907;</a>
                   </div>
                </div>
                <div class="proj-title">Retail Data Insight Application</div>
@@ -800,7 +845,7 @@
                   <span class="metric-badge">180K+ Transaction Records</span>
                   <span class="metric-badge">8 Publication-Quality Charts</span>
                   <span class="metric-badge">3-Level Progressive PDF Reports</span>
-                  <span class="metric-badge">Revenue, Geo & Customer Analytics</span>
+                  <span class="metric-badge">Revenue, Geo &amp; Customer Analytics</span>
                </div>
                <div class="proj-stack">
                   <span class="stack-tag">Python</span>
@@ -813,16 +858,16 @@
             </div>
             <div class="proj-card" id="pc6">
                <div class="proj-top">
-                  <div class="proj-icon" style="background:rgba(16,185,129,.08);color:#10b981">💰</div>
+                  <div class="proj-icon" style="background:rgba(16,185,129,.08);color:#10b981">&#128176;</div>
                   <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/Financial-Tracker-Application" target="_blank" class="proj-link" title="GitHub">⎇</a>
+                     <a href="https://github.com/abhishek-tiwari-nitrr/Financial-Tracker-Application" target="_blank" class="proj-link" title="GitHub">&#8907;</a>
                   </div>
                </div>
                <div class="proj-title">Financial Tracker Application</div>
                <div class="proj-desc">Menu-driven CLI finance tracker with clean modular architecture - add income/expense transactions, browse history and generate net balance reports. CSV-backed persistence, rotating logs and custom exception classes keep it production-readable despite being terminal-only.</div>
                <div class="proj-metrics">
                   <span class="metric-badge">CSV-Backed Persistence</span>
-                  <span class="metric-badge">Income & Expense Tracking</span>
+                  <span class="metric-badge">Income &amp; Expense Tracking</span>
                   <span class="metric-badge">Financial Summary Reports</span>
                   <span class="metric-badge">Custom Exception Handling</span>
                </div>
@@ -840,99 +885,99 @@
       <section id="achievements">
          <div class="inner">
             <p class="section-tag fade-up">05. Achievements</p>
-            <h2 class="section-title fade-up">Milestones & Recognition</h2>
+            <h2 class="section-title fade-up">Milestones &amp; Recognition</h2>
             <div class="achv-grid">
                <div class="achv-item fade-up">
-                  <div class="achv-icon">🏆</div>
+                  <div class="achv-icon">&#127942;</div>
                   <div class="achv-text">
                      <div class="achv-title">Global Rank #8 - HR Analytics</div>
-                     <div class="achv-sub">Analytics Vidhya · Jun 2023</div>
+                     <div class="achv-sub">Analytics Vidhya &middot; Jun 2023</div>
                   </div>
                </div>
                <div class="achv-item fade-up">
-                  <div class="achv-icon">🎯</div>
+                  <div class="achv-icon">&#127919;</div>
                   <div class="achv-text">
                      <div class="achv-title">GATE 2025 Qualified (AIR 155)</div>
-                     <div class="achv-sub">MN · IIT · Feb 2025</div>
+                     <div class="achv-sub">MN &middot; IIT &middot; Feb 2025</div>
                   </div>
                </div>
                <div class="achv-item fade-up">
-                  <div class="achv-icon">⚡</div>
+                  <div class="achv-icon">&#9889;</div>
                   <div class="achv-text">
-                     <div class="achv-title">4× Super Squad Award</div>
-                     <div class="achv-sub">EXL Service · 2024 & 2025</div>
+                     <div class="achv-title">4&times; Super Squad Award</div>
+                     <div class="achv-sub">EXL Service &middot; 2024 &amp; 2025</div>
                   </div>
                </div>
                <div class="achv-item fade-up">
-                  <div class="achv-icon">🌐</div>
+                  <div class="achv-icon">&#127760;</div>
                   <div class="achv-text">
                      <div class="achv-title">Global Rank #67 - Power Plant AI Challenge</div>
-                     <div class="achv-sub">Kaggle · Aug 2021</div>
+                     <div class="achv-sub">Kaggle &middot; Aug 2021</div>
                   </div>
                </div>
                <div class="achv-item fade-up">
-                  <div class="achv-icon">🤖</div>
+                  <div class="achv-icon">&#129302;</div>
                   <div class="achv-text">
                      <div class="achv-title">AWS Machine Learning Scholarship</div>
-                     <div class="achv-sub">Udacity · Jul 2021</div>
+                     <div class="achv-sub">Udacity &middot; Jul 2021</div>
                   </div>
                </div>
                <div class="achv-item fade-up">
-                  <div class="achv-icon">🎓</div>
+                  <div class="achv-icon">&#127891;</div>
                   <div class="achv-text">
                      <div class="achv-title">Bertelsmann Technology Scholarship</div>
-                     <div class="achv-sub">Udacity · Dec 2020</div>
+                     <div class="achv-sub">Udacity &middot; Dec 2020</div>
                   </div>
                </div>
                <div class="achv-item fade-up">
-                  <div class="achv-icon">🥉</div>
+                  <div class="achv-icon">&#129353;</div>
                   <div class="achv-text">
-                     <div class="achv-title">2× Kaggle Bronze Notebook Medal</div>
-                     <div class="achv-sub">Kaggle · 2021</div>
+                     <div class="achv-title">2&times; Kaggle Bronze Notebook Medal</div>
+                     <div class="achv-sub">Kaggle &middot; 2021</div>
                   </div>
                </div>
                <div class="achv-item fade-up">
-                  <div class="achv-icon">🏅</div>
+                  <div class="achv-icon">&#127885;</div>
                   <div class="achv-text">
-                     <div class="achv-title">1st Prize - Vigyaan'19</div>
-                     <div class="achv-sub">Aavartan, NIT Raipur · Sep 2019</div>
+                     <div class="achv-title">1st Prize - Vigyaan&#39;19</div>
+                     <div class="achv-sub">Aavartan, NIT Raipur &middot; Sep 2019</div>
                   </div>
                </div>
                <div class="achv-item fade-up">
-                  <div class="achv-icon">💡</div>
+                  <div class="achv-icon">&#128161;</div>
                   <div class="achv-text">
                      <div class="achv-title">Finalist - NEI Idea Factory</div>
-                     <div class="achv-sub">NBC · Jan 2021</div>
+                     <div class="achv-sub">NBC &middot; Jan 2021</div>
                   </div>
                </div>
             </div>
             <div class="cert-grid">
                <div class="cert-card fade-up">
-                  <div class="cert-logo" style="background:rgba(124,58,237,.15)">📜</div>
+                  <div class="cert-logo" style="background:rgba(124,58,237,.15)">&#128220;</div>
                   <div>
                      <div class="cert-name">Appian Certified Associate Developer</div>
-                     <div class="cert-issuer">Appian Corporation · Valid through May 2027</div>
+                     <div class="cert-issuer">Appian Corporation &middot; Valid through May 2027</div>
                   </div>
                </div>
                <div class="cert-card fade-up">
-                  <div class="cert-logo" style="background:rgba(0,212,255,.1)">🎓</div>
+                  <div class="cert-logo" style="background:rgba(0,212,255,.1)">&#127891;</div>
                   <div>
                      <div class="cert-name">Machine Learning - Stanford University</div>
-                     <div class="cert-issuer">Coursera / Andrew Ng · Jan 2020</div>
+                     <div class="cert-issuer">Coursera / Andrew Ng &middot; Jan 2020</div>
                   </div>
                </div>
                <div class="cert-card fade-up">
-                  <div class="cert-logo" style="background:rgba(16,185,129,.1)">⚙️</div>
+                  <div class="cert-logo" style="background:rgba(16,185,129,.1)">&#9881;&#65039;</div>
                   <div>
                      <div class="cert-name">EXL Hyperautomation Training</div>
-                     <div class="cert-issuer">Great Learning · Sep 2022</div>
+                     <div class="cert-issuer">Great Learning &middot; Sep 2022</div>
                   </div>
                </div>
                <div class="cert-card fade-up">
-                  <div class="cert-logo" style="background:rgba(250,199,75,.1)">🐍</div>
+                  <div class="cert-logo" style="background:rgba(250,199,75,.1)">&#128013;</div>
                   <div>
-                     <div class="cert-name">3× Udacity Nanodegrees</div>
-                     <div class="cert-issuer">Data Analytics · AI with Python · Predictive Analytics</div>
+                     <div class="cert-name">3&times; Udacity Nanodegrees</div>
+                     <div class="cert-issuer">Data Analytics &middot; AI with Python &middot; Predictive Analytics</div>
                   </div>
                </div>
             </div>
@@ -941,23 +986,23 @@
       <!-- CONTACT -->
       <section id="contact">
          <p class="section-tag">06. Contact</p>
-         <h2 class="section-title">Let's Build Something.</h2>
+         <h2 class="section-title">Let&#39;s Build Something.</h2>
          <div class="contact-card fade-up">
          <div onclick="copyEmail()" style="cursor:pointer">
             <div class="contact-email">abhishek.tiwari.nitrr@gmail.com</div>
             <div class="copy-hint" id="copyHint">Click to copy email address</div>
          </div>
          <div class="social-row">
-            <a href="https://drive.google.com/file/d/1Ukbhty31lL0Ls-LOu5K3zrbgaD4IH_Ky/view?usp=sharing" download class="social-btn" target="_blank"  style="background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.3);color:var(--accent)">⬇ Download Resume</a>
-            <a href="https://github.com/abhishek-tiwari-nitrr" target="_blank" class="social-btn">⎇ GitHub</a>
+            <a href="https://drive.google.com/file/d/1Ukbhty31lL0Ls-LOu5K3zrbgaD4IH_Ky/view?usp=sharing" download class="social-btn" target="_blank"  style="background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.3);color:var(--accent)">&#11015; Download Resume</a>
+            <a href="https://github.com/abhishek-tiwari-nitrr" target="_blank" class="social-btn">&#8907; GitHub</a>
             <a href="https://linkedin.com/in/abhishek-tiwari-nitrr" target="_blank" class="social-btn">in LinkedIn</a>
-            <a href="https://kaggle.com/abhishek20182" target="_blank" class="social-btn">📊 Kaggle</a>
-            <a href="https://medium.com/@abhishek-tiwari-nitrr" target="_blank" class="social-btn">✍ Medium</a>
+            <a href="https://kaggle.com/abhishek20182" target="_blank" class="social-btn">&#128202; Kaggle</a>
+            <a href="https://medium.com/@abhishek-tiwari-nitrr" target="_blank" class="social-btn">&#9997; Medium</a>
          </div>
       </section>
       <!-- FOOTER -->
       <footer>
-         Built with 💙 by <a href="https://github.com/abhishek-tiwari-nitrr">Abhishek Tiwari</a> · 2026
+         Built with &#128153; by <a href="https://github.com/abhishek-tiwari-nitrr">Abhishek Tiwari</a> &middot; 2026
       </footer>
       <!-- TERMINAL EASTER EGG -->
       <div id="terminal">
@@ -1094,7 +1139,7 @@
          function copyEmail(){
            navigator.clipboard.writeText('abhishek.tiwari.nitrr@gmail.com').then(()=>{
              const h=document.getElementById('copyHint');
-             h.textContent='✓ Copied to clipboard!';h.style.color='var(--accent3)';
+             h.textContent='&#10003; Copied to clipboard!';h.style.color='var(--accent3)';
              setTimeout(()=>{h.textContent='Click to copy email address';h.style.color='';},2500);
            });
          }
