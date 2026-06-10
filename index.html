@@ -155,13 +155,6 @@
          .skill-item:last-child{margin-bottom:0}
          .skill-header{display:flex;justify-content:space-between;margin-bottom:.4rem;font-size:.88rem;font-weight:500}
          .skill-pct{font-family:var(--mono);font-size:.78rem;color:var(--text3)}
-         .skill-bar-bg{height:5px;background:var(--border);border-radius:3px;overflow:visible;position:relative}
-         .skill-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,var(--accent2),var(--accent));position:relative;overflow:visible}
-         /* liquid wave inside the bar */
-         .skill-bar-fill::after{content:'';position:absolute;inset:0;border-radius:3px;background:repeating-linear-gradient(115deg,transparent 0 6px,rgba(255,255,255,.16) 6px 9px,transparent 9px 14px);background-size:28px 100%;animation:liquidWave 1.6s linear infinite;opacity:.7}
-         @keyframes liquidWave{to{background-position:28px 0}}
-         /* glow pulse at the fill endpoint */
-         .skill-bar-fill::before{content:'';position:absolute;right:-3px;top:50%;width:9px;height:9px;border-radius:50%;background:var(--accent);transform:translateY(-50%);box-shadow:0 0 8px var(--accent);animation:endGlow 1.8s ease-in-out infinite}
          @keyframes endGlow{0%,100%{box-shadow:0 0 4px var(--accent);opacity:.8}50%{box-shadow:0 0 14px var(--accent),0 0 26px rgba(0,212,255,.4);opacity:1}}
          .pill-group{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
          .pill{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:var(--text2);padding:.3rem .8rem;border-radius:50px;font-size:.78rem;font-family:var(--mono);transition:transform .25s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s,color .2s;cursor:default}
@@ -551,7 +544,7 @@
             </div>
             <p class="hero-desc">
                Building <strong>intelligent systems</strong> that turn raw data into real business impact.
-               Appian Developer by day - <strong>ML Engineer</strong> in the making.
+               Appian Developer by day - building production <strong>ML systems</strong> by night.
             </p>
             <div class="hero-btns">
                <a href="#projects" class="btn-primary">View My Work</a>
@@ -560,7 +553,7 @@
             </div>
             <div class="hero-stats">
                <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">YRS ENTERPRISE AI</span></div>
-               <div class="stat"><span class="stat-num" data-count="850">0</span><span class="stat-label">GITHUB CONTRIBUTIONS</span></div>
+               <div class="stat"><span class="stat-num" id="ghContribStat">—</span><span class="stat-label">GITHUB CONTRIBUTIONS </span></div>
                <div class="stat"><span class="stat-num" data-count="34">0</span><span class="stat-label">REPOSITORIES</span></div>
                <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">SUPER SQUAD AWARDS</span></div>
             </div>
@@ -571,8 +564,8 @@
          <h2 class="section-title fade-up">Turning data into decisions.</h2>
          <div class="about-grid fade-up">
             <div class="about-text">
-               <p>I'm a Data Science practitioner on a deliberate journey from <strong>Process Automation to ML Engineering</strong>. Nearly 4 years at EXL Service delivering enterprise Appian BPM and Agentic AI solutions - promoted twice, awarded 4x for impact.</p>
-               <p style="margin-top:1rem">Outside work I build <strong>personal ML projects</strong> End-to-End</p>
+               <p>I build <strong>end-to-end ML systems</strong> - pipelines, serving, monitoring, CI/CD. Four of them are live right now, with experiment tracking, drift detection and test suites behind them.</p>
+               <p style="margin-top:1rem">My day job: nearly 4 years at EXL Service on the <strong>enterprise AI side</strong> - Agentic AI POCs, GenAI demos for Internal and External stakeholders, Appian BPM delivery. Promoted twice, awarded 4x for impact.</p>
                <p style="margin-top:1rem">Currently targeting <strong>ML Engineer / Applied AI / Data Scientist</strong> roles at product companies and AI-native startups.</p>
             </div>
             <div class="fun-facts">
@@ -603,14 +596,14 @@
                      <div class="fact-label">Tech Stack Philosophy</div>
                      <div class="fact-val">Python-first. Scikit-learn → XGBoost → Streamlit → prod.</div>
                   </div>
-                  <div class="fact-back">currently_learning = ['LangChain','RAG','MLflow'] &#128640;</div>
+                  <div class="fact-back">currently_learning = ['LangChain','RAG','PyTorch'] &#128640;</div>
                </div>
                <div class="fact-card" onclick="this.classList.toggle('flipped')">
                   <div class="fact-front">
                      <div class="fact-label">HackerRank Badge</div>
                      <div class="fact-val">5★ Golden Badge in Python &amp; SQL</div>
                   </div>
-                  <div class="fact-back">Also: Codeforces Rating 784 · 2x Kaggle Bronze Notebook Medals &#129353;</div>
+                  <div class="fact-back">Also: 2x Kaggle Bronze Notebook Medals · 3x Udacity Nanodegrees &#129353;</div>
                </div>
             </div>
          </div>
@@ -621,132 +614,59 @@
             <p class="section-tag fade-up">02. Skills</p>
             <h2 class="section-title fade-up">Technical Arsenal</h2>
             <div class="skills-grid">
-               <div class="skill-group fade-up">
-                  <div class="skill-group-title">&#9889; Core ML / Python</div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>Python</span><span class="skill-pct">90%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="95"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>Scikit-Learn</span><span class="skill-pct">70%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="88"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>XGBoost / LightGBM</span><span class="skill-pct">70%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="82"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>SHAP / Model Interpretability</span><span class="skill-pct">60%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="78"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>Pandas / NumPy</span><span class="skill-pct">70%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="90"></div>
-                     </div>
-                  </div>
-               </div>
-               <div class="skill-group fade-up">
-                  <div class="skill-group-title">&#128196; Data &amp; SQL</div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>SQL (MariaDB / MySQL)</span><span class="skill-pct">80%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="90"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>Pandas Data Wrangling</span><span class="skill-pct">80%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="88"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>Plotly / Seaborn / Matplotlib</span><span class="skill-pct">70%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="85"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>SQLite / MongoDB</span><span class="skill-pct">70%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="75"></div>
-                     </div>
-                  </div>
-               </div>
-               <div class="skill-group fade-up">
-                  <div class="skill-group-title">&#128640; MLOps &amp; Deployment</div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>Streamlit</span><span class="skill-pct">80%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="88"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>GitHub Actions CI/CD</span><span class="skill-pct">60%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="75"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>pytest (20+ test suites)</span><span class="skill-pct">50%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="78"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>Flask / Heroku</span><span class="skill-pct">50%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="70"></div>
-                     </div>
-                  </div>
-               </div>
-               <div class="skill-group fade-up">
-                  <div class="skill-group-title">&#129302; AI &amp; Enterprise</div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>Appian BPM / Agentic AI</span><span class="skill-pct">90%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="92"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>Generative AI / LLM concepts</span><span class="skill-pct">70%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="68"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>PyTorch (learning)</span><span class="skill-pct">50%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="55"></div>
-                     </div>
-                  </div>
-                  <div class="skill-item">
-                     <div class="skill-header"><span>TensorFlow (learning)</span><span class="skill-pct">40%</span></div>
-                     <div class="skill-bar-bg">
-                        <div class="skill-bar-fill" data-w="45"></div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div style="margin-top:2rem" class="fade-up">
-               <p class="skill-group-title" style="margin-bottom:1rem;font-family:var(--mono);font-size:.75rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase">// Additional Technologies</p>
+            <div class="skill-group fade-up">
+               <div class="skill-group-title">&#9889; Core ML / Python</div>
                <div class="pill-group">
-                  <span class="pill">SMOTE / ImbPipeline</span><span class="pill">Isolation Forest</span><span class="pill">SHAP</span>
-                  <span class="pill">A/B Testing</span><span class="pill">Drift Monitoring</span><span class="pill">Covariate Shift</span>
-                  <span class="pill">Pickle</span><span class="pill">AdaBoost</span><span class="pill">QDA</span><span class="pill">LightGBM</span>
-                  <span class="pill">Supabase</span><span class="pill">Asana</span><span class="pill">Git</span><span class="pill">RPA</span>
-                  <span class="pill">LangChain ★</span><span class="pill">RAG ★</span><span class="pill">MLflow ★</span>
+                  <span class="pill">Python</span><span class="pill">Scikit-Learn</span>
+                  <span class="pill">XGBoost / LightGBM</span><span class="pill">AdaBoost</span>
+                  <span class="pill">SHAP / Interpretability</span><span class="pill">Pandas / NumPy</span>
+                  <span class="pill">imbalanced-learn (SMOTE)</span>
                </div>
-               <p style="font-family:var(--mono);font-size:.7rem;color:var(--text3);margin-top:.75rem">★ Currently learning</p>
             </div>
+            <div class="skill-group fade-up">
+               <div class="skill-group-title">&#128196; Data &amp; SQL</div>
+               <div class="pill-group">
+                  <span class="pill">SQL (MariaDB / MySQL)</span><span class="pill">Data Wrangling</span>
+                  <span class="pill">Plotly / Seaborn / Matplotlib</span><span class="pill">SQLite</span>
+                  <span class="pill">MongoDB Atlas</span><span class="pill">A/B Testing</span>
+               </div>
+            </div>
+            <div class="skill-group fade-up">
+               <div class="skill-group-title">&#128640; MLOps &amp; Deployment</div>
+               <div class="pill-group">
+                  <span class="pill">MLflow</span><span class="pill">DagsHub</span>
+                  <span class="pill">Docker</span><span class="pill">GitHub Actions CI/CD</span>
+                  <span class="pill">FastAPI</span><span class="pill">Streamlit</span>
+                  <span class="pill">pytest</span><span class="pill">Drift Monitoring</span>
+               </div>
+            </div>
+            <div class="skill-group fade-up">
+               <div class="skill-group-title">&#129302; AI &amp; Enterprise</div>
+               <div class="pill-group">
+                  <span class="pill">Appian BPM / Agentic AI</span><span class="pill">Generative AI</span>
+                  <span class="pill">LLM Concepts</span><span class="pill">RPA</span>
+                  <span class="pill">LangChain ★</span><span class="pill">RAG ★</span>
+                  <span class="pill">PyTorch ★</span>
+               </div>
+            </div>
+            <div class="skill-group fade-up">
+               <div class="skill-group-title">&#129516; ML Techniques</div>
+               <div class="pill-group">
+                  <span class="pill">SMOTE / ImbPipeline</span><span class="pill">SMOTETomek</span>
+                  <span class="pill">Isolation Forest</span><span class="pill">GridSearchCV</span>
+                  <span class="pill">Cross-Validation</span>
+               </div>
+            </div>
+            <div class="skill-group fade-up">
+               <div class="skill-group-title">&#128736;&#65039; Tools &amp; Auth</div>
+               <div class="pill-group">
+                  <span class="pill">Git</span><span class="pill">Jupyter</span>
+                  <span class="pill">PyJWT / bcrypt</span><span class="pill">ReportLab</span>
+                  <span class="pill">Plotly</span><span class="pill">Pydantic</span>
+               </div>
+            </div>
+            <p style="font-family:var(--mono);font-size:.65rem;color:var(--text3);margin-top:.75rem">★ currently learning</p>
+         </div>
          </div>
       </section>
       <section id="experience" data-cursor="#00d4ff">
@@ -765,6 +685,7 @@
                      <span class="tl-date">Jan 2026 - Present</span>
                   </div>
                   <ul class="tl-bullets">
+                     <li>Building production <strong>ML systems</strong> alongside core role - end-to-end pipelines with MLflow tracking, FastAPI serving and Dockerised CI/CD (see Projects below).</li>
                      <li>Primary developer on Insurance Domain Appian BPM project within a team of 4, collaborating directly with a Technical Architect to deliver <strong>enterprise-grade workflows.</strong></li>
                      <li>Translating complex financial requirements into scalable Appian applications; overseeing full development lifecycle from design to production deployment.</li>
                      <li>Driving end-to-end build of mission-critical enterprise Appian solutions - design, unit testing and release - for large-scale insurance operations.</li>
@@ -808,8 +729,8 @@
                      <span class="tl-date">Jul 2022 - Dec 2023</span>
                   </div>
                   <ul class="tl-bullets">
+                     <li>Built the Appian application layer for an <strong>Anomaly Detection POC</strong> - consumed ML model predictions delivered via API into the database, designing the process models and interfaces that surfaced anomaly results to business users.</li>
                      <li>Designed and deployed Real Estate domain BPM application as part of 9-member team; built Process Models, SAIL interfaces, Records and MariaDB integrations from ground up.</li>
-                     <li>Built Anomaly Detection POC using Appian, contributing to EXL's internal innovation pipeline - one of the earliest POC contributors on the team.</li>
                      <li>Improved team velocity by standardising reusable Appian component libraries, cutting recurring development effort and onboarding time for new modules.</li>
                   </ul>
                   <div class="tl-tags"><span class="tl-tag">Appian BPM</span><span class="tl-tag">SAIL</span><span class="tl-tag">MariaDB</span></div>
@@ -826,7 +747,7 @@
                      <span class="tl-date">Sep 2021 - Oct 2021</span>
                   </div>
                   <ul class="tl-bullets">
-                     <li>Performed EDA on meteorological datasets using Python, Pandas+ and NumPy - surfaced seasonal patterns and anomalous weather trends.</li>
+                     <li>Performed EDA on meteorological datasets using Python, Pandas and NumPy - surfaced seasonal patterns and anomalous weather trends.</li>
                      <li>Built MNIST Handwritten Digit Recognition model using Scikit-learn across the full ML pipeline; created stakeholder-ready visualizations with Matplotlib and Seaborn.</li>
                   </ul>
                   <div class="tl-tags"><span class="tl-tag">Python</span><span class="tl-tag">Pandas</span><span class="tl-tag">EDA</span><span class="tl-tag">Scikit-Learn</span></div>
@@ -850,7 +771,7 @@
                   </div>
                </div>
                <div class="proj-title">PhishGuard</div>
-               <div class="proj-desc">Full MLOps pipeline for phishing URL/domain detection - 5 Sequential Stages with typed Artifacts, Multi-Model Training with GridSearchCV, data Drift dDetection, F1-gated production model promotion, REST API and Streamlit dashboard.</div>
+               <div class="proj-desc">Full MLOps pipeline for phishing URL/domain detection - 6 sequential stages with typed artifacts, multi-model training with GridSearchCV, KS data drift detection, F1-gated production model promotion, REST API and Streamlit dashboard.</div>
                <div class="proj-metrics">
                   <span class="metric-badge">30 URL/Page Features</span>
                   <span class="metric-badge">5-Stage MLOps Pipeline</span>
@@ -1608,7 +1529,7 @@
                  message:msg,
                  _subject:'Portfolio message from '+name,
                  _template:'table',
-                 _captcha:'false'
+                 _captcha:'true'
                })
              });
              if(!res.ok)throw new Error('http '+res.status);
@@ -1625,7 +1546,7 @@
          const termData={
            help:{output:['Available commands:','  about     - Who is Abhishek?','  skills    - Tech stack','  projects  - Featured projects','  contact   - Get in touch','  kaggle    - Competition results','  matrix    - ???','  clear     - Clear terminal']},
            about:{output:['Abhishek Tiwari - ML Engineer & Data Scientist','─────────────────────────────────────','B.Tech Mining Engg. · NIT Raipur · Class of 2022','4 YOE at EXL Service (Appian + Agentic AI)','Lead Assistant Manager since Jan 2026','Personal projects: 4 live ML apps on Streamlit 🚀','Goal: ML Engineer / Applied AI roles']},
-           skills:{output:['Python ████████████████████ 90%','Scikit-Learn ███████████████████ 70%','SQL ████████████████████ 80%','XGBoost ████████████████ 70%','Streamlit ███████████████████ 80%','Appian BPM ████████████████████ 90%','PyTorch ████████████ 50% (learning)','LangChain ██████████ 40% (learning)']},
+           skills:{output:['ML: Python · Scikit-Learn · XGBoost · SHAP · SMOTE','MLOps: MLflow · DagsHub · Docker · GitHub Actions · pytest','Serving: FastAPI · Streamlit · Pydantic','Data: SQL · Pandas · MongoDB · SQLite','Enterprise: Appian BPM · Agentic AI · GenAI','Learning  : LangChain · RAG · PyTorch']},
            projects:{output:[
            '★ PhishGuard - 5-Stage MLOps · F1-gated prod model',
            '★ System Performance Analyzer - Isolation Forest · JWT Auth · PDF',
@@ -1702,6 +1623,24 @@
              const d=document.createElement('div');d.className='line';d.style.animationDelay=(i*.4)+'s';d.textContent=t;body.appendChild(d);
            });
          },500);
+         // Live GitHub contributions fetch
+         (async function(){
+               const username = 'abhishek-tiwari-nitrr';
+               const statEl = document.getElementById('ghContribStat');
+               if(!statEl) return;
+               try {
+                  const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`);
+                  if(!res.ok) throw new Error('fetch failed');
+                  console.log(data);
+                  const total = Object.values(data?.total ?? {}).reduce((a, b) => a + b, 0) || null;
+                  if(total === null || total === undefined) throw new Error('no data');
+                  statEl.removeAttribute('data-count');
+                  slotRoll(statEl, parseInt(total));
+               } catch(e) {
+                  statEl.removeAttribute('data-count');
+                  slotRoll(statEl, 850);
+               }
+               })();
       </script>
    </body>
 </html>
