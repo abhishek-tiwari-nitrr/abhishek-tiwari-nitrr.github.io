@@ -403,6 +403,10 @@
          .cursor-ring.hovering{width:72px;height:72px;border-color:transparent}
          .cursor-ring.hovering svg{opacity:1}
          .cursor-ghost{position:fixed;border-radius:50%;background:var(--cursor-color);pointer-events:none;z-index:9996;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:background .4s}
+
+         .touch-device nav.scrolled{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(8,9,14,.96)}
+         .touch-device .hero-noise{mix-blend-mode:normal;opacity:.02}
+         .touch-device .cursor,.touch-device .cursor-ring,.touch-device .cursor-ghost{display:none!important}
          @media(max-width:768px){
          nav,nav.scrolled{backdrop-filter:none;-webkit-backdrop-filter:none}
          .nav-inner{padding:.65rem 1.25rem}
@@ -1161,6 +1165,8 @@
          const isTouch=('ontouchstart' in window)||navigator.maxTouchPoints>0;
          const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
          const isMobile=window.matchMedia('(max-width:768px)').matches;
+         if(isTouch)document.documentElement.classList.add('touch-device');
+
          (function(){
            const pre=document.getElementById('preloader');
            if(reduceMotion){pre.remove();document.body.classList.add('loaded');return;}
@@ -1197,15 +1203,26 @@
          let nodes=[];
          const mouse={x:-9999,y:-9999};
          function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-         resize();window.addEventListener('resize',resize);
+         resize();
          function initNodes(){
            nodes=[];
-           // reduce node count 60% on small screens for performance
-           const density=window.innerWidth<768?45000:18000;
+           const density=(isTouch||window.innerWidth<768)?45000:18000;
            const n=Math.floor((canvas.width*canvas.height)/density);
            for(let i=0;i<n;i++)nodes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+1,flash:0});
          }
-         initNodes();window.addEventListener('resize',initNodes);
+         initNodes();
+         let lastW=window.innerWidth,resizeTimer=null;
+         window.addEventListener('resize',()=>{
+           clearTimeout(resizeTimer);
+           resizeTimer=setTimeout(()=>{
+             if(window.innerWidth!==lastW){
+               lastW=window.innerWidth;
+               resize();initNodes();
+             }else{
+               canvas.height=window.innerHeight;
+             }
+           },200);
+         });
          // mouse interaction (repel)
          if(!isTouch){
            const hero=document.getElementById('hero');
@@ -1487,7 +1504,7 @@
            if(reduceMotion)return;
            const words=['import torch','model.fit(X_train, y_train)','df.groupby()','GridSearchCV','sklearn.pipeline','xgboost.XGBClassifier','shap.TreeExplainer','np.argmax(probs)','pd.read_csv()','SMOTE(random_state=42)','mlflow.log_metric','streamlit run app.py','precision_recall_curve','cross_val_score','RandomForest','langchain.agents'];
            const rain=document.getElementById('codeRain');
-           const count=isMobile?7:14;
+           const count=(isTouch||isMobile)?7:14;
            for(let i=0;i<count;i++){
              const s=document.createElement('span');
              s.textContent=words[i%words.length];
