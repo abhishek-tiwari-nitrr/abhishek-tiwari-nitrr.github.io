@@ -407,6 +407,22 @@
          .touch-device nav.scrolled{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(8,9,14,.96)}
          .touch-device .hero-noise{mix-blend-mode:normal;opacity:.02}
          .touch-device .cursor,.touch-device .cursor-ring,.touch-device .cursor-ghost{display:none!important}
+         /* stop always-running animations on touch devices (flicker fix) */
+         .touch-device .hero-glow{animation:none}
+         .touch-device .hero-name .grad{animation:none}
+         .touch-device .hero-name{animation:shimmerIn .9s cubic-bezier(.22,1,.36,1) both}
+         .touch-device .hero-title::after{display:none}
+         .touch-device .stat-num{animation:none}
+         .touch-device .skill-bar-fill{animation:none;background:linear-gradient(90deg,var(--accent2),var(--accent))}
+         .touch-device .skill-bar-fill::before,.touch-device .skill-bar-fill::after{display:none}
+         .touch-device .skill-group:hover{animation:none}
+         .touch-device .counter-card{animation:none}
+         .touch-device .code-rain{display:none}
+         .touch-device footer::before{display:none}
+         .touch-device #backTop::before{animation:none;background:var(--accent2)}
+         .touch-device ::-webkit-scrollbar-thumb{animation:none}
+         .touch-device .contact-email::after{animation:none;background:var(--accent)}
+         .touch-device .hero-tag .dot{animation:pulse 2s infinite}
          @media(max-width:768px){
          nav,nav.scrolled{backdrop-filter:none;-webkit-backdrop-filter:none}
          .nav-inner{padding:.65rem 1.25rem}
