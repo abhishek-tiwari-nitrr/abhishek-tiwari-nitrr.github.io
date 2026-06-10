@@ -1624,23 +1624,26 @@
            });
          },500);
          // Live GitHub contributions fetch
+         window.addEventListener('load', function(){
          (async function(){
-               const username = 'abhishek-tiwari-nitrr';
-               const statEl = document.getElementById('ghContribStat');
-               if(!statEl) return;
-               try {
-                  const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`);
-                  if(!res.ok) throw new Error('fetch failed');
-                  console.log(data);
-                  const total = Object.values(data?.total ?? {}).reduce((a, b) => a + b, 0) || null;
-                  if(total === null || total === undefined) throw new Error('no data');
-                  statEl.removeAttribute('data-count');
-                  slotRoll(statEl, parseInt(total));
-               } catch(e) {
-                  statEl.removeAttribute('data-count');
-                  slotRoll(statEl, 850);
-               }
-               })();
-      </script>
+            const username = 'abhishek-tiwari-nitrr';
+            const statEl = document.getElementById('ghContribStat');
+            if(!statEl) { console.error('ghContribStat element not found'); return; }
+            try {
+               const res = await fetch('https://github-contributions-api.jogruber.de/v4/' + username);
+               if(!res.ok) throw new Error('http ' + res.status);
+               const data = await res.json();
+               const total = Object.values(data.total).reduce((a, b) => a + b, 0);
+               console.log('Contributions total:', total);
+               statEl.removeAttribute('data-count');
+               statEl.dataset.done = '';
+               slotRoll(statEl, total);
+            } catch(e) {
+               console.error('GitHub fetch error:', e);
+               slotRoll(statEl, 850);
+            }
+         })();
+         });
+               </script>
    </body>
 </html>
