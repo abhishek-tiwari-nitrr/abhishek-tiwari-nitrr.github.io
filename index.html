@@ -554,7 +554,7 @@
             <div class="hero-stats">
                <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">YRS ENTERPRISE AI</span></div>
                <div class="stat"><span class="stat-num" id="ghContribStat">—</span><span class="stat-label">GITHUB CONTRIBUTIONS </span></div>
-               <div class="stat"><span class="stat-num" data-count="34">0</span><span class="stat-label">REPOSITORIES</span></div>
+               <div class="stat"><span class="stat-num" id="ghRepoStat">—</span><span class="stat-label">REPOSITORIES</span></div>
                <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">SUPER SQUAD AWARDS</span></div>
             </div>
          </div>
@@ -1623,6 +1623,28 @@
              const d=document.createElement('div');d.className='line';d.style.animationDelay=(i*.4)+'s';d.textContent=t;body.appendChild(d);
            });
          },500);
+         // Live Github Repo Count
+         window.addEventListener('load', function(){
+         (async function(){
+            const username = 'abhishek-tiwari-nitrr';
+            const statEl = document.getElementById('ghRepoStat');
+            if(!statEl) return;
+            try {
+               const res = await fetch('https://api.github.com/users/' + username);
+               if(!res.ok) throw new Error('http ' + res.status);
+               const data = await res.json();
+               const total = data.public_repos;
+               console.log('Repos total:', total);
+               statEl.removeAttribute('data-count');
+               statEl.dataset.done = '';
+               slotRoll(statEl, total);
+            } catch(e) {
+               console.error('GitHub repos error:', e);
+               slotRoll(statEl, 34);
+            }
+         })();
+         });
+
          // Live GitHub contributions fetch
          window.addEventListener('load', function(){
          (async function(){
