@@ -555,7 +555,7 @@
                <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">YRS ENTERPRISE AI</span></div>
                <div class="stat"><span class="stat-num" id="ghContribStat">—</span><span class="stat-label">GITHUB CONTRIBUTIONS </span></div>
                <div class="stat"><span class="stat-num" id="ghRepoStat">—</span><span class="stat-label">REPOSITORIES</span></div>
-               <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">SUPER SQUAD AWARDS</span></div>
+               <div class="stat"><span class="stat-num" id="visitStat">—</span><span class="stat-label">PORTFOLIO VISITS</span></div>
             </div>
          </div>
       </section>
@@ -1666,6 +1666,25 @@
             }
          })();
          });
-               </script>
+
+         // Portfolio visit counter
+         (async function(){
+         const statEl = document.getElementById('visitStat');
+         if(!statEl) return;
+         try {
+            const res = await fetch('https://hits.sh/abhishek-tiwari-nitrr.portfolio.json');
+            if(!res.ok) throw new Error('http ' + res.status);
+            const data = await res.json();
+            console.log('Visit count:', data);
+            statEl.removeAttribute('data-count');
+            statEl.dataset.done = '';
+            slotRoll(statEl, parseInt(data.total_count));
+         } catch(e) {
+            console.error('Visit counter error:', e);
+            statEl.removeAttribute('data-count');
+            slotRoll(statEl, 1);
+         }
+         })();
+                        </script>
    </body>
 </html>
