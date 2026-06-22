@@ -1,1671 +1,674 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <script>document.documentElement.classList.add('js-ready');</script>
-      <meta charset="UTF-8"/>
-      <meta name="viewport" content="width=device-width,initial-scale=1"/>
-      <title>Abhishek Tiwari - ML Engineer &amp; Data Scientist</title>
-      <link rel="icon" href="icon/logo.png" type="image/png"/>
-      <meta name="description" content="ML Engineer &amp; Data Scientist. Building intelligent systems with Python, XGBoost, Scikit-Learn, and Agentic AI. Appian Developer at EXL Service."/>
-      <link rel="preconnect" href="https://fonts.googleapis.com"/>
-      <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&amp;display=swap" rel="stylesheet"/>
-      <style>
-         :root{
-         --bg:#08090e;--bg2:#0f1018;--bg3:#161724;
-         --accent:#00d4ff;--accent2:#7c3aed;--accent3:#10b981;--accentW:#ff6b6b;
-         --text:#e8e9f0;--text2:#9899b0;--text3:#5a5b70;
-         --card:#13141f;--border:#1e1f32;--borderH:#2a2b45;
-         --radius:14px;--radiusLg:20px;
-         --font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
-         --cursor-color:#00d4ff;
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Abhishek Tiwari - ML Engineer, Data Scientist &amp;  AI Engineer</title>
+      <meta name="description" content="Machine-learning engineer and data scientist. I build end-to-end ML systems - pipelines, serving, drift monitoring, CI/CD - and four of them run live. Currently at EXL Service." />
+      <meta name="author" content="Abhishek Tiwari" />
+      <meta name="keywords" content="Abhishek Tiwari, ML Engineer, Data Scientist, MLOps, Python, scikit-learn, XGBoost, FastAPI, Streamlit, MLflow, Appian, Agentic AI" />
+      <meta name="color-scheme" content="light dark" />
+      <meta name="theme-color" content="#e7eae8" media="(prefers-color-scheme: light)" />
+      <meta name="theme-color" content="#0e1113" media="(prefers-color-scheme: dark)" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Abhishek Tiwari - ML Engineer, Data Scientist &amp;  AI Engineer" />
+      <meta property="og:description" content="End-to-end ML systems that ship: pipelines, serving, drift monitoring, CI/CD. Four live apps with the metrics to prove they work." />
+      <meta property="og:url" content="https://abhishek-tiwari-nitrr.github.io/" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <link rel="canonical" href="https://abhishek-tiwari-nitrr.github.io/" />
+      <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314181a'/%3E%3Cpath d='M6 24 L11 14 L15 18 L20 9 L26 7' fill='none' stroke='%231f4dff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='7' r='2.4' fill='%231f4dff'/%3E%3C/svg%3E" type="image/svg+xml" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+      <script type="application/ld+json">
+         {
+           "@context": "https://schema.org",
+           "@type": "Person",
+           "name": "Abhishek Tiwari",
+           "jobTitle": "Machine Learning Engineer & Data Scientist",
+           "url": "https://abhishek-tiwari-nitrr.github.io/",
+           "email": "mailto:abhishek.tiwari.nitrr@gmail.com",
+           "alumniOf": "National Institute of Technology, Raipur",
+           "worksFor": { "@type": "Organization", "name": "EXL Service" },
+           "knowsAbout": ["Machine Learning","Data Science","MLOps","Python","scikit-learn","XGBoost","Appian BPM","Agentic AI"],
+           "sameAs": [
+             "https://github.com/abhishek-tiwari-nitrr",
+             "https://linkedin.com/in/abhishek-tiwari-nitrr",
+             "https://kaggle.com/abhishek20182",
+             "https://medium.com/@abhishek-tiwari-nitrr"
+           ]
          }
-         *{margin:0;padding:0;box-sizing:border-box}
-         html{scroll-behavior:smooth;font-size:16px}
-         body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;line-height:1.7}
-         ::selection{background:rgba(0,212,255,.25);color:#fff}
-         ::-webkit-scrollbar{width:4px}
-         ::-webkit-scrollbar-track{background:var(--bg)}
-         ::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:2px}
-         #preloader{position:fixed;inset:0;background:var(--bg);z-index:10001;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s}
-         #preloader.done{opacity:0;visibility:hidden;pointer-events:none}
-         #preloader svg{width:min(380px,70vw);height:auto;overflow:visible}
-         #preloader .pre-stroke{font-family:var(--mono);font-size:64px;font-weight:500;fill:transparent;stroke:var(--accent);stroke-width:1.2;stroke-dasharray:520;stroke-dashoffset:520;animation:preDraw 1.4s .15s cubic-bezier(.4,0,.2,1) forwards}
-         #preloader .pre-fill{font-family:var(--mono);font-size:64px;font-weight:500;fill:url(#preGrad);opacity:0;animation:preFill .5s 1.35s ease forwards}
-         #preloader .pre-bar{position:absolute;bottom:18vh;left:50%;transform:translateX(-50%);width:140px;height:2px;background:var(--border);border-radius:2px;overflow:hidden}
-         #preloader .pre-bar::after{content:'';display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));transform:translateX(-100%);animation:preBar 1.7s .1s cubic-bezier(.4,0,.2,1) forwards}
-         @keyframes preDraw{to{stroke-dashoffset:0}}
-         @keyframes preFill{to{opacity:1}}
-         @keyframes preBar{to{transform:translateX(0)}}
-         #preloader.simple svg .pre-stroke{display:none}
-         #preloader.simple svg .pre-fill{animation:preFill .8s .1s ease forwards}
-         body:not(.loaded) .hero-name,body:not(.loaded) .hero-desc,body:not(.loaded) .hero-btns,body:not(.loaded) .hero-stats{animation-play-state:paused!important}
-         #scrollProgress{position:fixed;top:0;left:0;right:0;height:3px;z-index:10000;background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent3));transform-origin:left;transform:scaleX(0);pointer-events:none}
-         #backTop{position:fixed;bottom:6.5rem;right:2rem;width:46px;height:46px;border-radius:50%;background:var(--bg3);border:none;color:var(--accent);font-size:1.1rem;cursor:pointer;z-index:997;opacity:0;transform:translateY(16px) scale(.85);transition:opacity .35s,transform .35s;display:flex;align-items:center;justify-content:center}
-         #backTop.show{opacity:1;transform:none}
-         #backTop::before{content:'';position:absolute;inset:-2px;border-radius:50%;background:conic-gradient(var(--accent),var(--accent2),var(--accent3),var(--accent));animation:spinBorder 3s linear infinite;z-index:-1}
-         #backTop::after{content:'';position:absolute;inset:1px;border-radius:50%;background:var(--bg3);z-index:-1}
-         @keyframes spinBorder{to{transform:rotate(360deg)}}
-         nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:0;transition:.3s}
-         nav.scrolled{background:rgba(8,9,14,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-         .nav-inner{max-width:1100px;margin:0 auto;padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between}
-         .nav-logo{font-family:var(--mono);font-size:1rem;color:var(--accent);letter-spacing:.05em}
-         .nav-logo span{color:var(--text2)}
-         .nav-links{display:flex;gap:2rem;list-style:none}
-         .nav-links a{color:var(--text2);text-decoration:none;font-size:.9rem;font-weight:500;letter-spacing:.03em;transition:.2s;position:relative}
-         .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:.3s}
-         .nav-links a:hover{color:var(--accent)}
-         .nav-links a:hover::after{width:100%}
-         .nav-cta{background:transparent;border:1px solid var(--accent);color:var(--accent);padding:.45rem 1.2rem;border-radius:8px;font-family:var(--font);font-size:.85rem;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none;letter-spacing:.05em}
-         .nav-cta:hover{background:var(--accent);color:var(--bg);box-shadow:0 0 20px rgba(0,212,255,.3)}
-         .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-         .hamburger span{width:22px;height:2px;background:var(--text2);border-radius:2px;transition:.3s}
-         #hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:0 2rem;max-width:100%;width:100%}
-         #canvas-bg{position:absolute;inset:0;opacity:.55}
-         .hero-glow{position:absolute;inset:-25%;pointer-events:none;z-index:0;
-            background:
-               radial-gradient(700px 700px at 50% 50%,rgba(124,58,237,.06) 0%,rgba(0,212,255,.025) 45%,transparent 70%),
-               radial-gradient(640px 640px at 14% 10%,rgba(124,58,237,.11) 0%,rgba(124,58,237,.04) 40%,transparent 68%),
-               radial-gradient(580px 580px at 86% 88%,rgba(0,212,255,.08) 0%,rgba(0,212,255,.03) 40%,transparent 68%),
-               radial-gradient(470px 470px at 76% 38%,rgba(16,185,129,.06) 0%,rgba(16,185,129,.02) 40%,transparent 68%),
-               radial-gradient(430px 430px at 20% 76%,rgba(255,107,107,.045) 0%,rgba(255,107,107,.015) 40%,transparent 68%);
-            animation:glowDrift 26s ease-in-out infinite alternate}
-         @keyframes glowDrift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(2.5%,1.8%,0) scale(1.07)}}
-         .hero-noise{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.035;mix-blend-mode:overlay;
-            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-            background-size:160px 160px}
-         .hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto;padding-top:80px}
-         .hero-tag{display:inline-flex;align-items:center;gap:.6rem;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);border-radius:50px;padding:.4rem 1.1rem;font-family:var(--mono);font-size:.75rem;color:var(--accent);letter-spacing:.08em;margin-bottom:1.5rem}
-         .hero-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite}
-         .hero-name{font-size:clamp(2.8rem,8vw,6rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:.5rem;position:relative}
-         .hero-name .grad{background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 5s ease-in-out infinite alternate}
-         /* load glitch */
-         @keyframes heroGlitch{
-            0%,100%{transform:translate(0);text-shadow:none}
-            12%{transform:translate(-3px,2px);text-shadow:3px 0 var(--accent2),-3px 0 var(--accent)}
-            24%{transform:translate(3px,-2px);text-shadow:-3px 0 var(--accent2),3px 0 var(--accent)}
-            36%{transform:translate(-2px,-1px) skewX(2deg);text-shadow:2px 2px var(--accentW)}
-            48%{transform:translate(2px,1px);text-shadow:-2px 0 var(--accent3),2px 0 var(--accent)}
-            60%{transform:translate(0);text-shadow:none}
-            72%{transform:translate(-1px,1px);text-shadow:2px 0 var(--accent2)}
-         }
-         .hero-name.glitch-once{animation:heroGlitch .75s steps(1) both!important}
-         .hero-title{font-family:var(--mono);font-size:clamp(1rem,2.5vw,1.35rem);color:var(--text2);margin-bottom:1.5rem;min-height:2em;position:relative}
-         #typed-cursor{display:inline-block;width:2px;height:1.2em;background:var(--accent);vertical-align:middle;animation:blink .7s infinite}
-         /* scanline flicker as phrase types */
-         @keyframes typedFlicker{0%{opacity:.2}18%{opacity:1}30%{opacity:.35}45%{opacity:1}60%{opacity:.6}100%{opacity:1}}
-         #typed.flicker{animation:typedFlicker .45s steps(2)}
-         .hero-title::after{content:'';position:absolute;left:0;right:60%;top:0;height:1px;background:linear-gradient(90deg,rgba(0,212,255,.25),transparent);opacity:0;animation:scanSweep 4s 2s ease-in-out infinite}
-         @keyframes scanSweep{0%,85%,100%{opacity:0;transform:translateY(0)}88%{opacity:.7}92%{opacity:.4;transform:translateY(1.6em)}}
-         .hero-desc{font-size:1.1rem;color:var(--text2);max-width:600px;margin-bottom:2.5rem;line-height:1.8;font-weight:300}
-         .hero-desc strong{color:var(--text)}
-         .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-         .btn-primary{background:var(--accent);color:var(--bg);padding:.75rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;transition:.25s;letter-spacing:.03em;border:none;cursor:pointer}
-         .btn-primary:hover{box-shadow:0 0 30px rgba(0,212,255,.5);transform:translateY(-2px)}
-         .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text2);padding:.75rem 2rem;border-radius:10px;font-weight:500;font-size:.95rem;text-decoration:none;transition:.25s;letter-spacing:.03em}
-         .btn-ghost:hover{border-color:var(--accent2);color:var(--text);transform:translateY(-2px)}
-         .hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap}
-         .stat{display:flex;flex-direction:column}
-         .stat-num{font-size:1.8rem;font-weight:800;color:var(--accent);letter-spacing:-.02em;line-height:1}
-         .stat-label{font-size:.75rem;color:var(--text3);font-family:var(--mono);letter-spacing:.06em;margin-top:.3rem}
-         /* hero click particle burst */
-         .burst-p{position:absolute;width:6px;height:6px;border-radius:50%;pointer-events:none;z-index:3;animation:burstFly .8s cubic-bezier(.2,.8,.3,1) forwards}
-         @keyframes burstFly{from{transform:translate(0,0) scale(1);opacity:1}to{transform:translate(var(--bx),var(--by)) scale(.2);opacity:0}}
-         section{padding:6rem 2rem;max-width:1100px;margin:0 auto;width:100%}
-         .section-tag{font-family:var(--mono);font-size:.75rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem}
-         .section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.02em;margin-bottom:1rem;line-height:1.2}
-         .section-sub{font-size:1.05rem;color:var(--text2);max-width:600px;line-height:1.8;margin-bottom:3rem}
-         #about .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
-         .about-text{font-size:1.05rem;color:var(--text2);line-height:1.9}
-         .about-text p+p{margin-top:1rem}
-         .about-text strong{color:var(--text)}
-         .about-text p{overflow:hidden}
-         .about-text p>.line-inner{display:block;transform:translateY(110%);transition:transform .85s cubic-bezier(.22,1,.36,1)}
-         .about-grid.visible .about-text p:nth-child(1)>.line-inner{transform:none;transition-delay:.05s}
-         .about-grid.visible .about-text p:nth-child(2)>.line-inner{transform:none;transition-delay:.2s}
-         .about-grid.visible .about-text p:nth-child(3)>.line-inner{transform:none;transition-delay:.35s}
-         .fun-facts{display:flex;flex-direction:column;gap:.75rem}
-         .fact-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
-         .fact-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transition:.3s;transform-origin:bottom;z-index:2}
-         .fact-card:hover{border-color:var(--borderH);transform:translateX(4px)}
-         .fact-card:hover::before{transform:scaleY(1)}
-         .fact-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--hx,50%) var(--hy,50%),rgba(0,212,255,.12),rgba(124,58,237,.08) 35%,transparent 65%);opacity:0;transition:opacity .3s;pointer-events:none}
-         .fact-card:hover::after{opacity:1}
-         .fact-card.flipped{border-color:rgba(0,212,255,.3);background:rgba(0,212,255,.04)}
-         .fact-front,.fact-back{transition:.3s;position:relative;z-index:1}
-         .fact-card.flipped .fact-front{display:none}
-         .fact-back{display:none;color:var(--accent);font-family:var(--mono);font-size:.85rem}
-         .fact-card.flipped .fact-back{display:block}
-         .fact-label{font-size:.7rem;font-family:var(--mono);color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem}
-         .fact-val{font-size:.95rem;font-weight:600}
-         #skills{background:linear-gradient(var(--bg),var(--bg2),var(--bg));max-width:100%;padding:6rem 0;width:100%;position:relative;overflow:hidden}
-         #skills .inner{max-width:1100px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
-         /* floating code keywords background */
-         .code-rain{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-         .code-rain span{position:absolute;font-family:var(--mono);font-size:.85rem;color:var(--accent);opacity:.04;white-space:nowrap;will-change:transform;animation:codeDrift linear infinite}
-         @keyframes codeDrift{from{transform:translateX(-110%)}to{transform:translateX(110vw)}}
-         .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
-         .skill-group{background:var(--card);border:1px solid var(--border);border-radius:var(--radiusLg);padding:1.75rem;position:relative}
-         .skill-group svg.trace{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;border-radius:var(--radiusLg)}
-         .skill-group svg.trace rect{fill:none;stroke:var(--accent);stroke-width:1.5;opacity:.8;stroke-dasharray:100;stroke-dashoffset:100}
-         .skill-group.visible svg.trace rect{animation:traceDraw 1.4s .2s cubic-bezier(.4,0,.2,1) forwards}
-         @keyframes traceDraw{to{stroke-dashoffset:0}}
-         .skill-group-title{display:flex;align-items:center;gap:.75rem;font-size:.8rem;font-family:var(--mono);color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem}
-         .skill-group-title i{font-size:1.2rem;color:var(--accent)}
-         .skill-item{margin-bottom:1.1rem}
-         .skill-item:last-child{margin-bottom:0}
-         .skill-header{display:flex;justify-content:space-between;margin-bottom:.4rem;font-size:.88rem;font-weight:500}
-         .skill-pct{font-family:var(--mono);font-size:.78rem;color:var(--text3)}
-         @keyframes endGlow{0%,100%{box-shadow:0 0 4px var(--accent);opacity:.8}50%{box-shadow:0 0 14px var(--accent),0 0 26px rgba(0,212,255,.4);opacity:1}}
-         .pill-group{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
-         .pill{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:var(--text2);padding:.3rem .8rem;border-radius:50px;font-size:.78rem;font-family:var(--mono);transition:transform .25s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s,color .2s;cursor:default}
-         .pill:hover{background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.3);color:var(--accent);transform:scale(1.12)}
-         .pill.magnet{transform:scale(1.06)}
-         .timeline{position:relative;padding-left:2rem}
-         .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(var(--accent2),var(--accent),transparent);transform:scaleY(0);transform-origin:top;transition:transform 1.6s cubic-bezier(.22,1,.36,1)}
-         .timeline.drawn::before{transform:scaleY(1)}
-         .tl-item{position:relative;padding-bottom:3rem;transition:.6s}
-         .tl-item.visible{opacity:1;transform:none}
-         .tl-dot{position:absolute;left:-2.45rem;top:.35rem;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);border:2px solid var(--bg)}
-         /* second outer ring for double pulse */
-         .tl-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid currentColor;opacity:0;color:inherit}
-         .tl-item.visible .tl-dot::after{animation:dotRipple2 1.5s .65s ease-out}
-         @keyframes dotRipple2{0%{transform:scale(.6);opacity:.8}100%{transform:scale(2.6);opacity:0}}
-         .tl-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radiusLg);padding:1.75rem;transition:.3s}
-         .tl-card:hover{border-color:var(--borderH);transform:translateX(4px)}
-         .tl-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:.5rem}
-         .tl-role{font-size:1.1rem;font-weight:700}
-         .tl-date{font-family:var(--mono);font-size:.75rem;color:var(--accent);background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);padding:.3rem .75rem;border-radius:50px;white-space:nowrap}
-         .tl-company{font-size:.88rem;color:var(--accent2);font-weight:600;margin-bottom:1rem;letter-spacing:.03em}
-         .tl-bullets{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-         .tl-bullets li{font-size:.9rem;color:var(--text2);padding-left:1.2rem;position:relative;line-height:1.7}
-         .tl-bullets li::before{content:'▹';position:absolute;left:0;color:var(--accent);font-size:.75rem;top:.2rem}
-         .tl-bullets li strong{color:var(--accent3)}
-         .tl-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
-         .tl-tag{font-family:var(--mono);font-size:.7rem;color:var(--text3);background:var(--bg3);border:1px solid var(--border);padding:.2rem .6rem;border-radius:4px}
-         .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem}
-         .proj-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radiusLg);padding:1.75rem;transition:.3s;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column}
-         .proj-card.visible{opacity:1;transform:none}
-         .proj-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,212,255,.06) 0%,transparent 60%);opacity:0;transition:.3s;pointer-events:none}
-         .proj-card:hover{border-color:rgba(0,212,255,.3);box-shadow:0 8px 40px rgba(0,0,0,.4)}
-         .proj-card:hover::before{opacity:1}
-         .proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
-         .proj-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
-         .proj-links{display:flex;gap:.5rem}
-         .proj-link{color:var(--text3);text-decoration:none;font-size:1.1rem;transition:.2s;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:6px;border:1px solid var(--border)}
-         .proj-link:hover{color:var(--accent);border-color:rgba(0,212,255,.3)}
-         .proj-title{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;transition:.2s}
-         .proj-card:hover .proj-title{color:var(--accent)}
-         .proj-desc{font-size:.88rem;color:var(--text2);line-height:1.7;flex:1;margin-bottom:1.25rem}
-         .proj-metrics{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
-         .metric-badge{font-family:var(--mono);font-size:.7rem;color:var(--accent3);background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:.25rem .65rem;border-radius:4px}
-         .proj-actions{display:flex;gap:.5rem;margin-top:auto;padding-top:.85rem;border-top:1px solid var(--border);flex-wrap:wrap}
-         .proj-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.38rem .9rem;border-radius:7px;font-size:.75rem;font-weight:600;font-family:var(--mono);text-decoration:none;transition:.22s;white-space:nowrap;letter-spacing:.02em}
-         .proj-btn-live{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.35);color:#10b981}
-         .proj-btn-live:hover{background:rgba(16,185,129,.22);border-color:#10b981;transform:translateY(-2px);box-shadow:0 4px 14px rgba(16,185,129,.2)}
-         .proj-btn-yt{background:rgba(255,70,70,.1);border:1px solid rgba(255,70,70,.3);color:#ff6b6b}
-         .proj-btn-yt:hover{background:rgba(255,70,70,.18);border-color:#ff6b6b;transform:translateY(-2px);box-shadow:0 4px 14px rgba(255,70,70,.18)}
-         .proj-live-dot{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--mono);font-size:.65rem;color:#10b981;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:.18rem .55rem;border-radius:4px;letter-spacing:.05em}
-         .proj-live-dot::before{content:'';width:5px;height:5px;border-radius:50%;background:#10b981;animation:pulse 1.8s infinite;flex-shrink:0}
-         .proj-stack{display:flex;flex-wrap:wrap;gap:.4rem}
-         .stack-tag{font-family:var(--mono);font-size:.7rem;color:var(--text3);background:var(--bg3);padding:.2rem .55rem;border-radius:4px;border:1px solid var(--border)}
-         /* stack tags stagger pop-in on card hover */
-         @keyframes tagBounce{0%{transform:translateY(8px) scale(.85);opacity:.2}60%{transform:translateY(-2px) scale(1.05);opacity:1}100%{transform:none;opacity:1}}
-         .proj-card:hover .stack-tag{animation:tagBounce .45s cubic-bezier(.34,1.56,.64,1) both}
-         .proj-card:hover .stack-tag:nth-child(1){animation-delay:.02s}.proj-card:hover .stack-tag:nth-child(2){animation-delay:.06s}
-         .proj-card:hover .stack-tag:nth-child(3){animation-delay:.1s}.proj-card:hover .stack-tag:nth-child(4){animation-delay:.14s}
-         .proj-card:hover .stack-tag:nth-child(5){animation-delay:.18s}.proj-card:hover .stack-tag:nth-child(6){animation-delay:.22s}
-         .proj-card:hover .stack-tag:nth-child(7){animation-delay:.26s}.proj-card:hover .stack-tag:nth-child(8){animation-delay:.3s}
-         .proj-card:hover .stack-tag:nth-child(9){animation-delay:.34s}
-         #achievements{max-width:100%;background:var(--bg2);padding:6rem 0;width:100%}
-         #achievements .inner{max-width:1100px;margin:0 auto;padding:0 2rem}
-         .counter-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radiusLg);padding:1.75rem;text-align:center;transition:.3s}
-         .counter-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,212,255,.1)}
-         .counter-num{font-size:2.5rem;font-weight:800;color:var(--accent);letter-spacing:-.03em;line-height:1;font-family:var(--mono)}
-         .counter-suffix{color:var(--accent2)}
-         .counter-label{font-size:.75rem;color:var(--text3);margin-top:.5rem;letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono)}
-         .achv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
-         .achv-item{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.25rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);transition:.25s;position:relative;overflow:visible}
-         .achv-item:hover{border-color:var(--borderH)}
-         .achv-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem;position:relative}
-         /* trophy particle burst */
-         .achv-spark{position:absolute;left:50%;top:50%;font-size:.65rem;color:var(--accent);pointer-events:none;animation:sparkFly .9s cubic-bezier(.2,.8,.3,1) forwards}
-         @keyframes sparkFly{from{transform:translate(-50%,-50%) scale(1);opacity:1}to{transform:translate(calc(-50% + var(--sx)),calc(-50% + var(--sy))) scale(.3);opacity:0}}
-         .achv-text{flex:1}
-         .achv-title{font-size:.9rem;font-weight:600;margin-bottom:.15rem}
-         .achv-sub{font-size:.78rem;color:var(--text3);font-family:var(--mono)}
-         .cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2.5rem}
-         .cert-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;transition:.25s;min-width:0;position:relative;overflow:hidden}
-         .cert-card:hover{border-color:var(--accent2);transform:translateY(-2px)}
-         /* holographic foil on hover */
-         .cert-card::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,0,128,.07),rgba(0,212,255,.09) 30%,rgba(124,58,237,.08) 55%,rgba(16,185,129,.07) 80%,rgba(255,200,0,.06));background-size:300% 300%;background-position:var(--fx,50%) 50%;opacity:0;transition:opacity .3s;pointer-events:none;mix-blend-mode:screen}
-         .cert-card:hover::after{opacity:1}
-         .cert-logo{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-         .cert-name{font-size:.9rem;font-weight:600;line-height:1.3}
-         .cert-issuer{font-size:.75rem;color:var(--text3);font-family:var(--mono);margin-top:.2rem}
-         #contact{max-width:700px;margin:0 auto;text-align:center;padding:6rem 2rem}
-         .contact-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radiusLg);padding:3rem 2rem;margin-top:2.5rem;transition:.3s}
-         .contact-card:hover{border-color:var(--borderH)}
-         .contact-email{font-size:1.5rem;font-weight:700;color:var(--accent);font-family:var(--mono);margin-bottom:2rem;cursor:pointer;transition:.2s;display:inline-block}
-         .contact-email:hover{text-shadow:0 0 20px rgba(0,212,255,.5)}
-         .copy-hint{font-size:.75rem;color:var(--text3);font-family:var(--mono);margin-top:.5rem;transition:.3s}
-         .social-row{display:flex;justify-content:center;gap:1rem;margin-top:2rem;flex-wrap:wrap}
-         .social-btn{display:flex;align-items:center;gap:.5rem;padding:.6rem 1.25rem;border:1px solid var(--border);border-radius:8px;color:var(--text2);text-decoration:none;font-size:.85rem;font-weight:500;transition:.25s;font-family:var(--mono);position:relative;overflow:hidden}
-         .social-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,212,255,.05)}
-         .contact-form{display:flex;flex-direction:column;gap:1rem;margin:2.25rem 0 .5rem;text-align:left}
-         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-         .form-field{display:flex;flex-direction:column;gap:.4rem}
-         .form-label{font-family:var(--mono);font-size:.7rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
-         .form-input,.form-textarea{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-family:var(--font);font-size:.95rem;outline:none;transition:border-color .25s,box-shadow .25s;width:100%}
-         .form-textarea{resize:vertical;min-height:130px;line-height:1.6}
-         .form-input::placeholder,.form-textarea::placeholder{color:var(--text3)}
-         .form-input:focus,.form-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,.12),0 0 18px rgba(0,212,255,.08)}
-         .form-send{align-self:flex-start;display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--bg);border:none;padding:.75rem 2rem;border-radius:10px;font-weight:700;font-size:.95rem;font-family:var(--font);letter-spacing:.03em;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
-         .form-send:hover{box-shadow:0 0 30px rgba(0,212,255,.5);transform:translateY(-2px)}
-         .form-send:disabled{opacity:.6;cursor:wait;transform:none;box-shadow:none}
-         .form-status{font-family:var(--mono);font-size:.8rem;min-height:1.2em;transition:.3s}
-         .form-status.ok{color:var(--accent3)}
-         .form-status.err{color:var(--accentW)}
-         .form-divider{display:flex;align-items:center;gap:1rem;margin:2rem 0 1.5rem;color:var(--text3);font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase}
-         .form-divider::before,.form-divider::after{content:'';flex:1;height:1px;background:var(--border)}
-         @keyframes sendPulse{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
-         .form-send:hover .send-arrow{animation:sendPulse .8s ease infinite}
-         .btn-ripple{position:absolute;border-radius:50%;background:rgba(0,212,255,.25);transform:translate(-50%,-50%) scale(0);animation:rippleGrow .6s ease-out forwards;pointer-events:none}
-         @keyframes rippleGrow{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
-         footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--text3);font-size:.8rem;font-family:var(--mono);letter-spacing:.05em;position:relative}
-         footer::before{content:'';position:absolute;top:-1px;left:0;width:30%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);animation:footerSweep 4s linear infinite}
-         @keyframes footerSweep{from{transform:translateX(-100%)}to{transform:translateX(433%)}}
-         footer a{color:var(--accent2);text-decoration:none}
-         @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-         @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-         @keyframes gradShift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(40deg)}}
-         @keyframes fadeIn{to{opacity:1}}
-         .fade-up{transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
-         .js-ready .fade-up{opacity:0;transform:translateY(32px)}
-         .fade-up.visible{opacity:1;transform:none}
-         .fade-up:nth-child(2){transition-delay:.1s}
-         .fade-up:nth-child(3){transition-delay:.18s}
-         .fade-up:nth-child(4){transition-delay:.26s}
-         .fade-up:nth-child(5){transition-delay:.34s}
-         @keyframes shimmerIn{0%{opacity:0;letter-spacing:-.08em}100%{opacity:1;letter-spacing:-.03em}}
-         .hero-name{animation:shimmerIn .9s cubic-bezier(.22,1,.36,1) both}
-         .hero-name .grad{background:linear-gradient(135deg,#fff 0%,var(--accent) 40%,var(--accent2) 70%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 5s ease-in-out infinite alternate,textShimmer 3s linear infinite}
-         @keyframes textShimmer{to{background-position:200% center}}
-         @keyframes fadeSlide{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-         .hero-desc{animation:fadeSlide .7s .5s cubic-bezier(.22,1,.36,1) both}
-         .hero-btns{animation:fadeSlide .7s .65s cubic-bezier(.22,1,.36,1) both}
-         .hero-stats{animation:fadeSlide .7s .8s cubic-bezier(.22,1,.36,1) both}
-         @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-         .stat-num{animation:floatY 4s ease-in-out infinite}
-         .stat:nth-child(2) .stat-num{animation-delay:.5s}
-         .stat:nth-child(3) .stat-num{animation-delay:1s}
-         .stat:nth-child(4) .stat-num{animation-delay:1.5s}
-         /* Section titles: masked text reveal (slides up from behind clip mask) */
-         @keyframes maskReveal{from{clip-path:inset(0 0 100% 0);transform:translateY(40%)}to{clip-path:inset(0 0 -10% 0);transform:none}}
-         .section-title.visible{animation:maskReveal .85s cubic-bezier(.22,1,.36,1) both}
-         @keyframes barShimmer{0%,80%,100%{background-position:200% center}40%{background-position:0% center}}
-         .skill-bar-fill{background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent2));background-size:200% auto;animation:barShimmer 2.5s 1.4s ease infinite}
-         @keyframes borderGlow{0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,0)}50%{box-shadow:0 0 20px rgba(0,212,255,.15)}}
-         .skill-group:hover{animation:borderGlow 1.8s ease infinite}
-         @keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
-         .pill{opacity:0;animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both}
-         .pill:nth-child(1){animation-delay:.05s}.pill:nth-child(2){animation-delay:.1s}.pill:nth-child(3){animation-delay:.15s}
-         .pill:nth-child(4){animation-delay:.2s}.pill:nth-child(5){animation-delay:.25s}.pill:nth-child(6){animation-delay:.3s}
-         .pill:nth-child(7){animation-delay:.35s}.pill:nth-child(8){animation-delay:.4s}.pill:nth-child(9){animation-delay:.45s}
-         .pill:nth-child(10){animation-delay:.5s}.pill:nth-child(11){animation-delay:.55s}.pill:nth-child(12){animation-delay:.6s}
-         .pill:nth-child(n+13){animation-delay:.65s}
-         /* Timeline items: alternate slide-in left / right */
-         .tl-item{transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
-         .js-ready .tl-item:nth-child(odd):not(.visible){opacity:0;transform:translateX(-30px)}
-         .js-ready .tl-item:nth-child(even):not(.visible){opacity:0;transform:translateX(30px)}
-         .js-ready .tl-item.visible{opacity:1;transform:none}
-         .tl-item:nth-child(2){transition-delay:.1s}
-         .tl-item:nth-child(3){transition-delay:.2s}
-         .tl-item:nth-child(4){transition-delay:.3s}
-         .tl-item.visible{opacity:1;transform:none}
-         @keyframes dotRipple{0%{box-shadow:0 0 0 0 rgba(0,212,255,.6)}70%{box-shadow:0 0 0 10px rgba(0,212,255,0)}100%{box-shadow:0 0 0 0 rgba(0,212,255,0)}}
-         .tl-item.visible .tl-dot{animation:dotRipple 1.5s .3s ease-out}
-         .proj-card{transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .3s}
-         .js-ready .proj-card{opacity:0;transform:translateY(24px) scale(.97)}
-         .proj-card.visible{opacity:1;transform:none}
-         .proj-card:nth-child(2){transition-delay:.08s}
-         .proj-card:nth-child(3){transition-delay:.16s}
-         .proj-card:nth-child(4){transition-delay:.24s}
-         .proj-card:nth-child(5){transition-delay:.32s}
-         .proj-card:nth-child(6){transition-delay:.40s}
-         /* spotlight sweep - brighter diagonal light on hover */
-         .proj-card::after{content:'';position:absolute;top:-50%;left:-60%;width:45%;height:200%;background:linear-gradient(105deg,transparent,rgba(0,212,255,.07) 40%,rgba(255,255,255,.09) 50%,rgba(0,212,255,.07) 60%,transparent);transform:skewX(-20deg);transition:left .65s ease;pointer-events:none}
-         .proj-card:hover::after{left:130%}
-         @keyframes counterFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-         .counter-card{animation:counterFloat 3.5s ease-in-out infinite}
-         .counter-card:nth-child(2){animation-delay:.5s}
-         .counter-card:nth-child(3){animation-delay:1s}
-         .counter-card:nth-child(4){animation-delay:1.5s}
-         .counter-card:nth-child(5){animation-delay:2s}
-         .achv-item{transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1),border-color .25s}
-         .js-ready .achv-item{opacity:0;transform:translateX(-16px)}
-         .achv-item.visible{opacity:1;transform:none}
-         .cert-card{transition:border-color .25s,transform .35s cubic-bezier(.34,1.56,.64,1)}
-         .cert-card:hover{transform:translateY(-4px) rotate(.4deg)}
-         @keyframes glitch{0%,100%{text-shadow:none}20%{text-shadow:-2px 0 var(--accent2),2px 0 var(--accent)}40%{text-shadow:2px 0 var(--accent2),-2px 0 var(--accent)}60%{text-shadow:none}}
-         .nav-logo:hover{animation:glitch .4s ease}
-         .nav-logo.auto-glitch{animation:glitch .45s ease}
-         @keyframes neonFlicker{0%,95%,100%{opacity:1}96%,98%{opacity:.4}}
-         .hero-tag .dot{animation:pulse 2s infinite,neonFlicker 6s 3s infinite}
-         @keyframes bounceIn{0%{opacity:0;transform:scale(.85) translateX(8px)}70%{transform:scale(1.03) translateX(-2px)}100%{opacity:1;transform:scale(1) translateX(0)}}
-         .fact-card{animation:bounceIn .5s cubic-bezier(.34,1.56,.64,1) both}
-         .fact-card:nth-child(2){animation-delay:.07s}.fact-card:nth-child(3){animation-delay:.14s}
-         .fact-card:nth-child(4){animation-delay:.21s}.fact-card:nth-child(5){animation-delay:.28s}.fact-card:nth-child(6){animation-delay:.35s}
-         .contact-email{position:relative;display:inline-block}
-         .contact-email::after{content:'';position:absolute;left:0;bottom:-4px;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent));background-size:200% auto;border-radius:2px;animation:textShimmer 2s linear infinite;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.22,1,.36,1)}
-         .contact-email:hover::after{transform:scaleX(1)}
-         .social-btn{opacity:0;transform:translateY(12px);animation:fadeSlide .5s cubic-bezier(.22,1,.36,1) both}
-         .social-btn:nth-child(1){animation-delay:.1s}.social-btn:nth-child(2){animation-delay:.18s}
-         .social-btn:nth-child(3){animation-delay:.26s}.social-btn:nth-child(4){animation-delay:.34s}.social-btn:nth-child(5){animation-delay:.42s}
-         @keyframes metricPulse{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0)}60%{box-shadow:0 0 8px rgba(16,185,129,.3)}}
-         .metric-badge:hover{animation:metricPulse 1.2s ease infinite}
-         @keyframes scrollThumb{0%{background-position:0% 50%}100%{background-position:100% 50%}}
-         ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent2),var(--accent));background-size:100% 200%;animation:scrollThumb 3s linear infinite}
-         /* center ambient glow is painted inside .hero-glow now - no separate
-            animated ::after layer that could show rectangular bounds */
-         @keyframes tagReveal{from{max-width:0;overflow:hidden}to{max-width:100%}}
-         .section-tag.visible{display:inline-block;animation:tagReveal .5s cubic-bezier(.22,1,.36,1) both}
-         #terminal{position:fixed;bottom:2rem;right:2rem;width:380px;background:#0c0d15;border:1px solid var(--accent2);border-radius:12px;font-family:var(--mono);font-size:.8rem;overflow:hidden;z-index:9999;transform:translateY(calc(100% + 3rem));transition:.4s cubic-bezier(.4,0,.2,1);box-shadow:0 20px 60px rgba(0,0,0,.6)}
-         #terminal.open{transform:translateY(0)}
-         /* CRT scanlines overlay */
-         #terminal::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);pointer-events:none;z-index:5;mix-blend-mode:overlay}
-         /* CRT flicker + travelling scanline */
-         #terminal.open::after{content:'';position:absolute;left:0;right:0;height:14px;background:linear-gradient(rgba(10,255,157,.06),rgba(10,255,157,.02));top:-14px;pointer-events:none;z-index:6;animation:crtScan 3.4s linear infinite}
-         @keyframes crtScan{from{transform:translateY(0)}to{transform:translateY(420px)}}
-         #terminal.open .term-body{animation:crtFlicker 5s steps(1) infinite}
-         @keyframes crtFlicker{0%,93%,100%{opacity:1}94%{opacity:.88}95%{opacity:1}97%{opacity:.92}98%{opacity:1}}
-         .term-bar{background:#161724;padding:.6rem 1rem;display:flex;align-items:center;gap:.5rem;cursor:pointer;position:relative;z-index:7}
-         .term-dot{width:10px;height:10px;border-radius:50%}
-         .term-title{flex:1;text-align:center;color:var(--text3);font-size:.7rem;letter-spacing:.1em}
-         .term-body{padding:1rem;max-height:220px;overflow-y:auto;color:#0aff9d;line-height:1.8}
-         .term-body .line{opacity:0;animation:fadeIn .3s forwards}
-         .term-body .matrix-line{color:#0aff9d;text-shadow:0 0 6px rgba(10,255,157,.6);letter-spacing:.15em;opacity:0;animation:fadeIn .15s forwards}
-         .term-input-row{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-top:1px solid var(--border)}
-         .term-prompt{color:var(--accent);flex-shrink:0}
-         .term-input{flex:1;background:transparent;border:none;outline:none;color:#0aff9d;font-family:var(--mono);font-size:.8rem}
-         .term-hint{position:fixed;bottom:2rem;right:2rem;font-family:var(--mono);font-size:.7rem;color:var(--text3);background:var(--bg2);border:1px solid var(--border);padding:.4rem .8rem;border-radius:6px;pointer-events:none;transition:.3s;letter-spacing:.06em}
-         #terminal.open~.term-hint{opacity:0}
-         .cursor{position:fixed;width:10px;height:10px;background:var(--cursor-color);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .1s,opacity .2s,background .4s;mix-blend-mode:screen}
-         .cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--cursor-color);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:left .12s ease-out,top .12s ease-out,opacity .2s,width .25s,height .25s,border-color .4s;display:flex;align-items:center;justify-content:center}
-         .cursor-ring svg{width:100%;height:100%;opacity:0;transition:opacity .25s;animation:spinBorder 5s linear infinite}
-         .cursor-ring svg text{font-family:var(--mono);font-size:9px;fill:var(--cursor-color);letter-spacing:3px}
-         .cursor-ring.hovering{width:72px;height:72px;border-color:transparent}
-         .cursor-ring.hovering svg{opacity:1}
-         .cursor-ghost{position:fixed;border-radius:50%;background:var(--cursor-color);pointer-events:none;z-index:9996;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:background .4s}
-
-         .touch-device nav.scrolled{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(8,9,14,.96)}
-         .touch-device .hero-noise{mix-blend-mode:normal;opacity:.02}
-         .touch-device .cursor,.touch-device .cursor-ring,.touch-device .cursor-ghost{display:none!important}
-         /* stop always-running animations on touch devices (flicker fix) */
-         .touch-device .hero-glow{animation:none}
-         .touch-device .hero-name .grad{animation:none}
-         .touch-device .hero-name{animation:shimmerIn .9s cubic-bezier(.22,1,.36,1) both}
-         .touch-device .hero-title::after{display:none}
-         .touch-device .stat-num{animation:none}
-         .touch-device .skill-bar-fill{animation:none;background:linear-gradient(90deg,var(--accent2),var(--accent))}
-         .touch-device .skill-bar-fill::before,.touch-device .skill-bar-fill::after{display:none}
-         .touch-device .skill-group:hover{animation:none}
-         .touch-device .counter-card{animation:none}
-         .touch-device .code-rain{display:none}
-         .touch-device footer::before{display:none}
-         .touch-device #backTop::before{animation:none;background:var(--accent2)}
-         .touch-device ::-webkit-scrollbar-thumb{animation:none}
-         .touch-device .contact-email::after{animation:none;background:var(--accent)}
-         .touch-device .hero-tag .dot{animation:pulse 2s infinite}
-         @media(max-width:768px){
-         nav,nav.scrolled{backdrop-filter:none;-webkit-backdrop-filter:none}
-         .nav-inner{padding:.65rem 1.25rem}
-         .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg,#08090e);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;z-index:998}
-         .nav-links.open{display:flex}
-         .nav-links a{font-size:1.4rem}
-         .hamburger{display:flex;z-index:999}
-         .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-         .hamburger.open span:nth-child(2){opacity:0}
-         .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-         .nav-cta{display:none}
-         html,body{overflow-x:hidden;max-width:100vw}
-         #hero{padding:0 1.25rem}
-         .hero-content{padding-top:90px}
-         .hero-desc{font-size:.95rem}
-         .hero-btns{flex-direction:column;align-items:flex-start;gap:.65rem}
-         .btn-primary{width:100%;max-width:270px;text-align:center;padding:.7rem 1.25rem;font-size:.9rem}
-         .btn-ghost{width:100%;max-width:270px;text-align:center;justify-content:center;padding:.7rem 1.25rem;font-size:.9rem}
-         .hero-stats{gap:.9rem 1.4rem;flex-wrap:wrap}
-         .stat{min-width:calc(50% - .75rem)}
-         .stat-num{font-size:1.5rem}
-         section{padding:4rem 1.25rem}
-         #skills{padding:4rem 0}
-         #achievements{padding:4rem 0}
-         #contact{padding:4rem 1.25rem;max-width:100%}
-         #about .about-grid{grid-template-columns:1fr}
-         .skills-grid{grid-template-columns:1fr}
-         .projects-grid{grid-template-columns:1fr}
-         .proj-card{padding:1.25rem}
-         .proj-actions{flex-wrap:wrap}
-         .achv-grid{grid-template-columns:1fr}
-         .cert-grid{grid-template-columns:repeat(2,1fr);gap:.75rem}
-         .tl-header{flex-direction:column;align-items:flex-start;gap:.35rem}
-         .tl-date{white-space:normal}
-         .contact-card{padding:1.75rem 1.25rem}
-         .form-row{grid-template-columns:1fr}
-         .form-send{align-self:stretch;justify-content:center}
-         .contact-email{font-size:1.1rem;word-break:break-all}
-         .social-row{flex-wrap:wrap;gap:.6rem;justify-content:center}
-         .social-btn{flex:1 1 140px;justify-content:center;min-width:140px}
-         .cursor,.cursor-ring,.cursor-ghost{display:none}
-         #terminal{width:calc(100vw - 2rem);right:1rem;bottom:1rem}
-         .term-hint{right:1rem;bottom:1rem}
-         /* slightly lighter glow on mobile */
-         .hero-glow{opacity:.8}
-         .hero-noise{opacity:.025}
-         /* back-to-top sits clear of the terminal hint */
-         #backTop{right:1rem;bottom:6rem;width:42px;height:42px}
-         /* code rain a touch dimmer on mobile */
-         .code-rain span{font-size:.72rem}
-         }
-         @media(max-width:420px){
-         .hero-name{font-size:2.6rem}
-         .cert-grid{grid-template-columns:1fr}
-         .btn-primary,.btn-ghost{max-width:100%}
-         .social-btn{flex:1 1 100%;min-width:0}
-         .tl-card{padding:1.25rem 1rem}
-         .hero-stats{gap:.65rem 1rem}
-         .proj-metrics{gap:.35rem}
-         .metric-badge{font-size:.65rem}
-         }
-         @media (prefers-reduced-motion: reduce){
-         *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-         html{scroll-behavior:auto}
-         .js-ready .fade-up,.js-ready .tl-item,.js-ready .proj-card,.js-ready .achv-item{opacity:1!important;transform:none!important}
-         .about-text p>.line-inner{transform:none!important}
-         .timeline::before{transform:scaleY(1)!important}
-         .pill,.social-btn{opacity:1!important;transform:none!important}
-         .skill-bar-fill::before,.skill-bar-fill::after{display:none}
-         #preloader{display:none!important}
-         body:not(.loaded) .hero-name,body:not(.loaded) .hero-desc,body:not(.loaded) .hero-btns,body:not(.loaded) .hero-stats{animation-play-state:running!important}
-         .hero-name,.hero-desc,.hero-btns,.hero-stats{opacity:1!important}
-         .cursor,.cursor-ring,.cursor-ghost{display:none!important}
-         .code-rain{display:none}
-         .hero-glow{animation:none}
-         #canvas-bg{opacity:.3}
-         }
-      </style>
+      </script>
+      <script>
+         (function () {
+           try {
+             var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+             document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+           } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+           document.documentElement.classList.add('has-js');
+         })();
+      </script>
+      <link rel="stylesheet" href="styles.css" />
    </head>
    <body>
-      <div id="preloader" aria-hidden="true">
-         <svg viewBox="0 0 380 110" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-               <linearGradient id="preGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#ffffff"/>
-                  <stop offset="50%" stop-color="#00d4ff"/>
-                  <stop offset="100%" stop-color="#7c3aed"/>
-               </linearGradient>
-            </defs>
-            <text class="pre-stroke" x="50%" y="72" text-anchor="middle">AT.dev</text>
-            <text class="pre-fill" x="50%" y="72" text-anchor="middle">AT.dev</text>
-         </svg>
-         <div class="pre-bar"></div>
-      </div>
-      <div id="scrollProgress"></div>
-      <div class="cursor" id="cursor"></div>
-      <div class="cursor-ring" id="cursorRing">
-         <svg viewBox="0 0 72 72"><defs><path id="viewCircle" d="M36,36 m-26,0 a26,26 0 1,1 52,0 a26,26 0 1,1 -52,0"/></defs><text><textPath href="#viewCircle">VIEW · VIEW · VIEW · </textPath></text></svg>
-      </div>
-      <button id="backTop" aria-label="Back to top" title="Back to top">↑</button>
-      <nav id="navbar">
-         <div class="nav-inner">
-            <div class="nav-logo" id="navLogo">AT<span>.dev</span></div>
-            <ul class="nav-links" id="navLinks">
-               <li><a href="#about">About</a></li>
-               <li><a href="#skills">Skills</a></li>
-               <li><a href="#experience">Experience</a></li>
-               <li><a href="#projects">Projects</a></li>
-               <li><a href="#achievements">Achievements</a></li>
-               <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="https://github.com/abhishek-tiwari-nitrr" target="_blank" class="nav-cta">GitHub ↗</a>
-            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <a class="skip" href="#main">Skip to content</a>
+      <div class="grid-bg" aria-hidden="true"></div>
+      <div id="scrollbar" aria-hidden="true"></div>
+      <header class="topbar" id="topbar">
+         <a class="mark" href="#masthead" aria-label="Abhishek Tiwari - top">
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+               <rect width="32" height="32" rx="6" fill="currentColor" opacity="0.08"/>
+               <path d="M6 24 L11 14 L15 18 L20 9 L26 7" fill="none" stroke="var(--signal)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+               <circle cx="26" cy="7" r="2.2" fill="var(--signal)"/>
+            </svg>
+            <span><b>Abhishek Tiwari</b> · <span>ML Engineer</span></span>
+         </a>
+         <div class="bar-actions">
+            <button class="btn-chip" id="openCmd" aria-label="Open command menu"><span class="hide-sm">Index</span> <kbd id="kKey">⌘K</kbd></button>
+            <button class="icon-btn" id="themeToggle" aria-label="Toggle colour theme">
+               <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <circle cx="12" cy="12" r="4"/>
+                  <!--sun icon--> 
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+               </svg>
+               <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <!--moon icon--> 
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+               </svg>
+            </button>
          </div>
+      </header>
+      <nav class="rail" id="rail" aria-label="Section index">
+         <span class="rail-fill" id="railFill" aria-hidden="true"></span>
+         <a href="#masthead" data-rail="masthead"><span class="n">00</span> Top</a>
+         <a href="#overview" data-rail="overview"><span class="n">01</span> Overview</a>
+         <a href="#stack" data-rail="stack"><span class="n">02</span> Stack</a>
+         <a href="#experience" data-rail="experience"><span class="n">03</span> Experience</a>
+         <a href="#work" data-rail="work"><span class="n">04</span> Selected work</a>
+         <a href="#recognition" data-rail="recognition"><span class="n">05</span> Recognition</a>
+         <a href="#contact" data-rail="contact"><span class="n">06</span> Contact</a>
       </nav>
-      <section id="hero" data-cursor="#00d4ff">
-         <div class="hero-glow" aria-hidden="true"></div>
-         <div class="hero-noise" aria-hidden="true"></div>
-         <canvas id="canvas-bg"></canvas>
-         <div class="hero-content">
-            <h1 class="hero-name" id="heroName">
-               <span class="grad">Abhishek</span><br>Tiwari
-            </h1>
-            <div class="hero-title">
-               <span id="typed"></span><span id="typed-cursor"></span>
-            </div>
-            <p class="hero-desc">
-               Building <strong>intelligent systems</strong> that turn raw data into real business impact.
-               Appian Developer by day - building production <strong>ML systems</strong> by night.
-            </p>
-            <div class="hero-btns">
-               <a href="#projects" class="btn-primary">View My Work</a>
-               <a href="https://drive.google.com/file/d/1tfrmLjwJ9vj1Opdlo-NNkDRwArTj2Nsd/view?usp=sharing" download class="btn-ghost" target="_blank"  style="display:flex;align-items:center;gap:.5rem">⬇ Download Resume</a>
-               <a href="#contact" class="btn-ghost">Get In Touch</a>
-            </div>
-            <div class="hero-stats">
-               <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">YRS ENTERPRISE AI</span></div>
-               <div class="stat"><span class="stat-num" id="ghContribStat">—</span><span class="stat-label">GITHUB CONTRIBUTIONS </span></div>
-               <div class="stat"><span class="stat-num" id="ghRepoStat">—</span><span class="stat-label">REPOSITORIES</span></div>
-               <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">SUPER SQUAD AWARDS</span></div>
-            </div>
-         </div>
-      </section>
-      <section id="about" data-cursor="#00d4ff">
-         <p class="section-tag fade-up">01. About</p>
-         <h2 class="section-title fade-up">Turning data into decisions.</h2>
-         <div class="about-grid fade-up">
-            <div class="about-text">
-               <p>I build <strong>end-to-end ML systems</strong> - pipelines, serving, monitoring, CI/CD. Four of them are live right now, with experiment tracking, drift detection and test suites behind them.</p>
-               <p style="margin-top:1rem">My day job: nearly 4 years at EXL Service on the <strong>enterprise AI side</strong> - Agentic AI POCs, GenAI demos for Internal and External stakeholders, Appian BPM delivery. Promoted twice, awarded 4x for impact.</p>
-               <p style="margin-top:1rem">Currently targeting <strong>ML Engineer / Applied AI / Data Scientist</strong> roles at product companies and AI-native startups.</p>
-            </div>
-            <div class="fun-facts">
-               <p style="font-family:var(--mono);font-size:.72rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem">// Click a card to reveal</p>
-               <div class="fact-card" onclick="this.classList.toggle('flipped')">
-                  <div class="fact-front">
-                     <div class="fact-label">Institute</div>
-                     <div class="fact-val">NIT Raipur - B.Tech Mining Engineering</div>
+      <main id="main">
+         <section id="masthead" aria-label="Introduction">
+            <div class="mast-grid">
+               <div>
+                  <p class="run-tag m-rise m-d1">experiment report <span style="opacity:.5">//</span> <b>2022 - 2026</b></p>
+                  <h1 class="mast-name m-rise m-d2" id="heroName"><span data-decode="Abhishek">Abhishek</span><br><span data-decode="Tiwari">Tiwari</span></h1>
+                  <p class="mast-role m-rise m-d3">ML Engineer<span class="div">&middot;</span>Data Scientist <span class="div">&middot;</span>AI Engineer</p>
+                  <p class="mast-thesis m-rise m-d4">I build end-to-end machine-learning systems that ship - pipelines, serving, drift monitoring and <em>the metrics to prove they work.</em></p>
+                  <div class="mast-cta m-rise m-d5">
+                     <a class="cta cta-solid" href="#work">Selected work ↓</a>
+                     <a class="cta cta-line" href="https://drive.google.com/file/d/1tfrmLjwJ9vj1Opdlo-NNkDRwArTj2Nsd/view?usp=sharing" target="_blank" rel="noopener">Résumé (PDF) ↗</a>
+                     <button class="kbd-hint" id="paletteHint" type="button" aria-label="Open command menu"><span id="hintPre">press</span> <kbd id="modK1">⌘</kbd><kbd>K</kbd> <span id="hintVerb">to navigate</span></button>
                   </div>
-                  <div class="fact-back">Class of 2022 · GATE 2025 Qualified · AWS ML Scholarship &#127919;</div>
-               </div>
-               <div class="fact-card" onclick="this.classList.toggle('flipped')">
-                  <div class="fact-front">
-                     <div class="fact-label">Current Role</div>
-                     <div class="fact-val">Lead Asst. Manager @ EXL Service, Noida</div>
+                  <div class="telemetry m-rise m-d5">
+                     <div class="tele"><span class="tele-v"><span class="pre">~</span>4</span><span class="tele-k">yrs enterprise AI</span></div>
+                     <div class="tele"><span class="tele-v" id="ghContrib">850</span><span class="tele-k">github commits</span></div>
+                     <div class="tele"><span class="tele-v" id="ghRepos">34</span><span class="tele-k">public repos</span></div>
+                     <div class="tele"><span class="tele-v">4</span><span class="tele-k">live ML apps</span></div>
+                     <div class="tele"><span class="tele-v">4<span class="pre">x</span></span><span class="tele-k">super squad award</span></div>
                   </div>
-                  <div class="fact-back">Leading Insurance Domain Appian BPM as Primary Developer since Jan 2026 &#9889;</div>
                </div>
-               <div class="fact-card" onclick="this.classList.toggle('flipped')">
-                  <div class="fact-front">
-                     <div class="fact-label">Best Competition Result</div>
-                     <div class="fact-val">Global Rank #8 - Analytics Vidhya HR Analytics</div>
+               <div class="plot m-rise m-d4">
+                  <div class="plot-head">
+                     <span class="plot-title">model: abhishek.v4 - training run</span>
+                     <span class="plot-head-r">
+                     <button class="replay" id="replayRun" type="button" aria-label="Re-run the training animation" title="Re-run">↻</button>
+                     <span class="status" id="trainStatus"><span class="dot"></span><span id="statusTxt">training</span></span>
+                     </span>
                   </div>
-                  <div class="fact-back">Also: #67 Power Plant Energy AI, #299 AmExpert ML Hackathon &#127942;</div>
-               </div>
-               <div class="fact-card" onclick="this.classList.toggle('flipped')">
-                  <div class="fact-front">
-                     <div class="fact-label">Tech Stack Philosophy</div>
-                     <div class="fact-val">Python-first. Scikit-learn → XGBoost → Streamlit → prod.</div>
+                  <svg id="lossPlot" viewBox="0 0 372 220" role="img" aria-label="Training run chart: validation loss decreasing from about 1.0 to 0.15 (blue, downward) and validation accuracy rising to about 0.95 (green, upward) over 60 epochs.">
+                     <line class="grid-ln" x1="44" y1="56" x2="340" y2="56"/>
+                     <line class="grid-ln" x1="44" y1="98" x2="340" y2="98"/>
+                     <line class="grid-ln" x1="44" y1="140" x2="340" y2="140"/>
+                     <line class="axis-ln" x1="44" y1="24" x2="44" y2="184"/>
+                     <line class="axis-ln" x1="44" y1="184" x2="340" y2="184"/>
+                     <text class="plot-axis" x="40" y="30" text-anchor="end">1.0</text>
+                     <text class="plot-axis" x="40" y="142" text-anchor="end">0.3</text>
+                     <text class="plot-axis" x="40" y="187" text-anchor="end">0.1</text>
+                     <text class="plot-axis" x="44" y="200" text-anchor="start">0</text>
+                     <text class="plot-axis" x="340" y="200" text-anchor="end">60</text>
+                     <text class="plot-axis" x="192" y="213" text-anchor="middle">epoch</text>
+                     <text class="plot-axis" x="14" y="104" text-anchor="middle" transform="rotate(-90 14 104)">loss</text>
+                     <text class="plot-axis accx" x="346" y="42" text-anchor="start">1.0</text>
+                     <text class="plot-axis accx" x="346" y="146" text-anchor="start">0.5</text>
+                     <path class="acc-ln" id="accLine" d="M44 171 L74 135 L103 108 L133 88 L162 74 L192 63 L222 55 L251 49 L281 45 L310 41 L340 39"/>
+                     <path class="loss-ln" id="lossLine" d="M44 29 L74 73 L103 104 L133 126 L162 142 L192 153 L222 161 L251 167 L281 171 L310 174 L340 176"/>
+                     <circle class="acc-dot-ring dot-ring" id="accDotRing" cx="340" cy="39" r="6"/>
+                     <circle class="acc-dot" id="accDot" cx="340" cy="39" r="3"/>
+                     <circle class="loss-dot-ring dot-ring" id="lossDotRing" cx="340" cy="176" r="6"/>
+                     <circle class="loss-dot" id="lossDot" cx="340" cy="176" r="3"/>
+                     <g id="xhair">
+                        <line class="xhair-line" id="xhairLine" x1="340" y1="24" x2="340" y2="184"/>
+                        <circle class="xhair-dot a" id="xhairAcc" cx="340" cy="39" r="3.5"/>
+                        <circle class="xhair-dot l" id="xhairLoss" cx="340" cy="176" r="3.5"/>
+                     </g>
+                  </svg>
+                  <div class="plot-tip" id="plotTip"></div>
+                  <div class="plot-foot">
+                     <span><span class="k">epoch</span> <span class="v epoch" id="epochVal">60</span><span class="k">/60</span></span>
+                     <span><span class="k">loss</span> <span class="v loss" id="lossVal">0.150</span></span>
+                     <span><span class="k">acc</span> <span class="v acc" id="accVal">0.948</span></span>
                   </div>
-                  <div class="fact-back">currently_learning = ['LangChain','RAG','PyTorch'] &#128640;</div>
+                  <div class="legend"><span><i style="background:var(--signal)"></i>val_loss ↓</span><span><i style="background:var(--live)"></i>val_acc ↑</span></div>
                </div>
-               <div class="fact-card" onclick="this.classList.toggle('flipped')">
-                  <div class="fact-front">
-                     <div class="fact-label">HackerRank Badge</div>
-                     <div class="fact-val">5★ Golden Badge in Python &amp; SQL</div>
+            </div>
+         </section>
+         <section id="overview" class="section" tabindex="-1" aria-labelledby="overview-h">
+            <p class="eyebrow reveal">01 - Overview</p>
+            <h2 class="h-sec reveal" id="overview-h">I turn data into systems that make decisions.</h2>
+            <div class="overview-grid">
+               <div class="prose reveal">
+                  <p>I'm a machine-learning engineer and data scientist. I build <strong>end-to-end ML systems</strong> - data pipelines, model serving, drift monitoring and CI/CD - and four of them run live today, each with experiment tracking and a test suite behind it.</p>
+                  <p>By day I'm a Lead Assistant Manager at <strong>EXL Service</strong>, where I've spent nearly four years on the enterprise-AI side: Agentic-AI proofs of concept and GenAI demos for internal and external stakeholders. Promoted twice; recognised four times for project impact.</p>
+                  <p>I'm now looking for <strong>ML Engineer, Applied AI or Data Scientist</strong> roles at product companies and AI-native startups - places where shipping measured, reliable models is the job.</p>
+               </div>
+               <aside class="notes-col reveal" aria-label="Notes">
+                  <p class="note" data-n="*"><b>NIT Raipur</b> - B.Tech, Mining Engineering, class of 2022.</p>
+                  <p class="note" data-n="†">GATE 2025 qualified &middot; <b>AIR 155</b> &middot; MN.</p>
+                  <p class="note" data-n="‡">Working philosophy: Python-first. scikit-learn → XGBoost → Streamlit.</p>
+                  <p class="note" data-n="§">Currently learning: <b>LangChain, RAG, PyTorch</b>.</p>
+                  <p class="note" data-n="¶">5&#9733; HackerRank (Python &amp; SQL) · 2x Kaggle bronze · 3x Udacity nanodegrees.</p>
+               </aside>
+            </div>
+         </section>
+         <section id="stack" class="section" tabindex="-1" aria-labelledby="stack-h">
+            <p class="eyebrow reveal">02 - Stack</p>
+            <h2 class="h-sec reveal" id="stack-h">Instruments &amp; methods.</h2>
+            <div class="reveal">
+               <div class="stack-row">
+                  <div class="stack-label">core ml / python</div>
+                  <div class="stack-items"><span class="tok">Python</span><span class="tok">scikit-learn</span><span class="tok">XGBoost / LightGBM</span><span class="tok">AdaBoost</span><span class="tok">SHAP</span><span class="tok">pandas / NumPy</span><span class="tok">imbalanced-learn</span></div>
+               </div>
+               <div class="stack-row">
+                  <div class="stack-label">mlops &amp; deployment</div>
+                  <div class="stack-items"><span class="tok">MLflow</span><span class="tok">DagsHub</span><span class="tok">Docker</span><span class="tok">GitHub Actions</span><span class="tok">FastAPI</span><span class="tok">Streamlit</span><span class="tok">pytest</span><span class="tok">drift monitoring</span></div>
+               </div>
+               <div class="stack-row">
+                  <div class="stack-label">data &amp; sql</div>
+                  <div class="stack-items"><span class="tok">SQL (MariaDB / MySQL)</span><span class="tok">SQLite</span><span class="tok">MongoDB Atlas</span><span class="tok">data wrangling</span><span class="tok">Plotly / Seaborn</span><span class="tok">A/B testing</span></div>
+               </div>
+               <div class="stack-row">
+                  <div class="stack-label">techniques</div>
+                  <div class="stack-items"><span class="tok">SMOTE / ImbPipeline</span><span class="tok">SMOTETomek</span><span class="tok">Isolation Forest</span><span class="tok">GridSearchCV</span><span class="tok">cross-validation</span></div>
+               </div>
+               <div class="stack-row">
+                  <div class="stack-label">ai &amp; enterprise</div>
+                  <div class="stack-items"><span class="tok">Appian BPM</span><span class="tok">Agentic AI</span><span class="tok">Generative AI</span><span class="tok">LLM concepts</span><span class="tok">RPA</span></div>
+               </div>
+               <div class="stack-row">
+                  <div class="stack-label">tooling &amp; auth</div>
+                  <div class="stack-items"><span class="tok">Git</span><span class="tok">Jupyter</span><span class="tok">PyJWT / bcrypt</span><span class="tok">ReportLab</span><span class="tok">Pydantic</span></div>
+               </div>
+               <div class="stack-row">
+                  <div class="stack-label">currently learning</div>
+                  <div class="stack-items"><span class="tok learn">LangChain</span><span class="tok learn">RAG</span><span class="tok learn">PyTorch</span></div>
+               </div>
+               <p class="stack-foot"><span class="d">$</span> dashed = in progress &middot; everything else is shipped in  competition work.</p>
+            </div>
+         </section>
+         <section id="experience" class="section" tabindex="-1" aria-labelledby="exp-h">
+            <p class="eyebrow reveal">03 - Experience</p>
+            <h2 class="h-sec reveal" id="exp-h">Depth over breadth - 4 years, 1 company, 2x Promotions.</h2>
+            <div>
+               <article class="rec reveal">
+                  <div class="rec-year">2026 -<br>now</div>
+                  <div class="rec-body">
+                     <h3 class="rec-role">Lead Assistant Manager - R&amp;D &amp; AI POC Lab</h3>
+                     <div class="rec-org">EXL Service · Noida (WFH)</div>
+                     <ul class="rec-points">
+                        <li>Currently on the <strong>demo & experimentation track</strong> - building Python ML proofs-of-concept and data-science experiments to validate ideas before they go into production pipelines.</li>
+                        <li>Designing and presenting <strong>end-to-end ML demos for stakeholders</strong> - from raw data through model training, evaluation and a Streamlit front-end.</li>
+                        <li>Running rapid experiments across models and datasets: tracking every run in <strong>MLflow</strong>, comparing metrics, and packaging the best results into shareable demo apps.</li>
+                     </ul>
+                     <ul class="rec-tags">
+                        <li>Python</li>
+                        <li>ML engineering</li>
+                        <li>Streamlit</li>
+                        <li>Insurance</li>
+                     </ul>
                   </div>
-                  <div class="fact-back">Also: 2x Kaggle Bronze Notebook Medals · 3x Udacity Nanodegrees &#129353;</div>
-               </div>
+               </article>
+               <article class="rec reveal">
+                  <div class="rec-year">2024 -<br>2025</div>
+                  <div class="rec-body">
+                     <h3 class="rec-role">Assistant Manager - R&amp;D &amp; AI POC Lab</h3>
+                     <div class="rec-org">EXL Service · Noida (WFH)</div>
+                     <ul class="rec-points">
+                        <li>Led an Agentic-AI POC for short-term-disability claims on Appian <strong>+15% productivity</strong> - as an early-access collaborator feeding direct feedback to Appian's product team.</li>
+                        <li>Architected a Digital Quality Assurance enterprise MVP (calendar management + audit forms) that <strong>cut delivery time 10%</strong> and removed manual errors across the team.</li>
+                        <li>Built <strong>15+ GenAI / Agentic-AI demos</strong> for internal and external stakeholders; earned 4x Super Squad Award across two years.</li>
+                     </ul>
+                     <ul class="rec-tags">
+                        <li>Agentic AI</li>
+                        <li>GenAI</li>
+                        <li>R&amp;D</li>
+                        <li>POC / MVP</li>
+                     </ul>
+                  </div>
+               </article>
+               <article class="rec reveal">
+                  <div class="rec-year">2022 -<br>2023</div>
+                  <div class="rec-body">
+                     <h3 class="rec-role">Senior Executive - Junior Developer</h3>
+                     <div class="rec-org">EXL Service · Noida (WFH)</div>
+                     <ul class="rec-points">
+                        <li>Built the Appian layer for an <strong>anomaly-detection POC</strong> - consumed ML predictions via API into the database and surfaced results to business users through process models and interfaces.</li>
+                        <li>Shipped a real-estate domain BPM app in a 9-person team: process models, SAIL interfaces, records and MariaDB integrations from the ground up.</li>
+                        <li>Standardised reusable Appian component libraries, cutting recurring effort and onboarding time for new modules.</li>
+                     </ul>
+                     <ul class="rec-tags">
+                        <li>Appian BPM</li>
+                        <li>SAIL</li>
+                        <li>MariaDB</li>
+                     </ul>
+                  </div>
+               </article>
+               <article class="rec reveal">
+                  <div class="rec-year">2021</div>
+                  <div class="rec-body">
+                     <h3 class="rec-role">Data Analyst Intern</h3>
+                     <div class="rec-org">Suven Consultants &amp; Technology · Mumbai (WFH)</div>
+                     <ul class="rec-points">
+                        <li>Performed EDA on meteorological datasets with pandas and NumPy, surfacing seasonal patterns and anomalous trends.</li>
+                        <li>Built an MNIST digit-recognition model with scikit-learn across the full pipeline; stakeholder-ready visuals in Matplotlib and Seaborn.</li>
+                     </ul>
+                     <ul class="rec-tags">
+                        <li>Python</li>
+                        <li>Pandas</li>
+                        <li>EDA</li>
+                        <li>scikit-learn</li>
+                     </ul>
+                  </div>
+               </article>
             </div>
-         </div>
-      </section>
-      <section id="skills" data-cursor="#7c3aed">
-         <div class="code-rain" id="codeRain" aria-hidden="true"></div>
-         <div class="inner">
-            <p class="section-tag fade-up">02. Skills</p>
-            <h2 class="section-title fade-up">Technical Arsenal</h2>
-            <div class="skills-grid">
-            <div class="skill-group fade-up">
-               <div class="skill-group-title">&#9889; Core ML / Python</div>
-               <div class="pill-group">
-                  <span class="pill">Python</span><span class="pill">Scikit-Learn</span>
-                  <span class="pill">XGBoost / LightGBM</span><span class="pill">AdaBoost</span>
-                  <span class="pill">SHAP / Interpretability</span><span class="pill">Pandas / NumPy</span>
-                  <span class="pill">imbalanced-learn (SMOTE)</span>
-               </div>
-            </div>
-            <div class="skill-group fade-up">
-               <div class="skill-group-title">&#128196; Data &amp; SQL</div>
-               <div class="pill-group">
-                  <span class="pill">SQL (MariaDB / MySQL)</span><span class="pill">Data Wrangling</span>
-                  <span class="pill">Plotly / Seaborn / Matplotlib</span><span class="pill">SQLite</span>
-                  <span class="pill">MongoDB Atlas</span><span class="pill">A/B Testing</span>
-               </div>
-            </div>
-            <div class="skill-group fade-up">
-               <div class="skill-group-title">&#128640; MLOps &amp; Deployment</div>
-               <div class="pill-group">
-                  <span class="pill">MLflow</span><span class="pill">DagsHub</span>
-                  <span class="pill">Docker</span><span class="pill">GitHub Actions CI/CD</span>
-                  <span class="pill">FastAPI</span><span class="pill">Streamlit</span>
-                  <span class="pill">pytest</span><span class="pill">Drift Monitoring</span>
-               </div>
-            </div>
-            <div class="skill-group fade-up">
-               <div class="skill-group-title">&#129302; AI &amp; Enterprise</div>
-               <div class="pill-group">
-                  <span class="pill">Appian BPM / Agentic AI</span><span class="pill">Generative AI</span>
-                  <span class="pill">LLM Concepts</span><span class="pill">RPA</span>
-                  <span class="pill">LangChain ★</span><span class="pill">RAG ★</span>
-                  <span class="pill">PyTorch ★</span>
-               </div>
-            </div>
-            <div class="skill-group fade-up">
-               <div class="skill-group-title">&#129516; ML Techniques</div>
-               <div class="pill-group">
-                  <span class="pill">SMOTE / ImbPipeline</span><span class="pill">SMOTETomek</span>
-                  <span class="pill">Isolation Forest</span><span class="pill">GridSearchCV</span>
-                  <span class="pill">Cross-Validation</span>
-               </div>
-            </div>
-            <div class="skill-group fade-up">
-               <div class="skill-group-title">&#128736;&#65039; Tools &amp; Auth</div>
-               <div class="pill-group">
-                  <span class="pill">Git</span><span class="pill">Jupyter</span>
-                  <span class="pill">PyJWT / bcrypt</span><span class="pill">ReportLab</span>
-                  <span class="pill">Plotly</span><span class="pill">Pydantic</span>
-               </div>
-            </div>
-            <p style="font-family:var(--mono);font-size:.65rem;color:var(--text3);margin-top:.75rem">★ currently learning</p>
-         </div>
-         </div>
-      </section>
-      <section id="experience" data-cursor="#00d4ff">
-         <p class="section-tag fade-up">03. Experience</p>
-         <h2 class="section-title fade-up">Where I've Worked</h2>
-         <p class="section-sub fade-up">From Junior Developer to Lead - building enterprise AI, Agentic systems and ML pipelines across 4 years at EXL Service.</p>
-         <div class="timeline">
-            <div class="tl-item">
-               <div class="tl-dot"></div>
-               <div class="tl-card">
-                  <div class="tl-header">
-                     <div>
-                        <div class="tl-role">Lead Assistant Manager - Developer</div>
-                        <div class="tl-company">EXL Service · Noida</div>
+         </section>
+         <section id="work" class="section" tabindex="-1" aria-labelledby="work-h">
+            <p class="eyebrow reveal">04 - Selected work</p>
+            <h2 class="h-sec reveal" id="work-h">Six builds, read like figures.</h2>
+            <p class="lede reveal" style="margin-bottom:2.5rem">Each is an end-to-end system with results attached. Repos are public; four run live; demos are on YouTube.</p>
+            <div class="figs">
+               <article class="fig reveal">
+                  <div class="fig-no">FIG.01</div>
+                  <div class="fig-body">
+                     <div class="fig-head">
+                        <h3 class="fig-title">PhishGuard</h3>
+                        <span class="live">live</span>
                      </div>
-                     <span class="tl-date">Jan 2026 - Present</span>
-                  </div>
-                  <ul class="tl-bullets">
-                     <li>Building production <strong>ML systems</strong> alongside core role - end-to-end pipelines with MLflow tracking, FastAPI serving and Dockerised CI/CD (see Projects below).</li>
-                     <li>Primary developer on Insurance Domain Appian BPM project within a team of 4, collaborating directly with a Technical Architect to deliver <strong>enterprise-grade workflows.</strong></li>
-                     <li>Translating complex financial requirements into scalable Appian applications; overseeing full development lifecycle from design to production deployment.</li>
-                     <li>Driving end-to-end build of mission-critical enterprise Appian solutions - design, unit testing and release - for large-scale insurance operations.</li>
-                  </ul>
-                  <div class="tl-tags">
-                     <span class="tl-tag">Appian BPM</span>
-                     <span class="tl-tag">Python</span>
-                     <span class="tl-tag">ML Engineering</span>
-                     <span class="tl-tag">Streamlit</span>
-                     <span class="tl-tag">Insurance Domain</span>
-                  </div>
-               </div>
-            </div>
-            <div class="tl-item">
-               <div class="tl-dot" style="background:var(--accent2);box-shadow:0 0 10px var(--accent2);color:var(--accent2)"></div>
-               <div class="tl-card">
-                  <div class="tl-header">
-                     <div>
-                        <div class="tl-role">Assistant Manager - R&amp;D &amp; AI POC Lab</div>
-                        <div class="tl-company">EXL Service · Noida</div>
+                     <p class="fig-cap">End-to-end MLOps pipeline for phishing URL / domain detection.</p>
+                     <dl class="readout">
+                        <div>
+                           <dt>features</dt>
+                           <dd>30 url/page</dd>
+                        </div>
+                        <div>
+                           <dt>pipeline</dt>
+                           <dd>6 stages</dd>
+                        </div>
+                        <div>
+                           <dt>selection</dt>
+                           <dd>multi-model + GridSearchCV</dd>
+                        </div>
+                        <div>
+                           <dt>promotion</dt>
+                           <dd>F1-gated &ge; 2%</dd>
+                        </div>
+                        <div>
+                           <dt>drift</dt>
+                           <dd>KS-test</dd>
+                        </div>
+                        <div>
+                           <dt>serving</dt>
+                           <dd>REST + Streamlit</dd>
+                        </div>
+                     </dl>
+                     <div class="fig-stack"><span>Python</span><span>FastAPI</span><span>scikit-learn</span><span>MLflow</span><span>DagsHub</span><span>Docker</span><span>GitHub Actions</span></div>
+                     <div class="fig-links">
+                        <a class="flink primary" href="https://abhishek-tiwari-nitrr-phishguard.streamlit.app/" target="_blank" rel="noopener">↗ Live app</a>
+                        <a class="flink" href="https://github.com/abhishek-tiwari-nitrr/PhishGuard" target="_blank" rel="noopener">⎇ Repo</a>
+                        <a class="flink yt" href="https://www.youtube.com/watch?v=2LUZ8VoyMQY" target="_blank" rel="noopener">▶ Demo</a>
+                        <button class="notes-toggle" aria-expanded="false" aria-controls="n1">Notes <span class="chev">⌄</span></button>
                      </div>
-                     <span class="tl-date">Jan 2024 - Dec 2025</span>
-                  </div>
-                  <ul class="tl-bullets">
-                     <li>Led Agentic AI POC for Short-Term Disability Claims using Appian Agentic AI - <strong>+15% productivity gain</strong>; served as early-access collaborator providing direct feedback to Appian's Product Team.</li>
-                     <li>Architected DQA (Digital Quality Assurance) Enterprise MVP in Appian with calendar management and audit forms, <strong>cutting delivery time 10%</strong> and eliminating manual errors across the team.</li>
-                     <li>Engineered <strong>15+ Demos &amp; POC applications</strong> showcasing GenAI/Agentic AI capabilities to internal and external stakeholders in EXL's R&amp;D Lab.</li>
-                     <li>Received <strong>4x Super Squad Awards</strong> (Apr 2024, Jul 2024, Oct 2024, Oct 2025) for outstanding project and POC contributions across two years.</li>
-                  </ul>
-                  <div class="tl-tags"><span class="tl-tag">Agentic AI</span><span class="tl-tag">GenAI</span><span class="tl-tag">R&amp;D</span><span class="tl-tag">POC/MVP</span></div>
-               </div>
-            </div>
-            <div class="tl-item">
-               <div class="tl-dot" style="background:var(--accent3);box-shadow:0 0 10px var(--accent3);color:var(--accent3)"></div>
-               <div class="tl-card">
-                  <div class="tl-header">
-                     <div>
-                        <div class="tl-role">Senior Executive - Junior Appian Developer</div>
-                        <div class="tl-company">EXL Service · Noida</div>
+                     <div class="notes" id="n1">
+                        <div class="notes-inner">Six sequential stages pass typed artifacts down the pipeline: ingestion, validation, transformation, multi-model training with GridSearchCV, KS-based data-drift detection and an F1-gated promotion step that only ships a new model when it beats production by a set margin. Predictions are served over a REST API with a Streamlit dashboard on top.</div>
                      </div>
-                     <span class="tl-date">Jul 2022 - Dec 2023</span>
                   </div>
-                  <ul class="tl-bullets">
-                     <li>Built the Appian application layer for an <strong>Anomaly Detection POC</strong> - consumed ML model predictions delivered via API into the database, designing the process models and interfaces that surfaced anomaly results to business users.</li>
-                     <li>Designed and deployed Real Estate domain BPM application as part of 9-member team; built Process Models, SAIL interfaces, Records and MariaDB integrations from ground up.</li>
-                     <li>Improved team velocity by standardising reusable Appian component libraries, cutting recurring development effort and onboarding time for new modules.</li>
-                  </ul>
-                  <div class="tl-tags"><span class="tl-tag">Appian BPM</span><span class="tl-tag">SAIL</span><span class="tl-tag">MariaDB</span></div>
-               </div>
-            </div>
-            <div class="tl-item">
-               <div class="tl-dot" style="background:var(--text3);box-shadow:none;color:var(--text3)"></div>
-               <div class="tl-card">
-                  <div class="tl-header">
-                     <div>
-                        <div class="tl-role">Data Analyst Intern</div>
-                        <div class="tl-company">Suven Consultants - Technology Pvt. Ltd. · Mumbai</div>
+               </article>
+               <article class="fig reveal">
+                  <div class="fig-no">FIG.02</div>
+                  <div class="fig-body">
+                     <div class="fig-head">
+                        <h3 class="fig-title">System Performance Analyzer</h3>
+                        <span class="live">live</span>
                      </div>
-                     <span class="tl-date">Sep 2021 - Oct 2021</span>
+                     <p class="fig-cap">Real-time host telemetry with anomaly detection and auth.</p>
+                     <dl class="readout">
+                        <div>
+                           <dt>monitors</dt>
+                           <dd>cpu/ram/net/proc</dd>
+                        </div>
+                        <div>
+                           <dt>anomaly</dt>
+                           <dd>Isolation Forest + z-score</dd>
+                        </div>
+                        <div>
+                           <dt>health</dt>
+                           <dd>0-100 (A-F)</dd>
+                        </div>
+                        <div>
+                           <dt>auth</dt>
+                           <dd>JWT + bcrypt</dd>
+                        </div>
+                        <div>
+                           <dt>reports</dt>
+                           <dd>on-demand PDF</dd>
+                        </div>
+                        <div>
+                           <dt>charts</dt>
+                           <dd>interactive Plotly</dd>
+                        </div>
+                     </dl>
+                     <div class="fig-stack"><span>Python</span><span>Streamlit</span><span>Plotly</span><span>scikit-learn</span><span>SQLite</span><span>PyJWT</span><span>bcrypt</span><span>ReportLab</span></div>
+                     <div class="fig-links">
+                        <a class="flink primary" href="https://abhishek-tiwari-nitrr-system-performance-analyzer.streamlit.app/" target="_blank" rel="noopener">↗ Live app</a>
+                        <a class="flink" href="https://github.com/abhishek-tiwari-nitrr/System-Performance-Analyzer" target="_blank" rel="noopener">⎇ Repo</a>
+                        <a class="flink yt" href="https://www.youtube.com/watch?v=JKns0b45UX8" target="_blank" rel="noopener">▶ Demo</a>
+                        <button class="notes-toggle" aria-expanded="false" aria-controls="n2">Notes <span class="chev">⌄</span></button>
+                     </div>
+                     <div class="notes" id="n2">
+                        <div class="notes-inner">Tracks CPU, RAM, swap, battery, network and per-process metrics in real time. Isolation Forest plus a z-score check flag anomalies; a daily 0-100 health score rolls up to an A-F grade. Role-based admin access is gated with JWT and bcrypt, and any view exports to a one-click PDF report.</div>
+                     </div>
                   </div>
-                  <ul class="tl-bullets">
-                     <li>Performed EDA on meteorological datasets using Python, Pandas and NumPy - surfaced seasonal patterns and anomalous weather trends.</li>
-                     <li>Built MNIST Handwritten Digit Recognition model using Scikit-learn across the full ML pipeline; created stakeholder-ready visualizations with Matplotlib and Seaborn.</li>
+               </article>
+               <article class="fig reveal">
+                  <div class="fig-no">FIG.03</div>
+                  <div class="fig-body">
+                     <div class="fig-head">
+                        <h3 class="fig-title">Telco Customer Churn</h3>
+                        <span class="live">live</span>
+                     </div>
+                     <p class="fig-cap">Churn prediction with a cost model bolted on.</p>
+                     <dl class="readout">
+                        <div>
+                           <dt>auc-roc</dt>
+                           <dd>0.8403</dd>
+                        </div>
+                        <div>
+                           <dt>recall</dt>
+                           <dd>0.7727 (+41.6% SMOTE)</dd>
+                        </div>
+                        <div>
+                           <dt>net roi</dt>
+                           <dd>₹19.4L / cycle</dd>
+                        </div>
+                        <div>
+                           <dt>cv auc</dt>
+                           <dd>0.8480 (5-fold)</dd>
+                        </div>
+                        <div>
+                           <dt>explain</dt>
+                           <dd>SHAP top-20</dd>
+                        </div>
+                        <div>
+                           <dt>customers</dt>
+                           <dd>7,032</dd>
+                        </div>
+                     </dl>
+                     <div class="fig-stack"><span>Python</span><span>AdaBoost</span><span>SMOTE</span><span>SHAP</span><span>Streamlit</span><span>SQLite</span><span>pytest</span><span>GitHub Actions</span></div>
+                     <div class="fig-links">
+                        <a class="flink primary" href="https://abhishek-tiwari-nitrr-churn-prediction.streamlit.app/" target="_blank" rel="noopener">↗ Live app</a>
+                        <a class="flink" href="https://github.com/abhishek-tiwari-nitrr/Telco-Customer-Churn-Prediction" target="_blank" rel="noopener">⎇ Repo</a>
+                        <a class="flink yt" href="https://www.youtube.com/watch?v=LfmpoiXrcko" target="_blank" rel="noopener">▶ Demo</a>
+                        <button class="notes-toggle" aria-expanded="false" aria-controls="n3">Notes <span class="chev">⌄</span></button>
+                     </div>
+                     <div class="notes" id="n3">
+                        <div class="notes-inner">An AdaBoost classifier flags churn before customers leave, protecting ₹19.4L of net ROI per cycle over 7,032 customers. SMOTE lifted recall by 41.6% and SHAP narrows inference to the top-20 features. A drift-monitoring dashboard, a SQLite audit trail and a pytest-backed CI pipeline keep it production-honest.</div>
+                     </div>
+                  </div>
+               </article>
+               <article class="fig reveal">
+                  <div class="fig-no">FIG.04</div>
+                  <div class="fig-body">
+                     <div class="fig-head">
+                        <h3 class="fig-title">Thunderstorm Forecasting</h3>
+                        <span class="live">live</span>
+                     </div>
+                     <p class="fig-cap">Next-day thunderstorm classifier on atmospheric soundings.</p>
+                     <dl class="readout">
+                        <div>
+                           <dt>task</dt>
+                           <dd>next-day binary</dd>
+                        </div>
+                        <div>
+                           <dt>model</dt>
+                           <dd>QDA + SMOTETomek</dd>
+                        </div>
+                        <div>
+                           <dt>features</dt>
+                           <dd>sounding indices</dd>
+                        </div>
+                        <div>
+                           <dt>tracking</dt>
+                           <dd>MLflow</dd>
+                        </div>
+                     </dl>
+                     <div class="fig-stack"><span>Python</span><span>QDA</span><span>SMOTETomek</span><span>scikit-learn</span><span>MLflow</span><span>Streamlit</span><span>imbalanced-learn</span></div>
+                     <div class="fig-links">
+                        <a class="flink primary" href="https://abhishek-tiwari-nitrr-thunderstorm-forecasting.streamlit.app/" target="_blank" rel="noopener">↗ Live app</a>
+                        <a class="flink" href="https://github.com/abhishek-tiwari-nitrr/Thunderstorm-Forecasting" target="_blank" rel="noopener">⎇ Repo</a>
+                        <a class="flink yt" href="https://www.youtube.com/watch?v=l6QeBEMpkJ4" target="_blank" rel="noopener">▶ Demo</a>
+                        <button class="notes-toggle" aria-expanded="false" aria-controls="n4">Notes <span class="chev">⌄</span></button>
+                     </div>
+                     <div class="notes" id="n4">
+                        <div class="notes-inner">QDA quietly outperformed tree-based models on this dataset. SMOTETomek handles severe class imbalance by combining oversampling with Tomek-link cleaning, and every experiment is tracked in MLflow so the model-selection story stays reproducible.</div>
+                     </div>
+                  </div>
+               </article>
+               <article class="fig reveal">
+                  <div class="fig-no">FIG.05</div>
+                  <div class="fig-body">
+                     <div class="fig-head">
+                        <h3 class="fig-title">Retail Data Insight</h3>
+                     </div>
+                     <p class="fig-cap">CLI analytics over 180K+ e-commerce transactions.</p>
+                     <dl class="readout">
+                        <div>
+                           <dt>records</dt>
+                           <dd>180K+</dd>
+                        </div>
+                        <div>
+                           <dt>charts</dt>
+                           <dd>8 publication-grade</dd>
+                        </div>
+                        <div>
+                           <dt>reports</dt>
+                           <dd>3-level PDF</dd>
+                        </div>
+                        <div>
+                           <dt>scope</dt>
+                           <dd>revenue · geo · customer</dd>
+                        </div>
+                     </dl>
+                     <div class="fig-stack"><span>Python</span><span>pandas</span><span>Matplotlib</span><span>Seaborn</span><span>modular OOP</span><span>PDF generation</span></div>
+                     <div class="fig-links">
+                        <a class="flink" href="https://github.com/abhishek-tiwari-nitrr/Retail-Data-Insight-Application" target="_blank" rel="noopener">⎇ Repo</a>
+                        <button class="notes-toggle" aria-expanded="false" aria-controls="n5">Notes <span class="chev">⌄</span></button>
+                     </div>
+                     <div class="notes" id="n5">
+                        <div class="notes-inner">A command-line analytics tool that runs EDA across 180K+ transactions - revenue trends, top customers, best-selling products and geographic patterns - then emits 8 publication-quality charts and auto-generates Level 1-3 PDF reports, from summary stats up to geo-intelligence.</div>
+                     </div>
+                  </div>
+               </article>
+               <article class="fig reveal">
+                  <div class="fig-no">FIG.06</div>
+                  <div class="fig-body">
+                     <div class="fig-head">
+                        <h3 class="fig-title">Financial Tracker</h3>
+                     </div>
+                     <p class="fig-cap">Menu-driven CLI finance tracker, built to be production-readable.</p>
+                     <dl class="readout">
+                        <div>
+                           <dt>storage</dt>
+                           <dd>CSV-backed</dd>
+                        </div>
+                        <div>
+                           <dt>tracks</dt>
+                           <dd>income / expense</dd>
+                        </div>
+                        <div>
+                           <dt>reports</dt>
+                           <dd>net balance</dd>
+                        </div>
+                        <div>
+                           <dt>errors</dt>
+                           <dd>custom exceptions</dd>
+                        </div>
+                     </dl>
+                     <div class="fig-stack"><span>Python</span><span>CSV</span><span>OOP</span><span>logging</span><span>CLI</span></div>
+                     <div class="fig-links">
+                        <a class="flink" href="https://github.com/abhishek-tiwari-nitrr/Financial-Tracker-Application" target="_blank" rel="noopener">⎇ Repo</a>
+                        <button class="notes-toggle" aria-expanded="false" aria-controls="n6">Notes <span class="chev">⌄</span></button>
+                     </div>
+                     <div class="notes" id="n6">
+                        <div class="notes-inner">A clean, modular CLI tracker: add income/expense transactions, browse history and generate net-balance reports. CSV persistence, rotating logs and custom exception classes keep it readable and maintainable despite being terminal-only.</div>
+                     </div>
+                  </div>
+               </article>
+            </div>
+         </section>
+         <section id="recognition" class="section" tabindex="-1" aria-labelledby="rec-h">
+            <p class="eyebrow reveal">05 - Recognition</p>
+            <h2 class="h-sec reveal" id="rec-h">Ranked, awarded, certified.</h2>
+            <div class="rec-grid">
+               <div class="reveal">
+                  <h3 class="sub-h">Honours &amp; competitions</h3>
+                  <ul class="honors">
+                     <li><span class="t">Global rank #8 - HR Analytics</span><span class="m">Analytics Vidhya &middot; 2023</span></li>
+                     <li><span class="t">GATE 2025 qualified - AIR 155</span><span class="m">MN &middot; IIT &middot; 2025</span></li>
+                     <li><span class="t">4x Super Squad Award</span><span class="m">EXL Service &middot; 2024-25</span></li>
+                     <li><span class="t">Global rank #67 - Power Plant AI</span><span class="m">Dockership &middot; 2021</span></li>
+                     <li><span class="t">AWS Machine Learning Scholarship</span><span class="m">Udacity &middot; 2021</span></li>
+                     <li><span class="t">Bertelsmann Technology Scholarship</span><span class="m">Udacity &middot; 2020</span></li>
+                     <li><span class="t">2x Kaggle bronze notebook medal</span><span class="m">Kaggle &middot; 2021</span></li>
+                     <li><span class="t">1st prize - Vigyaan'19</span><span class="m">Aavartan, NIT Raipur &middot; 2019</span></li>
+                     <li><span class="t">Finalist - NEI Idea Factory</span><span class="m">Idea Factory, NBC &middot; 2021</span></li>
                   </ul>
-                  <div class="tl-tags"><span class="tl-tag">Python</span><span class="tl-tag">Pandas</span><span class="tl-tag">EDA</span><span class="tl-tag">Scikit-Learn</span></div>
+               </div>
+               <div class="reveal">
+                  <h3 class="sub-h">Certifications</h3>
+                  <ul class="certs">
+                     <li>
+                        <div class="t">Appian Certified Associate Developer</div>
+                        <div class="m">Appian Corporation &middot; valid through May 2027</div>
+                     </li>
+                     <li>
+                        <div class="t">Machine Learning - Stanford University</div>
+                        <div class="m">Coursera / Andrew Ng &middot; 2020</div>
+                     </li>
+                     <li>
+                        <div class="t">EXL Hyperautomation Training</div>
+                        <div class="m">Great Learning &middot; 2022</div>
+                     </li>
+                     <li>
+                        <div class="t">3x Udacity Nanodegrees</div>
+                        <div class="m">Data Analytics &middot; AI with Python &middot; Predictive Analytics</div>
+                     </li>
+                  </ul>
                </div>
             </div>
-         </div>
-      </section>
-      <section id="projects" data-cursor="#10b981">
-         <p class="section-tag fade-up">04. Projects</p>
-         <h2 class="section-title fade-up">Things I've Built</h2>
-         <p class="section-sub fade-up">End-to-End ML systems with real Business Impact - production-grade code, CI/CD, drift monitoring and explainability.</p>
-         <div class="projects-grid">
-            <div class="proj-card" id="pc1">
-               <div class="proj-top">
-                  <div style="display:flex;align-items:center;gap:.6rem">
-                     <div class="proj-icon" style="background:rgba(255,107,107,.1);color:#ff6b6b">&#128737;&#65039;</div>
-                     <span class="proj-live-dot">LIVE</span>
-                  </div>
-                  <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/PhishGuard" target="_blank" class="proj-link" title="GitHub">⎇</a>
-                  </div>
-               </div>
-               <div class="proj-title">PhishGuard</div>
-               <div class="proj-desc">Full MLOps pipeline for phishing URL/domain detection - 6 sequential stages with typed artifacts, multi-model training with GridSearchCV, KS data drift detection, F1-gated production model promotion, REST API and Streamlit dashboard.</div>
-               <div class="proj-metrics">
-                  <span class="metric-badge">30 URL/Page Features</span>
-                  <span class="metric-badge">5-Stage MLOps Pipeline</span>
-                  <span class="metric-badge">Multi-model + GridSearchCV</span>
-                  <span class="metric-badge">F1 >= 2% Production Gating</span>
-                  <span class="metric-badge">KS Drift Detection</span>
-               </div>
-               <div class="proj-stack">
-                  <span class="stack-tag">Python</span>
-                  <span class="stack-tag">FastAPI</span>
-                  <span class="stack-tag">Streamlit</span>
-                  <span class="stack-tag">Scikit-Learn</span>
-                  <span class="stack-tag">MLflow</span>
-                  <span class="stack-tag">DagsHub</span>
-                  <span class="stack-tag">Docker</span>
-                  <span class="stack-tag">GitHub Actions</span>
-               </div>
-               <div class="proj-actions">
-                  <a href="https://abhishek-tiwari-nitrr-phishguard.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">↗ Live App</a>
-                  <a href="https://www.youtube.com/watch?v=2LUZ8VoyMQY" target="_blank" class="proj-btn proj-btn-yt">▶ Watch Demo</a>
-               </div>
-            </div>
-            <div class="proj-card" id="pc2">
-               <div class="proj-top">
-                  <div style="display:flex;align-items:center;gap:.6rem">
-                     <div class="proj-icon" style="background:rgba(0,212,255,.1);color:#00d4ff">&#128421;&#65039;</div>
-                     <span class="proj-live-dot">LIVE</span>
-                  </div>
-                  <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/System-Performance-Analyzer" target="_blank" class="proj-link" title="GitHub">⎇</a>
-                  </div>
-               </div>
-               <div class="proj-title">System Performance Analyzer</div>
-               <div class="proj-desc">Real-time system monitoring app tracking CPU, RAM, swap, battery, network and per-process metrics. Features Isolation Forest anomaly detection, JWT + bcrypt auth with role-based admin access, interactive Plotly dashboards, a daily A-F health score and one-click PDF report generation.</div>
-               <div class="proj-metrics">
-                  <span class="metric-badge">CPU/RAM/Network/Process Monitoring</span>
-                  <span class="metric-badge">Isolation Forest + Z-Score</span>
-                  <span class="metric-badge">0-100 Health Score (A-F)</span>
-                  <span class="metric-badge">JWT + bcrypt Auth</span>
-                  <span class="metric-badge">On-demand PDF Reports</span>
-               </div>
-               <div class="proj-stack">
-                  <span class="stack-tag">Python</span>
-                  <span class="stack-tag">Streamlit</span>
-                  <span class="stack-tag">Plotly</span>
-                  <span class="stack-tag">Scikit-Learn</span>
-                  <span class="stack-tag">SQLite</span>
-                  <span class="stack-tag">PyJWT</span>
-                  <span class="stack-tag">bcrypt</span>
-                  <span class="stack-tag">ReportLab</span>
-                  <span class="stack-tag">Psutil</span>
-               </div>
-               <div class="proj-actions">
-                  <a href="https://abhishek-tiwari-nitrr-system-performance-analyzer.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">↗ Live App</a>
-                  <a href="https://www.youtube.com/watch?v=JKns0b45UX8" target="_blank" class="proj-btn proj-btn-yt">▶ Watch Demo</a>
-               </div>
-            </div>
-            <div class="proj-card" id="pc3">
-               <div class="proj-top">
-                  <div style="display:flex;align-items:center;gap:.6rem">
-                     <div class="proj-icon" style="background:rgba(16,185,129,.12);color:#10b981">&#128201;</div>
-                     <span class="proj-live-dot">LIVE</span>
-                  </div>
-                  <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/Telco-Customer-Churn-Prediction" target="_blank" class="proj-link" title="GitHub">⎇</a>
-                  </div>
-               </div>
-               <div class="proj-title">Telco Customer Churn Prediction</div>
-               <div class="proj-desc">AdaBoost classifier predicting telecom churn before customers leave protecting &#8377;19.4L/cycle net ROI on 7032 customers. SMOTE boosted recall by 41.6%, SHAP narrows inference to top-20 features. Includes drift monitoring dashboard, SQLite audit trail and CI/CD with pytest.</div>
-               <div class="proj-metrics">
-                  <span class="metric-badge">AUC-ROC 0.8403</span>
-                  <span class="metric-badge">Recall 0.7727 (+41.6% SMOTE lift)</span>
-                  <span class="metric-badge">&#8377;19.4L/cycle Net ROI</span>
-                  <span class="metric-badge">CV AUC 0.8480 (5-fold)</span>
-               </div>
-               <div class="proj-stack">
-                  <span class="stack-tag">Python</span>
-                  <span class="stack-tag">AdaBoost</span>
-                  <span class="stack-tag">SMOTE</span>
-                  <span class="stack-tag">SHAP</span>
-                  <span class="stack-tag">Streamlit</span>
-                  <span class="stack-tag">SQLite</span>
-                  <span class="stack-tag">pytest</span>
-                  <span class="stack-tag">GitHub Actions</span>
-               </div>
-               <div class="proj-actions">
-                  <a href="https://abhishek-tiwari-nitrr-churn-prediction.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">↗ Live App</a>
-                  <a href="https://www.youtube.com/watch?v=LfmpoiXrcko" target="_blank" class="proj-btn proj-btn-yt">▶ Watch Demo</a>
+         </section>
+         <section id="contact" class="section" tabindex="-1" aria-labelledby="contact-h">
+            <p class="eyebrow reveal">06 - Contact</p>
+            <h2 class="h-sec reveal" id="contact-h">Let's build something measurable.</h2>
+            <div class="contact-grid">
+               <form class="reveal" id="contactForm" novalidate>
+                  <div class="field"><label for="cfName">Your name</label><input id="cfName" name="name" type="text" placeholder="Jane Doe" required autocomplete="name" /></div>
+                  <div class="field"><label for="cfEmail">Your email</label><input id="cfEmail" name="email" type="email" placeholder="jane@company.com" required autocomplete="email" /></div>
+                  <div class="field"><label for="cfMsg">Message</label><textarea id="cfMsg" name="message" placeholder="Hi Abhishek, I'd like to talk about…" required></textarea></div>
+                  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                  <button class="send" id="cfSend" type="submit">Send message →</button>
+                  <p class="form-status" id="cfStatus" role="status" aria-live="polite"></p>
+               </form>
+               <div class="reveal">
+                  <p class="channels-h">Or reach me directly</p>
+                  <button class="email-line" id="emailCopy" type="button" aria-label="Copy email address"><span>abhishek.tiwari.nitrr@gmail.com</span></button>
+                  <p class="copy-state" id="copyState">click to copy</p>
+                  <ul class="channels">
+                     <li>
+                        <a href="https://drive.google.com/file/d/1tfrmLjwJ9vj1Opdlo-NNkDRwArTj2Nsd/view?usp=sharing" target="_blank" rel="noopener">
+                           <span class="lbl">
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                              </svg>
+                              Résumé
+                           </span>
+                           <span class="h">PDF ↗</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="https://github.com/abhishek-tiwari-nitrr" target="_blank" rel="noopener">
+                           <span class="lbl">
+                              <svg viewBox="0 0 24 24" fill="currentColor">
+                                 <path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11 11 0 0 1 6 0C17.3 5 18.3 5.3 18.3 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/>
+                              </svg>
+                              GitHub
+                           </span>
+                           <span class="h">@abhishek-tiwari-nitrr ↗</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="https://linkedin.com/in/abhishek-tiwari-nitrr" target="_blank" rel="noopener">
+                           <span class="lbl">
+                              <svg viewBox="0 0 24 24" fill="currentColor">
+                                 <path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.7-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM7.1 20.4H3.5V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7c0-.9-.8-1.7-1.8-1.7z"/>
+                              </svg>
+                              LinkedIn
+                           </span>
+                           <span class="h">connect ↗</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="https://kaggle.com/abhishek20182" target="_blank" rel="noopener">
+                           <span class="lbl">
+                              <svg viewBox="0 0 24 24" fill="currentColor">
+                                 <path d="M18.8 23.9c0 .1-.1.1-.2.1h-2.9c-.1 0-.2 0-.3-.1l-5.1-6.5-1.4 1.4v5c0 .1-.1.2-.2.2H6.2c-.1 0-.2-.1-.2-.2V.2c0-.1.1-.2.2-.2h2.3c.1 0 .2.1.2.2v14.3l6.2-6.3c.1-.1.2-.1.3-.1h3c.1 0 .2.1.2.2s0 .2-.1.2l-6.5 6.3 6.8 8.6c0 .1.1.2 0 .3z"/>
+                              </svg>
+                              Kaggle
+                           </span>
+                           <span class="h">competitions ↗</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="https://medium.com/@abhishek-tiwari-nitrr" target="_blank" rel="noopener">
+                           <span class="lbl">
+                              <svg viewBox="0 0 24 24" fill="currentColor">
+                                 <path d="M13.5 12a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0zM20.5 12c0 3.4-1.4 6.1-3.2 6.1s-3.2-2.7-3.2-6.1 1.4-6.1 3.2-6.1 3.2 2.7 3.2 6.1zM24 12c0 3-.5 5.5-1.2 5.5S21.6 15 21.6 12s.5-5.5 1.2-5.5S24 9 24 12z"/>
+                              </svg>
+                              Medium
+                           </span>
+                           <span class="h">writing ↗</span>
+                        </a>
+                     </li>
+                  </ul>
                </div>
             </div>
-            <div class="proj-card" id="pc4">
-               <div class="proj-top">
-                  <div style="display:flex;align-items:center;gap:.6rem">
-                     <div class="proj-icon" style="background:rgba(124,58,237,.12);color:#7c3aed">&#9928;&#65039;</div>
-                     <span class="proj-live-dot">LIVE</span>
-                  </div>
-                  <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/Thunderstorm-Forecasting" target="_blank" class="proj-link" title="GitHub">⎇</a>
-                  </div>
-               </div>
-               <div class="proj-title">Thunderstorm Forecasting</div>
-               <div class="proj-desc">Next-day thunderstorm binary classifier built on atmospheric sounding indices. QDA outperformed tree-based models on this dataset - SMOTETomek tackles severe class imbalance by combining oversampling and cleaning. Experiments tracked with MLflow.</div>
-               <div class="proj-metrics">
-                  <span class="metric-badge">Next-Day Binary Classification</span>
-                  <span class="metric-badge">QDA + SMOTETomek Pipeline</span>
-                  <span class="metric-badge">Atmospheric Sounding Indices</span>
-                  <span class="metric-badge">MLflow Experiment Tracking</span>
-               </div>
-               <div class="proj-stack">
-                  <span class="stack-tag">Python</span>
-                  <span class="stack-tag">QDA</span>
-                  <span class="stack-tag">SMOTETomek</span>
-                  <span class="stack-tag">Scikit-Learn</span>
-                  <span class="stack-tag">MLflow</span>
-                  <span class="stack-tag">Streamlit</span>
-                  <span class="stack-tag">imbalanced-learn</span>
-               </div>
-               <div class="proj-actions">
-                  <a href="https://abhishek-tiwari-nitrr-thunderstorm-forecasting.streamlit.app/" target="_blank" class="proj-btn proj-btn-live">↗ Live App</a>
-                  <a href="https://www.youtube.com/watch?v=l6QeBEMpkJ4" target="_blank" class="proj-btn proj-btn-yt">▶ Watch Demo</a>
-               </div>
-            </div>
-            <div class="proj-card" id="pc5">
-               <div class="proj-top">
-                  <div class="proj-icon" style="background:rgba(250,199,75,.1);color:#fac74b">&#128722;</div>
-                  <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/Retail-Data-Insight-Application" target="_blank" class="proj-link" title="GitHub">⎇</a>
-                  </div>
-               </div>
-               <div class="proj-title">Retail Data Insight Application</div>
-               <div class="proj-desc">CLI retail analytics tool performing EDA on 180K+ e-commerce transactions - surfacing revenue trends, top customers, best-selling products and geographic sales patterns. Outputs 8 publication-quality charts and auto-generates progressive Level 1-3 PDF reports from summary stats to advanced geo-intelligence.</div>
-               <div class="proj-metrics">
-                  <span class="metric-badge">180K+ Transaction Records</span>
-                  <span class="metric-badge">8 Publication-Quality Charts</span>
-                  <span class="metric-badge">3-Level Progressive PDF Reports</span>
-                  <span class="metric-badge">Revenue, Geo &amp; Customer Analytics</span>
-               </div>
-               <div class="proj-stack">
-                  <span class="stack-tag">Python</span>
-                  <span class="stack-tag">Pandas</span>
-                  <span class="stack-tag">Matplotlib</span>
-                  <span class="stack-tag">Seaborn</span>
-                  <span class="stack-tag">Modular OOP</span>
-                  <span class="stack-tag">PDF Generation</span>
-               </div>
-            </div>
-            <div class="proj-card" id="pc6">
-               <div class="proj-top">
-                  <div class="proj-icon" style="background:rgba(16,185,129,.08);color:#10b981">&#128176;</div>
-                  <div class="proj-links">
-                     <a href="https://github.com/abhishek-tiwari-nitrr/Financial-Tracker-Application" target="_blank" class="proj-link" title="GitHub">⎇</a>
-                  </div>
-               </div>
-               <div class="proj-title">Financial Tracker Application</div>
-               <div class="proj-desc">Menu-driven CLI finance tracker with clean modular architecture - add income/expense transactions, browse history and generate net balance reports. CSV-backed persistence, rotating logs and custom exception classes keep it production-readable despite being terminal-only.</div>
-               <div class="proj-metrics">
-                  <span class="metric-badge">CSV-Backed Persistence</span>
-                  <span class="metric-badge">Income &amp; Expense Tracking</span>
-                  <span class="metric-badge">Financial Summary Reports</span>
-                  <span class="metric-badge">Custom Exception Handling</span>
-               </div>
-               <div class="proj-stack">
-                  <span class="stack-tag">Python</span>
-                  <span class="stack-tag">CSV</span>
-                  <span class="stack-tag">OOP</span>
-                  <span class="stack-tag">Logging</span>
-                  <span class="stack-tag">CLI</span>
-               </div>
-            </div>
-         </div>
-      </section>
-      <section id="achievements" data-cursor="#7c3aed">
-         <div class="inner">
-            <p class="section-tag fade-up">05. Achievements</p>
-            <h2 class="section-title fade-up">Milestones &amp; Recognition</h2>
-            <div class="achv-grid">
-               <div class="achv-item fade-up">
-                  <div class="achv-icon">&#127942;</div>
-                  <div class="achv-text">
-                     <div class="achv-title">Global Rank #8 - HR Analytics</div>
-                     <div class="achv-sub">Analytics Vidhya · Jun 2023</div>
-                  </div>
-               </div>
-               <div class="achv-item fade-up">
-                  <div class="achv-icon">&#127919;</div>
-                  <div class="achv-text">
-                     <div class="achv-title">GATE 2025 Qualified (AIR 155)</div>
-                     <div class="achv-sub">MN · IIT · Feb 2025</div>
-                  </div>
-               </div>
-               <div class="achv-item fade-up">
-                  <div class="achv-icon">&#9889;</div>
-                  <div class="achv-text">
-                     <div class="achv-title">4x Super Squad Award</div>
-                     <div class="achv-sub">EXL Service · 2024 &amp; 2025</div>
-                  </div>
-               </div>
-               <div class="achv-item fade-up">
-                  <div class="achv-icon">&#127760;</div>
-                  <div class="achv-text">
-                     <div class="achv-title">Global Rank #67 - Power Plant AI Challenge</div>
-                     <div class="achv-sub">Kaggle · Aug 2021</div>
-                  </div>
-               </div>
-               <div class="achv-item fade-up">
-                  <div class="achv-icon">&#129302;</div>
-                  <div class="achv-text">
-                     <div class="achv-title">AWS Machine Learning Scholarship</div>
-                     <div class="achv-sub">Udacity · Jul 2021</div>
-                  </div>
-               </div>
-               <div class="achv-item fade-up">
-                  <div class="achv-icon">&#127891;</div>
-                  <div class="achv-text">
-                     <div class="achv-title">Bertelsmann Technology Scholarship</div>
-                     <div class="achv-sub">Udacity · Dec 2020</div>
-                  </div>
-               </div>
-               <div class="achv-item fade-up">
-                  <div class="achv-icon">&#129353;</div>
-                  <div class="achv-text">
-                     <div class="achv-title">2x Kaggle Bronze Notebook Medal</div>
-                     <div class="achv-sub">Kaggle · 2021</div>
-                  </div>
-               </div>
-               <div class="achv-item fade-up">
-                  <div class="achv-icon">&#127885;</div>
-                  <div class="achv-text">
-                     <div class="achv-title">1st Prize - Vigyaan'19</div>
-                     <div class="achv-sub">Aavartan, NIT Raipur · Sep 2019</div>
-                  </div>
-               </div>
-               <div class="achv-item fade-up">
-                  <div class="achv-icon">&#128161;</div>
-                  <div class="achv-text">
-                     <div class="achv-title">Finalist - NEI Idea Factory</div>
-                     <div class="achv-sub">NBC · Jan 2021</div>
-                  </div>
-               </div>
-            </div>
-            <div class="cert-grid">
-               <div class="cert-card fade-up">
-                  <div class="cert-logo" style="background:rgba(124,58,237,.15)">&#128220;</div>
-                  <div>
-                     <div class="cert-name">Appian Certified Associate Developer</div>
-                     <div class="cert-issuer">Appian Corporation · Valid through May 2027</div>
-                  </div>
-               </div>
-               <div class="cert-card fade-up">
-                  <div class="cert-logo" style="background:rgba(0,212,255,.1)">&#127891;</div>
-                  <div>
-                     <div class="cert-name">Machine Learning - Stanford University</div>
-                     <div class="cert-issuer">Coursera / Andrew Ng · Jan 2020</div>
-                  </div>
-               </div>
-               <div class="cert-card fade-up">
-                  <div class="cert-logo" style="background:rgba(16,185,129,.1)">&#9881;&#65039;</div>
-                  <div>
-                     <div class="cert-name">EXL Hyperautomation Training</div>
-                     <div class="cert-issuer">Great Learning · Sep 2022</div>
-                  </div>
-               </div>
-               <div class="cert-card fade-up">
-                  <div class="cert-logo" style="background:rgba(250,199,75,.1)">&#128013;</div>
-                  <div>
-                     <div class="cert-name">3x Udacity Nanodegrees</div>
-                     <div class="cert-issuer">Data Analytics · AI with Python · Predictive Analytics</div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      <section id="contact" data-cursor="#10b981">
-         <p class="section-tag">06. Contact</p>
-         <h2 class="section-title">Let's Build Something.</h2>
-         <div class="contact-card fade-up">
-         <form class="contact-form" id="contactForm" novalidate>
-            <div class="form-row">
-               <div class="form-field">
-                  <label class="form-label" for="cfName">Your Name</label>
-                  <input class="form-input" id="cfName" name="name" type="text" placeholder="Jane Doe" required/>
-               </div>
-               <div class="form-field">
-                  <label class="form-label" for="cfEmail">Your Email</label>
-                  <input class="form-input" id="cfEmail" name="email" type="email" placeholder="jane@company.com" required/>
-               </div>
-            </div>
-            <div class="form-field">
-               <label class="form-label" for="cfMsg">Message</label>
-               <textarea class="form-textarea" id="cfMsg" name="message" placeholder="Hi Abhishek, I'd like to talk about..." required></textarea>
-            </div>
-            <!-- honeypot: bots fill this, humans never see it -->
-            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
-            <button class="form-send" id="cfSend" type="submit">Send Message <span class="send-arrow">→</span></button>
-            <div class="form-status" id="cfStatus" role="status"></div>
-         </form>
-         <div class="form-divider">or reach me directly</div>
-         <div onclick="copyEmail()" style="cursor:pointer">
-            <div class="contact-email">abhishek.tiwari.nitrr@gmail.com</div>
-            <div class="copy-hint" id="copyHint">Click to copy email address</div>
-         </div>
-         <div class="social-row">
-            <a href="https://drive.google.com/file/d/1tfrmLjwJ9vj1Opdlo-NNkDRwArTj2Nsd/view?usp=sharing" download class="social-btn" target="_blank"  style="background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.3);color:var(--accent)">⬇ Download Resume</a>
-            <a href="https://github.com/abhishek-tiwari-nitrr" target="_blank" class="social-btn">⎇ GitHub</a>
-            <a href="https://linkedin.com/in/abhishek-tiwari-nitrr" target="_blank" class="social-btn">in LinkedIn</a>
-            <a href="https://kaggle.com/abhishek20182" target="_blank" class="social-btn">&#128202; Kaggle</a>
-            <a href="https://medium.com/@abhishek-tiwari-nitrr" target="_blank" class="social-btn">&#9997; Medium</a>
-         </div>
-      </section>
-      <footer>
-         Built with &#128153; by <a href="https://github.com/abhishek-tiwari-nitrr">Abhishek Tiwari</a> · 2026
+         </section>
+      </main>
+      <footer class="colophon">
+         <span>&copy; 2026 Abhishek Tiwari &#10022; Built with &#128153; &amp; passion</span>
       </footer>
-      <div id="terminal">
-         <div class="term-bar" onclick="document.getElementById('terminal').classList.toggle('open')">
-            <div class="term-dot" style="background:#ff5f57"></div>
-            <div class="term-dot" style="background:#febc2e"></div>
-            <div class="term-dot" style="background:#28c840"></div>
-            <div class="term-title">abhishek@portfolio ~ $</div>
-         </div>
-         <div class="term-body" id="termBody"></div>
-         <div class="term-input-row">
-            <span class="term-prompt">$</span>
-            <input class="term-input" id="termInput" placeholder="type 'help'" onkeydown="handleTerminal(event)" autocomplete="off" spellcheck="false"/>
+      <div class="cmdk-wrap" id="cmdkWrap" hidden>
+         <div class="cmdk-backdrop" id="cmdkBackdrop"></div>
+         <div class="cmdk" role="dialog" aria-modal="true" aria-label="Command menu">
+            <div class="cmdk-input-row">
+               <span class="pfx">></span>
+               <input class="cmdk-input" id="cmdkInput" type="text" placeholder="Jump to a section, open a link, copy email…" role="combobox" aria-expanded="true" aria-controls="cmdkList" aria-autocomplete="list" autocomplete="off" spellcheck="false" />
+               <span class="cmdk-esc">esc</span>
+            </div>
+            <div class="cmdk-list" id="cmdkList" role="listbox" aria-label="Commands"></div>
+            <div class="cmdk-foot"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span></div>
          </div>
       </div>
-      <div class="term-hint">Press ` to open terminal</div>
-      <script>
-         const isTouch=('ontouchstart' in window)||navigator.maxTouchPoints>0;
-         const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-         const isMobile=window.matchMedia('(max-width:768px)').matches;
-         if(isTouch)document.documentElement.classList.add('touch-device');
-
-         (function(){
-           const pre=document.getElementById('preloader');
-           if(reduceMotion){pre.remove();document.body.classList.add('loaded');return;}
-           if(isMobile)pre.classList.add('simple');
-           const total=isMobile?1300:2000;
-           setTimeout(()=>{
-             pre.classList.add('done');
-             document.body.classList.add('loaded');
-             // hero name glitch burst right after reveal
-             const hn=document.getElementById('heroName');
-             hn.classList.add('glitch-once');
-             setTimeout(()=>hn.classList.remove('glitch-once'),800);
-             setTimeout(()=>pre.remove(),800);
-           },total);
-         })();
-
-         const progBar=document.getElementById('scrollProgress');
-         function updateProgress(){
-           const h=document.documentElement;
-           const sc=h.scrollTop/(h.scrollHeight-h.clientHeight||1);
-           progBar.style.transform='scaleX('+sc+')';
-         }
-         window.addEventListener('scroll',updateProgress,{passive:true});
-         updateProgress();
-
-         const backTop=document.getElementById('backTop');
-         window.addEventListener('scroll',()=>{
-           backTop.classList.toggle('show',window.scrollY>400);
-         },{passive:true});
-         backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:reduceMotion?'auto':'smooth'}));
-
-         const canvas=document.getElementById('canvas-bg');
-         const ctx=canvas.getContext('2d');
-         let nodes=[];
-         const mouse={x:-9999,y:-9999};
-         function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-         resize();
-         function initNodes(){
-           nodes=[];
-           const density=(isTouch||window.innerWidth<768)?45000:18000;
-           const n=Math.floor((canvas.width*canvas.height)/density);
-           for(let i=0;i<n;i++)nodes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+1,flash:0});
-         }
-         initNodes();
-         let lastW=window.innerWidth,resizeTimer=null;
-         window.addEventListener('resize',()=>{
-           clearTimeout(resizeTimer);
-           resizeTimer=setTimeout(()=>{
-             if(window.innerWidth!==lastW){
-               lastW=window.innerWidth;
-               resize();initNodes();
-             }else{
-               canvas.height=window.innerHeight;
-             }
-           },200);
-         });
-         // mouse interaction (repel)
-         if(!isTouch){
-           const hero=document.getElementById('hero');
-           hero.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
-           hero.addEventListener('mouseleave',()=>{mouse.x=-9999;mouse.y=-9999;});
-         }
-         // click pulse on canvas + particle burst anywhere in hero
-         document.getElementById('hero').addEventListener('click',e=>{
-           if(e.target.closest('a,button'))return;
-           // pulse: push nodes outward from click
-           const rect=canvas.getBoundingClientRect();
-           const cx=e.clientX-rect.left,cy=e.clientY-rect.top;
-           nodes.forEach(n=>{
-             const d=Math.hypot(n.x-cx,n.y-cy);
-             if(d<200&&d>0.1){
-               const f=(200-d)/200*3.5;
-               n.vx+=(n.x-cx)/d*f;n.vy+=(n.y-cy)/d*f;
-               n.flash=1;
-             }
-           });
-           // particle burst
-           if(!reduceMotion){
-             const heroEl=e.currentTarget;
-             const hr=heroEl.getBoundingClientRect();
-             const colors=['#00d4ff','#7c3aed','#10b981','#ff6b6b'];
-             for(let i=0;i<14;i++){
-               const p=document.createElement('span');
-               p.className='burst-p';
-               p.style.left=(e.clientX-hr.left)+'px';
-               p.style.top=(e.clientY-hr.top)+'px';
-               p.style.background=colors[i%colors.length];
-               const ang=Math.random()*Math.PI*2,dist=40+Math.random()*90;
-               p.style.setProperty('--bx',Math.cos(ang)*dist+'px');
-               p.style.setProperty('--by',Math.sin(ang)*dist+'px');
-               heroEl.appendChild(p);
-               setTimeout(()=>p.remove(),850);
-             }
-           }
-         });
-         let lastFlash=0;
-         function drawCanvas(t){
-           ctx.clearRect(0,0,canvas.width,canvas.height);
-           // occasional random bright flash
-           if(t-lastFlash>2600&&nodes.length){
-             nodes[Math.floor(Math.random()*nodes.length)].flash=1;
-             lastFlash=t;
-           }
-           for(let i=0;i<nodes.length;i++){
-             const a=nodes[i];
-             // mouse repel
-             const md=Math.hypot(a.x-mouse.x,a.y-mouse.y);
-             if(md<120&&md>0.1){
-               const f=(120-md)/120*.6;
-               a.vx+=(a.x-mouse.x)/md*f;a.vy+=(a.y-mouse.y)/md*f;
-             }
-             // friction so pulses settle back
-             a.vx*=.985;a.vy*=.985;
-             if(Math.abs(a.vx)<.05)a.vx+=(Math.random()-.5)*.02;
-             if(Math.abs(a.vy)<.05)a.vy+=(Math.random()-.5)*.02;
-             a.x+=a.vx;a.y+=a.vy;
-             if(a.x<0||a.x>canvas.width)a.vx*=-1;
-             if(a.y<0||a.y>canvas.height)a.vy*=-1;
-             if(a.flash>0)a.flash=Math.max(0,a.flash-.02);
-             for(let j=i+1;j<nodes.length;j++){
-               const b=nodes[j];
-               const d=Math.hypot(a.x-b.x,a.y-b.y);
-               if(d<140){
-                 ctx.beginPath();
-                 ctx.strokeStyle=`rgba(0,212,255,${(1-d/140)*.2})`;
-                 ctx.lineWidth=.5;
-                 ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
-               }
-             }
-             ctx.beginPath();
-             ctx.arc(a.x,a.y,a.r+(a.flash*2.5),0,Math.PI*2);
-             ctx.fillStyle=a.flash>0?`rgba(140,240,255,${.5+a.flash*.5})`:'rgba(0,212,255,.5)';
-             ctx.fill();
-           }
-           requestAnimationFrame(drawCanvas);
-         }
-         if(!reduceMotion)requestAnimationFrame(drawCanvas);
-         const phrases=['ML Engineer','Data Scientist','Agentic AI Builder','Applied AI Developer','Python Practitioner'];
-         let pi=0,ci=0,deleting=false,pause=0;
-         function type(){
-           const el=document.getElementById('typed');
-           const cur=phrases[pi];
-           if(pause>0){pause--;setTimeout(type,50);return;}
-           if(!deleting){
-             if(ci===0&&!reduceMotion){el.classList.remove('flicker');void el.offsetWidth;el.classList.add('flicker');}
-             el.textContent=cur.slice(0,ci+1);ci++;
-             if(ci===cur.length){deleting=true;pause=40;setTimeout(type,50);return;}
-           }else{
-             el.textContent=cur.slice(0,ci-1);ci--;
-             if(ci===0){deleting=false;pi=(pi+1)%phrases.length;pause=8;}
-           }
-           setTimeout(type,deleting?35:75);
-         }
-         type();
-
-         window.addEventListener('scroll',()=>{
-           document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
-         });
-
-         if(!reduceMotion){
-           const logo=document.getElementById('navLogo');
-           setInterval(()=>{
-             logo.classList.add('auto-glitch');
-             setTimeout(()=>logo.classList.remove('auto-glitch'),500);
-           },8000);
-         }
-
-         const ham=document.getElementById('hamburger');
-         const navLinks=document.getElementById('navLinks');
-         ham.addEventListener('click',()=>{ham.classList.toggle('open');navLinks.classList.toggle('open');});
-         navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');navLinks.classList.remove('open');}));
-
-         document.querySelectorAll('#about .about-text p').forEach(p=>{
-           const inner=document.createElement('span');
-           inner.className='line-inner';
-           while(p.firstChild)inner.appendChild(p.firstChild);
-           p.appendChild(inner);
-         });
-
-         document.querySelectorAll('.skill-group').forEach(card=>{
-           const NS='http://www.w3.org/2000/svg';
-           const svg=document.createElementNS(NS,'svg');
-           svg.setAttribute('class','trace');
-           const rect=document.createElementNS(NS,'rect');
-           rect.setAttribute('x','1');rect.setAttribute('y','1');
-           rect.setAttribute('rx','19');rect.setAttribute('pathLength','100');
-           svg.appendChild(rect);card.appendChild(svg);
-           const size=()=>{rect.setAttribute('width',Math.max(card.clientWidth-2,0));rect.setAttribute('height',Math.max(card.clientHeight-2,0));};
-           size();window.addEventListener('resize',size);
-         });
-
-         function achvBurst(item){
-           if(reduceMotion)return;
-           const icon=item.querySelector('.achv-icon');
-           if(!icon)return;
-           const glyphs=['✦','✧','★','✺'];
-           for(let i=0;i<6;i++){
-             const s=document.createElement('span');
-             s.className='achv-spark';
-             s.textContent=glyphs[i%glyphs.length];
-             const ang=Math.random()*Math.PI*2,dist=20+Math.random()*26;
-             s.style.setProperty('--sx',Math.cos(ang)*dist+'px');
-             s.style.setProperty('--sy',Math.sin(ang)*dist+'px');
-             s.style.color=['#00d4ff','#7c3aed','#10b981'][i%3];
-             icon.appendChild(s);
-             setTimeout(()=>s.remove(),950);
-           }
-         }
-
-         function countTag(tag){
-           const m=tag.textContent.match(/^(\d+)\.\s*(.*)$/);
-           if(!m)return;
-           const target=parseInt(m[1]),label=m[2];
-           if(reduceMotion){tag.textContent=String(target).padStart(2,'0')+'. '+label;return;}
-           let c=0;
-           const iv=setInterval(()=>{
-             tag.textContent=String(c).padStart(2,'0')+'. '+label;
-             if(c>=target){clearInterval(iv);return;}
-             c++;
-           },90);
-         }
-
-         const obs=new IntersectionObserver(entries=>{
-           entries.forEach(e=>{
-             if(e.isIntersecting){
-               e.target.classList.add('visible');
-               const bars=e.target.querySelectorAll('.skill-bar-fill');
-               bars.forEach(b=>b.style.width=b.dataset.w+'%');
-               if(e.target.classList.contains('section-tag')&&!e.target.dataset.counted){
-                 e.target.dataset.counted='1';countTag(e.target);
-               }
-               if(e.target.classList.contains('achv-item')&&!e.target.dataset.burst){
-                 e.target.dataset.burst='1';setTimeout(()=>achvBurst(e.target),350);
-               }
-             }
-           });
-         },{threshold:.15});
-         document.querySelectorAll('.fade-up,.tl-item,.proj-card,.achv-item,.section-tag,.skill-group,.about-grid').forEach(el=>obs.observe(el));
-
-         const tlObs=new IntersectionObserver(entries=>{
-           entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('drawn');});
-         },{threshold:.05});
-         document.querySelectorAll('.timeline').forEach(el=>tlObs.observe(el));
-
-         function slotRoll(el,target){
-           if(reduceMotion){el.textContent=target;return;}
-           const digits=String(target).length;
-           const spinMs=550,spinStep=45;
-           let elapsed=0;
-           const spin=setInterval(()=>{
-             elapsed+=spinStep;
-             let s='';
-             for(let i=0;i<digits;i++)s+=Math.floor(Math.random()*10);
-             el.textContent=parseInt(s);
-             if(elapsed>=spinMs){
-               clearInterval(spin);
-               // settle: count to final
-               let c=Math.max(0,target-Math.ceil(target*.25));
-               const step=Math.max(1,Math.ceil(target/25));
-               const iv=setInterval(()=>{c=Math.min(c+step,target);el.textContent=c;if(c>=target)clearInterval(iv);},30);
-             }
-           },spinStep);
-         }
-         const heroObs=new IntersectionObserver(entries=>{
-           entries.forEach(e=>{
-             if(!e.isIntersecting)return;
-             e.target.querySelectorAll('[data-count]').forEach(el=>{
-               if(el.dataset.done)return;el.dataset.done='1';
-               slotRoll(el,parseInt(el.dataset.count));
-             });
-           });
-         },{threshold:.5});
-         document.querySelectorAll('.hero-stats').forEach(el=>heroObs.observe(el));
-
-         if(!isTouch){
-           document.querySelectorAll('.proj-card').forEach(card=>{
-             card.addEventListener('mousemove',e=>{
-               const r=card.getBoundingClientRect();
-               const x=((e.clientX-r.left)/r.width)*100;
-               const y=((e.clientY-r.top)/r.height)*100;
-               card.style.setProperty('--mx',x+'%');
-               card.style.setProperty('--my',y+'%');
-             });
-           });
-           // fact card holographic shimmer follows mouse
-           document.querySelectorAll('.fact-card').forEach(card=>{
-             card.addEventListener('mousemove',e=>{
-               const r=card.getBoundingClientRect();
-               card.style.setProperty('--hx',((e.clientX-r.left)/r.width)*100+'%');
-               card.style.setProperty('--hy',((e.clientY-r.top)/r.height)*100+'%');
-             });
-           });
-           // cert card foil follows mouse
-           document.querySelectorAll('.cert-card').forEach(card=>{
-             card.addEventListener('mousemove',e=>{
-               const r=card.getBoundingClientRect();
-               card.style.setProperty('--fx',((e.clientX-r.left)/r.width)*100+'%');
-             });
-           });
-         }else{
-           // touch fallback: tap shows shimmer briefly via :hover emulation
-           document.querySelectorAll('.cert-card,.proj-card').forEach(card=>{
-             card.addEventListener('touchstart',()=>{},{passive:true});
-           });
-         }
-
-         if(!isTouch){
-           document.querySelectorAll('.pill').forEach(pill=>{
-             pill.addEventListener('mouseenter',()=>{
-               if(pill.previousElementSibling&&pill.previousElementSibling.classList.contains('pill'))pill.previousElementSibling.classList.add('magnet');
-               if(pill.nextElementSibling&&pill.nextElementSibling.classList.contains('pill'))pill.nextElementSibling.classList.add('magnet');
-             });
-             pill.addEventListener('mouseleave',()=>{
-               document.querySelectorAll('.pill.magnet').forEach(p=>p.classList.remove('magnet'));
-             });
-           });
-         }
-
-         document.querySelectorAll('.social-btn').forEach(btn=>{
-           btn.addEventListener('click',e=>{
-             if(reduceMotion)return;
-             const r=btn.getBoundingClientRect();
-             const rip=document.createElement('span');
-             rip.className='btn-ripple';
-             const size=Math.max(r.width,r.height)*2;
-             rip.style.width=rip.style.height=size+'px';
-             rip.style.left=(e.clientX-r.left)+'px';
-             rip.style.top=(e.clientY-r.top)+'px';
-             btn.appendChild(rip);
-             setTimeout(()=>rip.remove(),650);
-           });
-         });
-
-         (function(){
-           if(reduceMotion)return;
-           const words=['import torch','model.fit(X_train, y_train)','df.groupby()','GridSearchCV','sklearn.pipeline','xgboost.XGBClassifier','shap.TreeExplainer','np.argmax(probs)','pd.read_csv()','SMOTE(random_state=42)','mlflow.log_metric','streamlit run app.py','precision_recall_curve','cross_val_score','RandomForest','langchain.agents'];
-           const rain=document.getElementById('codeRain');
-           const count=(isTouch||isMobile)?7:14;
-           for(let i=0;i<count;i++){
-             const s=document.createElement('span');
-             s.textContent=words[i%words.length];
-             s.style.top=(Math.random()*95)+'%';
-             s.style.animationDuration=(26+Math.random()*30)+'s';
-             s.style.animationDelay=(-Math.random()*40)+'s';
-             rain.appendChild(s);
-           }
-         })();
-
-         const cur=document.getElementById('cursor');
-         const ring=document.getElementById('cursorRing');
-         let mx=0,my=0,rx=0,ry=0;
-         const ghosts=[];
-         if(!isTouch&&!reduceMotion){
-           // build ghost trail dots
-           for(let i=0;i<5;i++){
-             const g=document.createElement('div');
-             g.className='cursor-ghost';
-             const sz=8-i*1.3;
-             g.style.width=g.style.height=sz+'px';
-             g.style.opacity=(0.45-i*0.08);
-             document.body.appendChild(g);
-             ghosts.push({el:g,x:0,y:0});
-           }
-           document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-           function animRing(){
-             rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
-             ring.style.left=rx+'px';ring.style.top=ry+'px';
-             // trail: each ghost lerps to the one before it
-             let px=mx,py=my;
-             ghosts.forEach((g,i)=>{
-               g.x+=(px-g.x)*(0.32-i*0.04);
-               g.y+=(py-g.y)*(0.32-i*0.04);
-               g.el.style.left=g.x+'px';g.el.style.top=g.y+'px';
-               px=g.x;py=g.y;
-             });
-             requestAnimationFrame(animRing);
-           }
-           animRing();
-           document.querySelectorAll('a,button,.proj-card,.fact-card').forEach(el=>{
-             el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2)';ring.classList.add('hovering');});
-             el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.classList.remove('hovering');});
-           });
-           // cursor color per section
-           const colorObs=new IntersectionObserver(entries=>{
-             entries.forEach(e=>{
-               if(e.isIntersecting&&e.target.dataset.cursor){
-                 document.documentElement.style.setProperty('--cursor-color',e.target.dataset.cursor);
-               }
-             });
-           },{threshold:.4});
-           document.querySelectorAll('section[data-cursor]').forEach(s=>colorObs.observe(s));
-         }else{
-           cur.style.display='none';ring.style.display='none';
-         }
-
-         function copyEmail(){
-           navigator.clipboard.writeText('abhishek.tiwari.nitrr@gmail.com').then(()=>{
-             const h=document.getElementById('copyHint');
-             h.textContent='✓ Copied to clipboard!';h.style.color='var(--accent3)';
-             setTimeout(()=>{h.textContent='Click to copy email address';h.style.color='';},2500);
-           });
-         }
-
-         document.getElementById('contactForm').addEventListener('submit',async e=>{
-           e.preventDefault();
-           const form=e.target;
-           const btn=document.getElementById('cfSend');
-           const status=document.getElementById('cfStatus');
-           const name=form.name.value.trim(),email=form.email.value.trim(),msg=form.message.value.trim();
-           status.className='form-status';
-           if(!name||!email||!msg){status.textContent='> please fill in all fields.';status.classList.add('err');return;}
-           if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent='> that email doesn\'t look valid.';status.classList.add('err');return;}
-           if(form._honey.value)return; // bot caught by honeypot
-           btn.disabled=true;
-           status.textContent='> sending...';
-           try{
-             const res=await fetch('https://formsubmit.co/ajax/abhishek.tiwari.nitrr@gmail.com',{
-               method:'POST',
-               headers:{'Content-Type':'application/json','Accept':'application/json'},
-               body:JSON.stringify({
-                 name:name,
-                 email:email,
-                 message:msg,
-                 _subject:'Portfolio message from '+name,
-                 _template:'table',
-                 _captcha:'true'
-               })
-             });
-             if(!res.ok)throw new Error('http '+res.status);
-             status.textContent='✓ message sent! I\'ll get back to you soon.';
-             status.classList.add('ok');
-             form.reset();
-           }catch(err){
-             status.textContent='> couldn\'t send right now - please email me directly below.';
-             status.classList.add('err');
-           }
-           btn.disabled=false;
-         });
-
-         const termData={
-           help:{output:['Available commands:','  about     - Who is Abhishek?','  skills    - Tech stack','  projects  - Featured projects','  contact   - Get in touch','  kaggle    - Competition results','  matrix    - ???','  clear     - Clear terminal']},
-           about:{output:['Abhishek Tiwari - ML Engineer & Data Scientist','─────────────────────────────────────','B.Tech Mining Engg. · NIT Raipur · Class of 2022','4 YOE at EXL Service (Appian + Agentic AI)','Lead Assistant Manager since Jan 2026','Personal projects: 4 live ML apps on Streamlit 🚀','Goal: ML Engineer / Applied AI roles']},
-           skills:{output:['ML: Python · Scikit-Learn · XGBoost · SHAP · SMOTE','MLOps: MLflow · DagsHub · Docker · GitHub Actions · pytest','Serving: FastAPI · Streamlit · Pydantic','Data: SQL · Pandas · MongoDB · SQLite','Enterprise: Appian BPM · Agentic AI · GenAI','Learning  : LangChain · RAG · PyTorch']},
-           projects:{output:[
-           '★ PhishGuard - 5-Stage MLOps · F1-gated prod model',
-           '★ System Performance Analyzer - Isolation Forest · JWT Auth · PDF',
-           '★ Telco Churn Prediction - AUC-ROC 0.8403 · ₹19.4L/cycle ROI',
-           '★ Thunderstorm Forecasting - QDA + SMOTETomek · MLflow tracked',
-           '★ Retail Data Insight App - 180K records · 3-Level PDF reports',
-           '★ Financial Tracker - Modular CLI · CSV persistence',
-           '→ github.com/abhishek-tiwari-nitrr'
-         ]},
-           contact:{output:['📧  abhishek.tiwari.nitrr@gmail.com','🔗  linkedin.com/in/abhishek-tiwari-nitrr','🔗  github.com/abhishek-tiwari-nitrr']},
-           kaggle:{output:['Competition Results:','─────────────────────────────────────','🏆 Global Rank #8   - HR Analytics (AV)','🌐 Global Rank #67  - Power Plant Energy AI','📊 Global Rank #299 - AmExpert 2021 ML Hackathon','🎓 GATE 2025 Qualified','🥉 2x Kaggle Bronze Notebook Medals']},
-           clear:{output:['__CLEAR__']},
-           matrix:{output:['__MATRIX__']}
-         };
-         const matrixChars='ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄ01ML$#@&*<>{}[]λΣΔπ';
-         function runMatrix(body){
-           const start=Date.now();
-           const iv=setInterval(()=>{
-             if(Date.now()-start>3000){
-               clearInterval(iv);
-               const d=document.createElement('div');
-               d.className='line';d.textContent='> wake up, neo... exiting matrix.';
-               body.appendChild(d);body.scrollTop=body.scrollHeight;
-               return;
-             }
-             const d=document.createElement('div');
-             d.className='matrix-line';
-             let line='';
-             const len=18+Math.floor(Math.random()*18);
-             for(let i=0;i<len;i++)line+=matrixChars[Math.floor(Math.random()*matrixChars.length)]+(Math.random()>.7?' ':'');
-             d.textContent=line;
-             body.appendChild(d);
-             body.scrollTop=body.scrollHeight;
-             while(body.children.length>40)body.removeChild(body.firstChild);
-           },90);
-         }
-         function handleTerminal(e){
-           if(e.key!=='Enter')return;
-           const inp=document.getElementById('termInput');
-           const cmd=inp.value.trim().toLowerCase();
-           inp.value='';
-           const body=document.getElementById('termBody');
-           const data=termData[cmd]||{output:['Command not found: '+cmd+'. Type "help" for commands.']};
-           if(data.output[0]==='__CLEAR__'){
-           body.innerHTML='';
-           ['Welcome to Abhishek\'s portfolio terminal 👋','Type "help" to see available commands.'].forEach((t,i)=>{
-             const d=document.createElement('div');
-             d.className='line';
-             d.style.animationDelay=(i*.4)+'s';
-             d.textContent=t;
-             body.appendChild(d);
-           });
-           return;
-         }
-           const prompt=document.createElement('div');
-           prompt.className='line';prompt.style.color='var(--text2)';prompt.textContent='$ '+cmd;
-           body.appendChild(prompt);
-           if(data.output[0]==='__MATRIX__'){runMatrix(body);return;}
-           data.output.forEach((line,i)=>{
-             const d=document.createElement('div');
-             d.className='line';d.style.animationDelay=(i*.06)+'s';d.textContent=line;
-             body.appendChild(d);
-           });
-           body.scrollTop=body.scrollHeight;
-         }
-         // backtick toggle
-         document.addEventListener('keydown',e=>{
-           if(e.key==='`'){document.getElementById('terminal').classList.toggle('open');}
-         });
-         // init terminal
-         setTimeout(()=>{
-           const body=document.getElementById('termBody');
-           ['Welcome to Abhishek\'s portfolio terminal 👋','Type "help" to see available commands.'].forEach((t,i)=>{
-             const d=document.createElement('div');d.className='line';d.style.animationDelay=(i*.4)+'s';d.textContent=t;body.appendChild(d);
-           });
-         },500);
-         // Live Github Repo Count
-         window.addEventListener('load', function(){
-         (async function(){
-            const username = 'abhishek-tiwari-nitrr';
-            const statEl = document.getElementById('ghRepoStat');
-            if(!statEl) return;
-            try {
-               const res = await fetch('https://api.github.com/users/' + username);
-               if(!res.ok) throw new Error('http ' + res.status);
-               const data = await res.json();
-               const total = data.public_repos;
-               console.log('Repos total:', total);
-               statEl.removeAttribute('data-count');
-               statEl.dataset.done = '';
-               slotRoll(statEl, total);
-            } catch(e) {
-               console.error('GitHub repos error:', e);
-               slotRoll(statEl, 34);
-            }
-         })();
-         });
-
-         // Live GitHub contributions fetch
-         window.addEventListener('load', function(){
-         (async function(){
-            const username = 'abhishek-tiwari-nitrr';
-            const statEl = document.getElementById('ghContribStat');
-            if(!statEl) { console.error('ghContribStat element not found'); return; }
-            try {
-               const res = await fetch('https://github-contributions-api.jogruber.de/v4/' + username);
-               if(!res.ok) throw new Error('http ' + res.status);
-               const data = await res.json();
-               const total = Object.values(data.total).reduce((a, b) => a + b, 0);
-               console.log('Contributions total:', total);
-               statEl.removeAttribute('data-count');
-               statEl.dataset.done = '';
-               slotRoll(statEl, total);
-            } catch(e) {
-               console.error('GitHub fetch error:', e);
-               slotRoll(statEl, 850);
-            }
-         })();
-         });
-               </script>
+      <script src="script.js" defer></script>
    </body>
 </html>
