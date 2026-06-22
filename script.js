@@ -371,7 +371,6 @@
             settle($('#ghContrib'), 850);
         });
 
-    /* SIGNATURE: animate the training run — loss falls, accuracy rises */
     (function() {
         var statusEl = document.getElementById('trainStatus'),
             statusTxt = document.getElementById('statusTxt');
@@ -563,7 +562,6 @@
         }
     })();
 
-    /* hero name decode-in (sampling glyphs that resolve to the name) */
     (function() {
         if (RM) return;
         var glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&<>/*0123456789';
@@ -596,7 +594,6 @@
         requestAnimationFrame(frame);
     })();
 
-    /* ===== MATRIX MODE (easter egg) ===== */
     var mtx = null;
 
     function enterMatrix() {
@@ -606,7 +603,7 @@
         cv.setAttribute('aria-hidden', 'true');
         document.body.appendChild(cv);
         var hint = document.createElement('div');
-        hint.textContent = '\u2588 wake up, Abhishek \u2014 press ESC or click to exit';
+        hint.textContent = '\u2588 wake up, Abhishek - press ESC or click to exit';
         hint.style.cssText = 'position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:9999;font-family:var(--mono);font-size:.72rem;color:#37ff9b;letter-spacing:.12em;background:rgba(0,0,0,.55);padding:.55rem .95rem;border:1px solid rgba(55,255,155,.4);border-radius:8px;pointer-events:none;text-shadow:0 0 8px rgba(55,255,155,.55)';
         document.body.appendChild(hint);
         var prevOverflow = document.body.style.overflow;
@@ -950,7 +947,7 @@
                 visible[i].run();
             }
         }
-        var examples = ['try: phishguard', 'try: toggle theme', 'try: résumé', 'try: github', 'try: contact'];
+        var examples = ['try: matrix', 'try: phishguard', 'try: toggle theme', 'try: résumé', 'try: github', 'try: contact'];
         var ph = {
             i: 0,
             c: 0,
