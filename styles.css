@@ -311,6 +311,10 @@ main {
     padding-bottom:.5rem
 }
 
+#contact{
+    padding-bottom:.5rem
+}
+
 .eyebrow {
     font-family: var(--mono);
     font-size: .72rem;
@@ -1633,6 +1637,64 @@ button.kbd-hint:hover kbd {
 .colophon a:hover {
     text-decoration: underline
 }
+
+#backTop{
+    position:fixed;
+    bottom:2rem;
+    right:2rem;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:transparent;
+    border:none;
+    color:var(--signal);
+    font-family:var(--mono);
+    font-size:1rem;
+    font-weight:700;
+    cursor:pointer;
+    z-index:997;
+    opacity:0;
+    transform:translateY(16px) scale(.85);
+    transition:opacity .35s,transform .35s;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+
+    #backTop.show{
+    opacity:1;
+    transform:none
+}
+
+#backTop:hover{
+    color:var(--live)
+}
+
+#backTop.show:hover{
+    transform:translateY(-2px) scale(1.08)
+}
+
+#backTop::before{
+    content:'';
+    position:absolute;
+    inset:-2px;border-radius:50%;
+    background:conic-gradient(var(--signal),var(--ink),var(--signal));
+    animation:spinBorder 3s linear infinite
+}
+
+#backTop::after{
+    content:'';
+    position:absolute;
+    inset:2px;
+    border-radius:50%;
+    background:var(--panel)
+}
+
+#backTop span{
+    position:relative;
+    z-index:1
+}
+@keyframes spinBorder{to{transform:rotate(360deg)}}
 
 .mtx-link {
     font-family: var(--mono);

@@ -248,6 +248,20 @@
         });
     });
 
+    /* back to top */
+    var backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', function() {
+        backTop.classList.toggle('show', window.scrollY > 400);
+    }, {
+        passive: true
+    });
+    backTop.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: RM ? 'auto' : 'smooth'
+        });
+    });
+
     /* email copy */
     var EMAIL = 'abhishek.tiwari.nitrr@gmail.com';
 
