@@ -2078,6 +2078,139 @@ button.kbd-hint:hover kbd {
     }
 }
 
+.rec { position: relative }
+
+.rec::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(120px + .9rem);
+    width: 2px;
+    background: var(--signal-line);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .75s cubic-bezier(.22, 1, .36, 1) .04s;
+    pointer-events: none
+}
+
+.rec.in::before { transform: scaleY(1) }
+
+.rec::after {
+    content: "";
+    position: absolute;
+    top: 2.15rem;
+    left: calc(120px + .9rem);
+    margin-left: -3.5px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--signal);
+    transform: scale(0);
+    transition: transform .5s cubic-bezier(.34, 1.56, .64, 1) .22s, border-color .25s, box-shadow .25s;
+    pointer-events: none
+}
+
+.rec.in::after { transform: scale(1) }
+
+.rec:first-of-type::after { top: .55rem; border-color: var(--live) }
+
+.rec:first-of-type.in::after { animation: nodeLive 2.6s ease-in-out infinite .8s }
+
+@keyframes nodeLive {
+    0% { box-shadow: 0 0 0 0 var(--live-bg) }
+    70% { box-shadow: 0 0 0 9px transparent }
+    100% { box-shadow: 0 0 0 0 transparent }
+}
+
+.rec:hover::before { background: var(--signal) }
+
+.rec:hover::after { border-color: var(--signal); box-shadow: 0 0 0 4px var(--signal-soft) }
+
+.tok { position: relative; overflow: hidden }
+
+.tok:hover { background: var(--signal-soft); transform: translateY(-1px) }
+
+.tok::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--signal);
+    transform: translateX(-101%);
+    transition: transform .3s ease
+}
+
+.tok:hover::after { transform: translateX(0) }
+
+.tok.learn { animation: learnPulse 2.4s ease-in-out infinite }
+
+@keyframes learnPulse {
+    0%, 100% { border-color: var(--signal-line) }
+    50% { border-color: var(--signal) }
+}
+
+.honors li,
+.certs li { position: relative; transition: padding-left .2s ease }
+
+.honors li::before,
+.certs li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 2px;
+    height: 0;
+    background: var(--signal);
+    transform: translateY(-50%);
+    transition: height .22s ease;
+    pointer-events: none
+}
+
+.honors li:hover,
+.certs li:hover { padding-left: .6rem }
+
+.honors li:hover::before,
+.certs li:hover::before { height: 60% }
+
+.honors li:hover .t,
+.certs li:hover .t { color: var(--signal) }
+
+.colophon a { position: relative }
+
+.colophon a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .28s ease
+}
+
+.colophon a:hover { text-decoration: none }
+
+.colophon a:hover::after { transform: scaleX(1) }
+
+.has-js .grid-bg { animation: gridBreathe 11s ease-in-out infinite }
+
+@keyframes gridBreathe {
+    0%, 100% { opacity: .6 }
+    50% { opacity: .47 }
+}
+
+@media (max-width:680px) {
+    .rec::before,
+    .rec::after { display: none }
+}
+
+
 @media (prefers-reduced-motion:reduce) {
 
     *,
@@ -2113,4 +2246,13 @@ button.kbd-hint:hover kbd {
     .grid-bg {
         opacity: .4
     }
+
+    .rec::before {
+        transform: scaleY(1) !important
+    }
+
+    .rec::after {
+        transform: scale(1) !important
+    }
+
 }
