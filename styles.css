@@ -307,13 +307,13 @@ main {
     border-top: 1px solid var(--line)
 }
 
-.section:last-of-type{
-    padding-bottom:.5rem
+.section:last-of-type {
+    padding-bottom: .5rem
 }
 
-#contact{
+#contact {
     padding-top: 2rem;
-    padding-bottom:.5rem
+    padding-bottom: .5rem
 }
 
 .eyebrow {
@@ -1620,10 +1620,10 @@ button.kbd-hint:hover kbd {
     padding: 2.4rem var(--pad) 3rem;
     border-top: 1px solid var(--line);
     display: flex;
-    flex-direction:column;
-    align-items:center;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    text-align:center;
+    text-align: center;
     gap: .5rem;
     font-family: var(--mono);
     font-size: .72rem;
@@ -1639,63 +1639,69 @@ button.kbd-hint:hover kbd {
     text-decoration: underline
 }
 
-#backTop{
-    position:fixed;
-    bottom:2rem;
-    right:2rem;
-    width:44px;
-    height:44px;
-    border-radius:50%;
-    background:transparent;
-    border:none;
-    color:var(--signal);
-    font-family:var(--mono);
-    font-size:1rem;
-    font-weight:700;
-    cursor:pointer;
-    z-index:997;
-    opacity:0;
-    transform:translateY(16px) scale(.85);
-    transition:opacity .35s,transform .35s;
-    display:flex;
-    align-items:center;
-    justify-content:center
+#backTop {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: var(--signal);
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 997;
+    opacity: 0;
+    transform: translateY(16px) scale(.85);
+    transition: opacity .35s, transform .35s;
+    display: flex;
+    align-items: center;
+    justify-content: center
 }
 
-    #backTop.show{
-    opacity:1;
-    transform:none
+#backTop.show {
+    opacity: 1;
+    transform: none
 }
 
-#backTop:hover{
-    color:var(--live)
+#backTop:hover {
+    color: var(--live)
 }
 
-#backTop.show:hover{
-    transform:translateY(-2px) scale(1.08)
+#backTop.show:hover {
+    transform: translateY(-2px) scale(1.08)
 }
 
-#backTop::before{
-    content:'';
-    position:absolute;
-    inset:-2px;border-radius:50%;
-    background:conic-gradient(var(--signal),var(--ink),var(--signal));
-    animation:spinBorder 3s linear infinite
+#backTop::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    background: conic-gradient(var(--signal), var(--ink), var(--signal));
+    animation: spinBorder 3s linear infinite
 }
 
-#backTop::after{
-    content:'';
-    position:absolute;
-    inset:2px;
-    border-radius:50%;
-    background:var(--panel)
+#backTop::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background: var(--panel)
 }
 
-#backTop span{
-    position:relative;
-    z-index:1
+#backTop span {
+    position: relative;
+    z-index: 1
 }
-@keyframes spinBorder{to{transform:rotate(360deg)}}
+
+@keyframes spinBorder {
+    to {
+        transform: rotate(360deg)
+    }
+}
 
 .mtx-link {
     font-family: var(--mono);
@@ -2078,7 +2084,9 @@ button.kbd-hint:hover kbd {
     }
 }
 
-.rec { position: relative }
+.rec {
+    position: relative
+}
 
 .rec::before {
     content: "";
@@ -2094,7 +2102,9 @@ button.kbd-hint:hover kbd {
     pointer-events: none
 }
 
-.rec.in::before { transform: scaleY(1) }
+.rec.in::before {
+    transform: scaleY(1)
+}
 
 .rec::after {
     content: "";
@@ -2112,25 +2122,51 @@ button.kbd-hint:hover kbd {
     pointer-events: none
 }
 
-.rec.in::after { transform: scale(1) }
-
-.rec:first-of-type::after { top: .55rem; border-color: var(--live) }
-
-.rec:first-of-type.in::after { animation: nodeLive 2.6s ease-in-out infinite .8s }
-
-@keyframes nodeLive {
-    0% { box-shadow: 0 0 0 0 var(--live-bg) }
-    70% { box-shadow: 0 0 0 9px transparent }
-    100% { box-shadow: 0 0 0 0 transparent }
+.rec.in::after {
+    transform: scale(1)
 }
 
-.rec:hover::before { background: var(--signal) }
+.rec:first-of-type::after {
+    top: .55rem;
+    border-color: var(--live)
+}
 
-.rec:hover::after { border-color: var(--signal); box-shadow: 0 0 0 4px var(--signal-soft) }
+.rec:first-of-type.in::after {
+    animation: nodeLive 2.6s ease-in-out infinite .8s
+}
 
-.tok { position: relative; overflow: hidden }
+@keyframes nodeLive {
+    0% {
+        box-shadow: 0 0 0 0 var(--live-bg)
+    }
 
-.tok:hover { background: var(--signal-soft); transform: translateY(-1px) }
+    70% {
+        box-shadow: 0 0 0 9px transparent
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 transparent
+    }
+}
+
+.rec:hover::before {
+    background: var(--signal)
+}
+
+.rec:hover::after {
+    border-color: var(--signal);
+    box-shadow: 0 0 0 4px var(--signal-soft)
+}
+
+.tok {
+    position: relative;
+    overflow: hidden
+}
+
+.tok:hover {
+    background: var(--signal-soft);
+    transform: translateY(-1px)
+}
 
 .tok::after {
     content: "";
@@ -2144,17 +2180,31 @@ button.kbd-hint:hover kbd {
     transition: transform .3s ease
 }
 
-.tok:hover::after { transform: translateX(0) }
+.tok:hover::after {
+    transform: translateX(0)
+}
 
-.tok.learn { animation: learnPulse 2.4s ease-in-out infinite }
+.tok.learn {
+    animation: learnPulse 2.4s ease-in-out infinite
+}
 
 @keyframes learnPulse {
-    0%, 100% { border-color: var(--signal-line) }
-    50% { border-color: var(--signal) }
+
+    0%,
+    100% {
+        border-color: var(--signal-line)
+    }
+
+    50% {
+        border-color: var(--signal)
+    }
 }
 
 .honors li,
-.certs li { position: relative; transition: padding-left .2s ease }
+.certs li {
+    position: relative;
+    transition: padding-left .2s ease
+}
 
 .honors li::before,
 .certs li::before {
@@ -2171,15 +2221,23 @@ button.kbd-hint:hover kbd {
 }
 
 .honors li:hover,
-.certs li:hover { padding-left: .6rem }
+.certs li:hover {
+    padding-left: .6rem
+}
 
 .honors li:hover::before,
-.certs li:hover::before { height: 60% }
+.certs li:hover::before {
+    height: 60%
+}
 
 .honors li:hover .t,
-.certs li:hover .t { color: var(--signal) }
+.certs li:hover .t {
+    color: var(--signal)
+}
 
-.colophon a { position: relative }
+.colophon a {
+    position: relative
+}
 
 .colophon a::after {
     content: "";
@@ -2194,20 +2252,36 @@ button.kbd-hint:hover kbd {
     transition: transform .28s ease
 }
 
-.colophon a:hover { text-decoration: none }
+.colophon a:hover {
+    text-decoration: none
+}
 
-.colophon a:hover::after { transform: scaleX(1) }
+.colophon a:hover::after {
+    transform: scaleX(1)
+}
 
-.has-js .grid-bg { animation: gridBreathe 11s ease-in-out infinite }
+.has-js .grid-bg {
+    animation: gridBreathe 11s ease-in-out infinite
+}
 
 @keyframes gridBreathe {
-    0%, 100% { opacity: .6 }
-    50% { opacity: .47 }
+
+    0%,
+    100% {
+        opacity: .6
+    }
+
+    50% {
+        opacity: .47
+    }
 }
 
 @media (max-width:680px) {
+
     .rec::before,
-    .rec::after { display: none }
+    .rec::after {
+        display: none
+    }
 }
 
 
@@ -2255,4 +2329,303 @@ button.kbd-hint:hover kbd {
         transform: scale(1) !important
     }
 
+}
+
+.ask-spark {
+    color: var(--signal)
+}
+
+.ask-launch {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 80;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-family: var(--mono);
+    font-size: .8rem;
+    letter-spacing: .01em;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: .6rem 1rem;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: border-color .18s, transform .15s, box-shadow .18s
+}
+
+.ask-launch:hover {
+    border-color: var(--signal);
+    transform: translateY(-2px)
+}
+
+.ask-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center
+}
+
+.ask-modal[hidden] {
+    display: none
+}
+
+.ask-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 10, 12, .55);
+    backdrop-filter: blur(3px);
+    animation: askFade .2s ease
+}
+
+@keyframes askFade {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.ask-panel {
+    position: relative;
+    width: min(620px, 92vw);
+    margin-top: clamp(3rem, 11vh, 7rem);
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .35);
+    overflow: hidden;
+    animation: askRise .26s cubic-bezier(.22, 1, .36, 1)
+}
+
+@keyframes askRise {
+    from {
+        opacity: 0;
+        transform: translateY(14px)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+.ask-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid var(--line-2)
+}
+
+.ask-title {
+    font-family: var(--mono);
+    font-size: .92rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem
+}
+
+.ask-x {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 .2rem;
+    transition: color .15s
+}
+
+.ask-x:hover {
+    color: var(--ink)
+}
+
+.ask-inputwrap {
+    display: flex;
+    gap: .5rem;
+    padding: 1rem 1.2rem .4rem
+}
+
+.ask-input {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--inset);
+    border: 1px solid var(--line-2);
+    border-radius: 9px;
+    padding: .7rem .9rem;
+    transition: border-color .18s, box-shadow .18s
+}
+
+.ask-input:focus {
+    outline: none;
+    border-color: var(--signal);
+    box-shadow: 0 0 0 3px var(--signal-soft)
+}
+
+.ask-send {
+    font-size: 1.1rem;
+    color: #fff;
+    background: var(--signal);
+    border: none;
+    border-radius: 9px;
+    width: 46px;
+    flex: none;
+    cursor: pointer;
+    transition: filter .15s
+}
+
+.ask-send:hover {
+    filter: brightness(1.08)
+}
+
+.ask-sugs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    padding: .6rem 1.2rem 1rem
+}
+
+.ask-sug {
+    font-size: .8rem;
+    color: var(--ink-2);
+    background: var(--inset);
+    border: 1px solid var(--line-2);
+    border-radius: 100px;
+    padding: .35rem .7rem;
+    cursor: pointer;
+    transition: color .15s, border-color .15s
+}
+
+.ask-sug:hover {
+    color: var(--signal);
+    border-color: var(--signal-line)
+}
+
+.ask-body {
+    padding: 0 1.2rem 1.2rem;
+    overflow-y: auto;
+    flex: 1
+}
+
+.ask-hello {
+    font-size: .92rem;
+    color: var(--muted);
+    line-height: 1.6
+}
+
+.ask-note {
+    display: block;
+    font-family: var(--mono);
+    font-size: .72rem;
+    color: var(--ink-2);
+    margin-top: .5rem
+}
+
+.ask-load {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-family: var(--mono);
+    font-size: .82rem;
+    color: var(--muted);
+    padding: .6rem 0
+}
+
+.ask-spin {
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--line-2);
+    border-top-color: var(--signal);
+    border-radius: 50%;
+    animation: askSpin .8s linear infinite
+}
+
+@keyframes askSpin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.ask-q {
+    font-family: var(--mono);
+    font-size: .82rem;
+    color: var(--signal);
+    margin: .4rem 0 .6rem;
+    padding-left: .7rem;
+    border-left: 2px solid var(--signal-line)
+}
+
+.ask-a {
+    font-size: .94rem;
+    color: var(--ink);
+    line-height: 1.62
+}
+
+.ask-a p {
+    margin: 0 0 .8rem
+}
+
+.ask-src {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+    margin-top: .6rem
+}
+
+.ask-srclbl {
+    font-family: var(--mono);
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin-right: .2rem
+}
+
+.ask-chip {
+    font-family: var(--mono);
+    font-size: .72rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    background: var(--inset);
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    padding: .25rem .5rem;
+    transition: color .15s, border-color .15s
+}
+
+.ask-chip:hover {
+    color: var(--signal);
+    border-color: var(--signal-line)
+}
+
+.ask-foot {
+    font-family: var(--mono);
+    font-size: .7rem;
+    color: var(--muted);
+    padding: .7rem 1.2rem;
+    border-top: 1px solid var(--line-2)
+}
+
+@media (max-width:560px) {
+    .ask-launch {
+        left: 12px;
+        bottom: 12px;
+        font-size: .74rem;
+        padding: .5rem .8rem
+    }
 }
