@@ -1,3 +1,12 @@
+async function cachedJSON(url, key, hours) {
+  try {
+    const c = JSON.parse(localStorage.getItem(key) || 'null');
+    if (c && Date.now() - c.t < hours * 3600000) return c.d;
+  } catch (e) {}
+  const d = await fetch(url).then(r => r.json());
+  try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d })); } catch (e) {}
+  return d;
+}
 (function() {
     "use strict";
     var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
