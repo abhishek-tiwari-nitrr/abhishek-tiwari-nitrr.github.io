@@ -119,7 +119,7 @@
     tx.env.allowLocalModels = false;
     extractor = await tx.pipeline('feature-extraction', MODEL, {
       quantized: true,
-      progress_callback: (d) => { if (d && d.status === 'progress' && d.progress != null && onProgress) onProgress(Math.round(d.progress)); }
+      progress_callback: (d) => { if (d && d.status === 'progress' && d.progress != null && onProgress) onProgress(Math.round(d.progress), d.file); }
     });
   }
   async function embed(text) {
@@ -305,14 +305,24 @@
       warming = true;
       const t0 = Date.now();
       if (loadEl) loadEl.hidden = false;
-      if (loadBar) loadBar.style.width = '8%';
+      if (loadBar) loadBar.style.width = '5%';
       if (modeEl) modeEl.textContent = 'loading AI model…';
 
-      await buildIndex(pct => {
-        if (loadBar) loadBar.style.width = Math.max(8, pct) + '%';
+      const seen = {};
+      const update = () => {
+        const vals = Object.values(seen);
+        const EXPECTED = 4;
+        const filesSeen = Math.max(vals.length, 1);
+        const denom = Math.max(EXPECTED, filesSeen);
+        const overall = vals.reduce((a, b) => a + b, 0) / denom;
+        const pct = Math.min(99, Math.max(5, Math.round(overall)));
+        if (loadBar) loadBar.style.width = pct + '%';
         if (loadTxt) loadTxt.textContent = 'Loading the AI model… ' + pct + '%';
         if (modeEl) modeEl.textContent = 'loading AI model… ' + pct + '%';
-      });
+      };
+
+      await buildIndex((pct, file) => { seen[file || 'f' + Object.keys(seen).length] = pct; update(); });
+
 
       if (loadBar) loadBar.style.width = '100%';
       const elapsed = Date.now() - t0;
