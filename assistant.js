@@ -52,6 +52,13 @@
   function tokens(s) { return s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length > 1 && !STOP.has(w)); }
   function dot(a, b) { let s = 0; for (let i = 0; i < a.length; i++) s += a[i] * b[i]; return s; }
 
+  /* light profanity / hostility gate */
+  const BLOCK = /\b(assholes?|asshats?|fuck\w*|shit\w*|bitch\w*|bastard\w*|dick\w*|cunt\w*|slut\w*|whore\w*|retard\w*|nigg\w*|faggot\w*|moron|loser|jerk|screw\s+you|suck\w*|hate\s+(you|him|this|abhishek)|kill\s+(you|him|yourself))\b/i;
+  function isHostile(q) {
+    const t = ' ' + q.toLowerCase().replace(/[\*\@\$0-9]/g, m => ({ '*': '', '@': 'a', '$': 's', '0': 'o', '1': 'i', '3': 'e', '4': 'a', '5': 's', '7': 't' }[m] || '')) + ' ';
+    return BLOCK.test(t);
+  }
+
   /* query expansion so casual phrasings still hit the right facts */
   const ALIASES = {
     ml: 'machine learning model models', ai: 'artificial intelligence', dl: 'deep learning neural',
@@ -119,7 +126,7 @@
     tx.env.allowLocalModels = false;
     extractor = await tx.pipeline('feature-extraction', MODEL, {
       quantized: true,
-      progress_callback: (d) => { if (d && d.status === 'progress' && d.progress != null && onProgress) onProgress(Math.round(d.progress), d.file); }
+      progress_callback: (d) => { if (d && d.status === 'progress' && d.progress != null && onProgress) onProgress(Math.round(d.progress)); }
     });
   }
   async function embed(text) {
@@ -298,6 +305,12 @@
 
     function setBody(html) { body.innerHTML = html; body.scrollTop = 0; }
 
+    function hostileHTML(q) {
+      return '<div class="ask-q">' + q.replace(/</g, '&lt;') + '</div>'
+        + '<div class="ask-a"><p>Let\u2019s keep it professional - I\u2019m here to answer questions about Abhishek\u2019s work, projects and experience. Try \u201cWhat ML systems has he shipped?\u201d or \u201cHow do I get in touch?\u201d</p>'
+        + '<button type="button" class="ask-reset" id="askReset">\u21bb Ask another</button></div>';
+    }
+
     let warming = false, warmed = false, busy = false;
     const MIN_LOAD_MS = 3000;
     async function warm() {
@@ -305,24 +318,14 @@
       warming = true;
       const t0 = Date.now();
       if (loadEl) loadEl.hidden = false;
-      if (loadBar) loadBar.style.width = '5%';
+      if (loadBar) loadBar.style.width = '8%';
       if (modeEl) modeEl.textContent = 'loading AI model…';
 
-      const seen = {};
-      const update = () => {
-        const vals = Object.values(seen);
-        const EXPECTED = 4;
-        const filesSeen = Math.max(vals.length, 1);
-        const denom = Math.max(EXPECTED, filesSeen);
-        const overall = vals.reduce((a, b) => a + b, 0) / denom;
-        const pct = Math.min(99, Math.max(5, Math.round(overall)));
-        if (loadBar) loadBar.style.width = pct + '%';
+      await buildIndex(pct => {
+        if (loadBar) loadBar.style.width = Math.max(8, pct) + '%';
         if (loadTxt) loadTxt.textContent = 'Loading the AI model… ' + pct + '%';
         if (modeEl) modeEl.textContent = 'loading AI model… ' + pct + '%';
-      };
-
-      await buildIndex((pct, file) => { seen[file || 'f' + Object.keys(seen).length] = pct; update(); });
-
+      });
 
       if (loadBar) loadBar.style.width = '100%';
       const elapsed = Date.now() - t0;
@@ -344,21 +347,32 @@
       return `<div class="ask-q">${q}</div><div class="ask-a">${ans}${srcs}<button type="button" class="ask-reset" id="askReset">\u21bb Ask another</button></div>`;
     }
 
+    function wireAfterAnswer() {
+      body.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        const t = document.getElementById(a.getAttribute('data-go'));
+        hide(); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }));
+      const rb = body.querySelector('#askReset');
+      if (rb) rb.addEventListener('click', reset);
+    }
+
     async function ask() {
       const q = (input.value || '').trim();
       if (!q || busy) return;
+
+      if (isHostile(q)) {
+        setBody(hostileHTML(q));
+        wireAfterAnswer();
+        return;
+      }
+
       busy = true; warm();
       setBody('<div class="ask-load"><span class="ask-spin"></span><span>searching\u2026</span></div>');
       try {
         const hits = await retrieve(q, 4);
         setBody(answerHTML(q, compose(q, hits)));
-        body.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', (ev) => {
-          ev.preventDefault();
-          const t = document.getElementById(a.getAttribute('data-go'));
-          hide(); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }));
-        const rb = body.querySelector('#askReset');
-        if (rb) rb.addEventListener('click', reset);
+        wireAfterAnswer();
       } catch (e) {
         setBody('<p class="ask-hello">Something went wrong answering that. Please try again.</p>');
       } finally { busy = false; }
