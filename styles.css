@@ -2678,6 +2678,7 @@ button.kbd-hint:hover kbd {
     display: block;
     height: 100%;
     width: 0;
+    border-radius: 3px;
     background: var(--signal);
-    transition: width .3s ease;
+    transition: width .25s ease;
 }

@@ -136,7 +136,7 @@
   function corpusHash() { let h = 0; const s = CORPUS.map(c => c.text).join('|'); for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) | 0; } return String(h); }
   async function buildIndex(onProgress) {
     try {
-      await withTimeout(loadModel(onProgress), 25000);
+      await withTimeout(loadModel(onProgress), 60000);
       const hash = corpusHash();
       try {
         const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
@@ -307,35 +307,49 @@
 
     function hostileHTML(q) {
       return '<div class="ask-q">' + q.replace(/</g, '&lt;') + '</div>'
-        + '<div class="ask-a"><p>Let\u2019s keep it professional - I\u2019m here to answer questions about Abhishek\u2019s work, projects and experience. Try \u201cWhat ML systems has he shipped?\u201d or \u201cHow do I get in touch?\u201d</p>'
+        + '<div class="ask-a"><p>Let\u2019s keep it professional \u2014 I\u2019m here to answer questions about Abhishek\u2019s work, projects and experience. Try \u201cWhat ML systems has he shipped?\u201d or \u201cHow do I get in touch?\u201d</p>'
         + '<button type="button" class="ask-reset" id="askReset">\u21bb Ask another</button></div>';
     }
 
     let warming = false, warmed = false, busy = false;
-    const MIN_LOAD_MS = 3000;
+    const MIN_LOAD_MS = 1400;
+    function setLoadTxt(t) { if (loadTxt) loadTxt.textContent = t; if (modeEl) modeEl.textContent = t; }
     async function warm() {
       if (warming || warmed) return;
       warming = true;
       const t0 = Date.now();
       if (loadEl) loadEl.hidden = false;
-      if (loadBar) loadBar.style.width = '8%';
-      if (modeEl) modeEl.textContent = 'loading AI model…';
 
-      await buildIndex(pct => {
-        if (loadBar) loadBar.style.width = Math.max(8, pct) + '%';
-        if (loadTxt) loadTxt.textContent = 'Loading the AI model… ' + pct + '%';
-        if (modeEl) modeEl.textContent = 'loading AI model… ' + pct + '%';
-      });
+      // Smooth, always-forward progress. Real multi-file byte progress is too
+      // jumpy to show, so we ease toward 95% while loading and snap to 100% the
+      // instant the model is actually ready.
+      let pct = 0, settled = false;
+      function paint() {
+        const v = Math.round(pct);
+        if (loadBar) loadBar.style.width = v + '%';
+        setLoadTxt('Loading the AI model\u2026 ' + v + '%  (first visit only)');
+      }
+      paint();
+      const crawl = setInterval(function () {
+        if (settled) return;
+        pct = Math.min(95, pct + Math.max(0.5, (95 - pct) * 0.035));
+        paint();
+      }, 180);
 
-      if (loadBar) loadBar.style.width = '100%';
+      await buildIndex();   // real load; sets mode = 'semantic' or 'keyword'
+
+      settled = true;
+      clearInterval(crawl);
+      pct = 100; paint();
+
       const elapsed = Date.now() - t0;
       if (elapsed < MIN_LOAD_MS) await new Promise(r => setTimeout(r, MIN_LOAD_MS - elapsed));
 
       if (loadEl) loadEl.hidden = true;
       warmed = true; warming = false;
       if (modeEl) modeEl.textContent = mode === 'semantic'
-        ? 'AI model ready · runs locally, nothing leaves your browser'
-        : 'keyword mode · nothing leaves your browser';
+        ? 'AI model ready \u00b7 runs locally, nothing leaves your browser'
+        : 'keyword mode \u00b7 nothing leaves your browser';
       const n = document.getElementById('askNote');
       if (n) n.textContent = noteText();
     }
