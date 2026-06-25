@@ -2647,3 +2647,37 @@ button.kbd-hint:hover kbd {
     color: var(--signal);
     border-color: var(--signal-line);
 }
+
+.ask-loading {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin: .2rem 1.2rem .5rem;
+    padding: .55rem .8rem;
+    font-family: var(--mono);
+    font-size: .74rem;
+    color: var(--ink-2);
+    background: var(--inset);
+    border: 1px solid var(--line-2);
+    border-radius: 9px;
+}
+
+.ask-loading[hidden] {
+    display: none;
+}
+
+.ask-loadbar {
+    flex: 1;
+    height: 4px;
+    border-radius: 3px;
+    background: var(--line-2);
+    overflow: hidden;
+}
+
+.ask-loadbar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--signal);
+    transition: width .3s ease;
+}
