@@ -116,7 +116,7 @@
     if (hit('retail', 'ecommerce')) return pack(byTag('Retail Data Insight'));
     if (hit('finance', 'financial')) return pack(byTag('Financial Tracker'));
     if (hit('projects', 'project', 'built', 'build', 'shipped', 'systems', 'apps', 'portfolio', 'live', 'demos', 'made', 'created', 'what has he', 'what did he'))
-      return pack(byTag('Live work'), 'Ask about any one for details \u2014 e.g. \u201cTell me about PhishGuard\u201d or \u201cthe churn model\u201d.');
+      return pack(byTag('Live work'), 'Ask about any one for details - e.g. \u201cTell me about PhishGuard\u201d or \u201cthe churn model\u201d.');
     if (hit('skill', 'skills', 'stack', 'tech', 'tools', 'technologies', 'good at', 'expertise', 'languages', 'know', 'frameworks'))
       return pack(byTag('ML stack', 'MLOps stack', 'Data stack'));
     if (hit('experience', 'career', 'background', 'work history', 'job', 'jobs', 'worked', 'company', 'promotion', 'promotions', 'years', 'exl'))
@@ -135,7 +135,7 @@
     if (intent) return intent;
     const top = hits[0];
     if (!top || top.s < 0.16)
-      return { text: "I don't have that specific detail in the portfolio. I can tell you about his ML/MLOps stack, the projects he's shipped (PhishGuard, churn, the performance analyzer, thunderstorm forecasting), his experience at EXL, his education, what roles he's after or how to reach him \u2014 try one of those.", srcs: [] };
+      return { text: "I don't have that specific detail in the portfolio. I can tell you about his ML/MLOps stack, the projects he's shipped (PhishGuard, churn, the performance analyzer, thunderstorm forecasting), his experience at EXL, his education, what roles he's after or how to reach him - try one of those.", srcs: [] };
     const parts = [top.c.text];
     if (hits[1] && hits[1].s > top.s * 0.72 && hits[1].c.tag !== top.c.tag) parts.push(hits[1].c.text);
     const seen = new Set(), srcs = [];

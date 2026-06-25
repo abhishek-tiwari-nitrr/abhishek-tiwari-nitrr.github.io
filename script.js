@@ -1,19 +1,19 @@
-async function cachedJSON(url, key, hours) {
-  try {
-    const c = JSON.parse(localStorage.getItem(key) || 'null');
-    if (c && Date.now() - c.t < hours * 3600000) return c.d;
-  } catch (e) {}
-  const d = await fetch(url).then(r => r.json());
-  try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d })); } catch (e) {}
-  return d;
+async function cachedJSON(url, key, minutes) {
+    try {
+        const c = JSON.parse(localStorage.getItem(key) || 'null');
+        if (c && Date.now() - c.t < minutes * 60000) return c.d;
+    } catch (e) { }
+    const d = await fetch(url).then(r => r.json());
+    try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d })); } catch (e) { }
+    return d;
 }
-(function() {
+(function () {
     "use strict";
     var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var $ = function(s, r) {
+    var $ = function (s, r) {
         return (r || document).querySelector(s);
     };
-    var $$ = function(s, r) {
+    var $$ = function (s, r) {
         return Array.prototype.slice.call((r || document).querySelectorAll(s));
     };
 
@@ -22,7 +22,7 @@ async function cachedJSON(url, key, hours) {
     var isApple = /Mac|iPhone|iPad|iPod/i.test(navPlat);
     var coarse = window.matchMedia('(pointer: coarse)').matches && !window.matchMedia('(pointer: fine)').matches;
     var MOD = isApple ? '\u2318' : 'Ctrl';
-    (function() {
+    (function () {
         var kKey = $('#kKey');
         if (kKey) kKey.textContent = isApple ? '\u2318K' : 'Ctrl K';
         var hint = $('#paletteHint');
@@ -39,11 +39,11 @@ async function cachedJSON(url, key, hours) {
 
     /* one-time nudge toward the command menu */
     if (!RM) {
-        setTimeout(function() {
+        setTimeout(function () {
             var c = $('#openCmd');
             if (!c) return;
             c.classList.add('nudge');
-            setTimeout(function() {
+            setTimeout(function () {
                 c.classList.remove('nudge');
             }, 2400);
         }, 1600);
@@ -51,7 +51,7 @@ async function cachedJSON(url, key, hours) {
 
     /* top bar shadow */
     var topbar = $('#topbar');
-    var onBar = function() {
+    var onBar = function () {
         topbar.classList.toggle('stuck', window.scrollY > 8);
     };
     window.addEventListener('scroll', onBar, {
@@ -60,7 +60,7 @@ async function cachedJSON(url, key, hours) {
     onBar();
 
     /* theme toggle (in-memory; honours OS at load) */
-    $('#themeToggle').addEventListener('click', function() {
+    $('#themeToggle').addEventListener('click', function () {
         var cur = document.documentElement.getAttribute('data-theme');
         document.documentElement.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
     });
@@ -73,7 +73,7 @@ async function cachedJSON(url, key, hours) {
             behavior: RM ? 'auto' : 'smooth',
             block: 'start'
         });
-        setTimeout(function() {
+        setTimeout(function () {
             try {
                 el.focus({
                     preventScroll: true
@@ -83,8 +83,8 @@ async function cachedJSON(url, key, hours) {
             }
         }, RM ? 0 : 420);
     }
-    $$('a[href^="#"]').forEach(function(a) {
-        a.addEventListener('click', function(e) {
+    $$('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
             var id = a.getAttribute('href').slice(1);
             if (document.getElementById(id)) {
                 e.preventDefault();
@@ -97,14 +97,14 @@ async function cachedJSON(url, key, hours) {
     /* index rail: scroll-spy + progress spine */
     var railLinks = $$('.rail a'),
         railMap = {};
-    railLinks.forEach(function(a) {
+    railLinks.forEach(function (a) {
         railMap[a.dataset.rail] = a;
     });
     var ids = ['masthead', 'overview', 'stack', 'experience', 'work', 'recognition', 'contact'];
-    var spy = new IntersectionObserver(function(entries) {
-        entries.forEach(function(en) {
+    var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
             if (en.isIntersecting) {
-                railLinks.forEach(function(a) {
+                railLinks.forEach(function (a) {
                     a.classList.remove('active');
                 });
                 if (railMap[en.target.id]) railMap[en.target.id].classList.add('active');
@@ -114,7 +114,7 @@ async function cachedJSON(url, key, hours) {
         rootMargin: '-45% 0px -50% 0px',
         threshold: 0
     });
-    ids.forEach(function(id) {
+    ids.forEach(function (id) {
         var el = document.getElementById(id);
         if (el) spy.observe(el);
     });
@@ -130,10 +130,10 @@ async function cachedJSON(url, key, hours) {
         if (scrollbar) scrollbar.style.transform = 'scaleX(' + frac + ')';
         if (rail.offsetParent !== null) railFill.style.height = (rail.clientHeight * frac) + 'px';
     }
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         if (!spineTick) {
             spineTick = true;
-            requestAnimationFrame(function() {
+            requestAnimationFrame(function () {
                 updateSpine();
                 spineTick = false;
             });
@@ -146,8 +146,8 @@ async function cachedJSON(url, key, hours) {
 
     /* reveal on scroll */
     if (!RM) {
-        var rev = new IntersectionObserver(function(entries) {
-            entries.forEach(function(en) {
+        var rev = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
                 if (en.isIntersecting) {
                     en.target.classList.add('in');
                     rev.unobserve(en.target);
@@ -157,14 +157,14 @@ async function cachedJSON(url, key, hours) {
             threshold: 0.12,
             rootMargin: '0px 0px -8% 0px'
         });
-        $$('.reveal').forEach(function(el, i) {
+        $$('.reveal').forEach(function (el, i) {
             el.style.setProperty('--i', i % 6);
             rev.observe(el);
         });
     }
 
     /* count-up numeric project metrics when a figure scrolls into view */
-    (function() {
+    (function () {
         var numRe = /^(\s*\u20B9?)(\d[\d,]*(?:\.\d+)?)(.*)$/;
 
         function fmt(v, dec, comma) {
@@ -210,8 +210,8 @@ async function cachedJSON(url, key, hours) {
             $$('.fig').forEach(fire);
             return;
         }
-        var o = new IntersectionObserver(function(ents) {
-            ents.forEach(function(en) {
+        var o = new IntersectionObserver(function (ents) {
+            ents.forEach(function (en) {
                 if (en.isIntersecting) {
                     fire(en.target);
                     o.unobserve(en.target);
@@ -220,17 +220,17 @@ async function cachedJSON(url, key, hours) {
         }, {
             threshold: 0.25
         });
-        $$('.fig').forEach(function(f) {
+        $$('.fig').forEach(function (f) {
             o.observe(f);
         });
     })();
 
     /* fit each white section heading to a single line (responsive) */
-    (function() {
+    (function () {
         var CAP = 44;
 
         function fit() {
-            $$('.h-sec').forEach(function(h) {
+            $$('.h-sec').forEach(function (h) {
                 h.style.whiteSpace = 'nowrap';
                 h.style.fontSize = CAP + 'px';
                 var avail = h.clientWidth,
@@ -241,16 +241,16 @@ async function cachedJSON(url, key, hours) {
         fit();
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
         var rt;
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
             clearTimeout(rt);
             rt = setTimeout(fit, 150);
         });
     })();
 
     /* project notes expand/collapse */
-    $$('.notes-toggle').forEach(function(btn) {
+    $$('.notes-toggle').forEach(function (btn) {
         var panel = document.getElementById(btn.getAttribute('aria-controls'));
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             var open = btn.getAttribute('aria-expanded') === 'true';
             btn.setAttribute('aria-expanded', String(!open));
             panel.style.maxHeight = open ? '0px' : (panel.firstElementChild.offsetHeight + 8) + 'px';
@@ -259,12 +259,12 @@ async function cachedJSON(url, key, hours) {
 
     /* back to top */
     var backTop = document.getElementById('backTop');
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         backTop.classList.toggle('show', window.scrollY > 400);
     }, {
         passive: true
     });
-    backTop.addEventListener('click', function() {
+    backTop.addEventListener('click', function () {
         window.scrollTo({
             top: 0,
             behavior: RM ? 'auto' : 'smooth'
@@ -276,14 +276,14 @@ async function cachedJSON(url, key, hours) {
 
     function copyEmail() {
         var st = $('#copyState');
-        var done = function() {
+        var done = function () {
             st.textContent = '✓ copied to clipboard';
-            setTimeout(function() {
+            setTimeout(function () {
                 st.textContent = 'click to copy';
             }, 2200);
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(EMAIL).then(done).catch(function() {
+            navigator.clipboard.writeText(EMAIL).then(done).catch(function () {
                 st.textContent = EMAIL;
             });
         } else {
@@ -303,7 +303,7 @@ async function cachedJSON(url, key, hours) {
     $('#emailCopy').addEventListener('click', copyEmail);
 
     /* contact form (FormSubmit AJAX) */
-    $('#contactForm').addEventListener('submit', function(e) {
+    $('#contactForm').addEventListener('submit', function (e) {
         e.preventDefault();
         var f = e.target,
             btn = $('#cfSend'),
@@ -339,15 +339,15 @@ async function cachedJSON(url, key, hours) {
                 _template: 'table',
                 _captcha: 'true'
             })
-        }).then(function(r) {
+        }).then(function (r) {
             if (!r.ok) throw new Error('http ' + r.status);
             st.textContent = "✓ sent — I'll get back to you soon.";
             st.classList.add('ok');
             f.reset();
-        }).catch(function() {
+        }).catch(function () {
             st.textContent = "> couldn't send right now — email me directly instead.";
             st.classList.add('err');
-        }).then(function() {
+        }).then(function () {
             btn.disabled = false;
         });
     });
@@ -371,30 +371,24 @@ async function cachedJSON(url, key, hours) {
         requestAnimationFrame(step);
     }
     var USER = 'abhishek-tiwari-nitrr';
-    fetch('https://api.github.com/users/' + USER).then(function(r) {
-            if (!r.ok) throw 0;
-            return r.json();
-        })
-        .then(function(d) {
+    cachedJSON('https://api.github.com/users/' + USER, 'gh-user', 5)
+        .then(function (d) {
             settle($('#ghRepos'), d.public_repos);
-        }).catch(function() {
+        }).catch(function () {
             settle($('#ghRepos'), 34);
         });
-    fetch('https://github-contributions-api.jogruber.de/v4/' + USER).then(function(r) {
-            if (!r.ok) throw 0;
-            return r.json();
-        })
-        .then(function(d) {
-            var t = Object.values(d.total).reduce(function(a, b) {
+    cachedJSON('https://github-contributions-api.jogruber.de/v4/' + USER, 'gh-contrib', 5)
+        .then(function (d) {
+            var t = Object.values(d.total).reduce(function (a, b) {
                 return a + b;
             }, 0);
             settle($('#ghContrib'), t);
         })
-        .catch(function() {
+        .catch(function () {
             settle($('#ghContrib'), 850);
         });
 
-    (function() {
+    (function () {
         var statusEl = document.getElementById('trainStatus'),
             statusTxt = document.getElementById('statusTxt');
         var epochEl = document.getElementById('epochVal'),
@@ -416,7 +410,7 @@ async function cachedJSON(url, key, hours) {
                     norm = (v - lo) / (hi - lo);
                 pts.push([X0 + (X1 - X0) * t, YB - norm * (YB - YT), v]);
             }
-            el.setAttribute('d', 'M' + pts.map(function(p) {
+            el.setAttribute('d', 'M' + pts.map(function (p) {
                 return p[0].toFixed(1) + ' ' + p[1].toFixed(1);
             }).join(' L'));
             var len = el.getTotalLength();
@@ -429,7 +423,7 @@ async function cachedJSON(url, key, hours) {
         }
 
         function dotter(curve, dot, ring) {
-            return function(end) {
+            return function (end) {
                 if (!curve) return;
                 var pt = curve.el.getPointAtLength(curve.len * end);
                 if (dot) {
@@ -518,7 +512,7 @@ async function cachedJSON(url, key, hours) {
             requestAnimationFrame(step);
         }
         var replayBtn = document.getElementById('replayRun');
-        if (replayBtn) replayBtn.addEventListener('click', function() {
+        if (replayBtn) replayBtn.addEventListener('click', function () {
             if (RM) {
                 finish();
                 return;
@@ -532,7 +526,7 @@ async function cachedJSON(url, key, hours) {
         }
         reset();
         if ('IntersectionObserver' in window) {
-            var io = new IntersectionObserver(function(ents) {
+            var io = new IntersectionObserver(function (ents) {
                 if (ents[0].isIntersecting) {
                     io.disconnect();
                     setTimeout(run, 450);
@@ -557,7 +551,7 @@ async function cachedJSON(url, key, hours) {
                 VH = 220,
                 PX0 = 44,
                 PX1 = 340;
-            svg.addEventListener('pointermove', function(ev) {
+            svg.addEventListener('pointermove', function (ev) {
                 if (!ready) return;
                 var rect = svg.getBoundingClientRect(),
                     prect = plot.getBoundingClientRect();
@@ -579,13 +573,13 @@ async function cachedJSON(url, key, hours) {
                 tip.style.top = ((rect.top - prect.top) + Math.min(lp[1], ap ? ap[1] : lp[1]) / VH * rect.height) + 'px';
                 plot.classList.add('inspect');
             });
-            svg.addEventListener('pointerleave', function() {
+            svg.addEventListener('pointerleave', function () {
                 plot.classList.remove('inspect');
             });
         }
     })();
 
-    (function() {
+    (function () {
         if (RM) return;
         var glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&<>/*0123456789';
         var spans = $$('#heroName [data-decode]');
@@ -596,7 +590,7 @@ async function cachedJSON(url, key, hours) {
         function frame(now) {
             var p = Math.min(1, (now - start) / dur),
                 done = true;
-            spans.forEach(function(sp) {
+            spans.forEach(function (sp) {
                 var target = sp.getAttribute('data-decode'),
                     out = '',
                     reveal = Math.floor(p * target.length + 0.0001);
@@ -610,7 +604,7 @@ async function cachedJSON(url, key, hours) {
                 sp.textContent = out;
             });
             if (p < 1 || !done) requestAnimationFrame(frame);
-            else spans.forEach(function(sp) {
+            else spans.forEach(function (sp) {
                 sp.textContent = sp.getAttribute('data-decode');
             });
         }
@@ -670,7 +664,7 @@ async function cachedJSON(url, key, hours) {
             cv: cv,
             hint: hint,
             prevOverflow: prevOverflow,
-            stop: function() {
+            stop: function () {
                 cancelAnimationFrame(raf);
                 window.removeEventListener('resize', onResize);
             }
@@ -685,9 +679,9 @@ async function cachedJSON(url, key, hours) {
         document.body.style.overflow = mtx.prevOverflow || '';
         mtx = null;
     }
-    (function() {
+    (function () {
         var buf = '';
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && mtx) {
                 exitMatrix();
                 return;
@@ -707,7 +701,7 @@ async function cachedJSON(url, key, hours) {
     })();
 
     /* COMMAND PALETTE */
-    (function() {
+    (function () {
         var wrap = document.getElementById('cmdkWrap'),
             input = document.getElementById('cmdkInput'),
             list = document.getElementById('cmdkList'),
@@ -720,193 +714,193 @@ async function cachedJSON(url, key, hours) {
             window.open(url, '_blank', 'noopener');
         }
         var items = [{
-                g: 'Navigate',
-                ic: '§',
-                lbl: 'Overview',
-                meta: '01',
-                kw: 'about intro who',
-                run: function() {
-                    goTo('overview');
-                }
-            },
-            {
-                g: 'Navigate',
-                ic: '§',
-                lbl: 'Stack',
-                meta: '02',
-                kw: 'skills tools python mlops methods',
-                run: function() {
-                    goTo('stack');
-                }
-            },
-            {
-                g: 'Navigate',
-                ic: '§',
-                lbl: 'Experience',
-                meta: '03',
-                kw: 'work history exl jobs career',
-                run: function() {
-                    goTo('experience');
-                }
-            },
-            {
-                g: 'Navigate',
-                ic: '§',
-                lbl: 'Selected work',
-                meta: '04',
-                kw: 'projects builds figures portfolio',
-                run: function() {
-                    goTo('work');
-                }
-            },
-            {
-                g: 'Navigate',
-                ic: '§',
-                lbl: 'Recognition',
-                meta: '05',
-                kw: 'awards certifications honours kaggle gate',
-                run: function() {
-                    goTo('recognition');
-                }
-            },
-            {
-                g: 'Navigate',
-                ic: '§',
-                lbl: 'Contact',
-                meta: '06',
-                kw: 'email message hire reach',
-                run: function() {
-                    goTo('contact');
-                }
-            },
-            {
-                g: 'Actions',
-                ic: '✎',
-                lbl: 'Copy email address',
-                meta: 'clipboard',
-                kw: 'mail gmail copy contact',
-                run: function() {
-                    goTo('contact');
-                    copyEmail();
-                }
-            },
-            {
-                g: 'Actions',
-                ic: '↗',
-                lbl: 'Open résumé (PDF)',
-                meta: 'drive',
-                kw: 'cv resume download',
-                run: function() {
-                    ext('https://drive.google.com/file/d/1tfrmLjwJ9vj1Opdlo-NNkDRwArTj2Nsd/view?usp=sharing');
-                }
-            },
-            {
-                g: 'Actions',
-                ic: '◐',
-                lbl: 'Toggle light / dark theme',
-                meta: 'theme',
-                kw: 'dark light mode colour color',
-                run: function() {
-                    document.getElementById('themeToggle').click();
-                }
-            },
-            {
-                g: 'Projects',
-                ic: '⎇',
-                lbl: 'PhishGuard — live app',
-                meta: 'streamlit',
-                kw: 'phishing mlops project',
-                run: function() {
-                    ext('https://abhishek-tiwari-nitrr-phishguard.streamlit.app/');
-                }
-            },
-            {
-                g: 'Projects',
-                ic: '⎇',
-                lbl: 'System Performance Analyzer — live',
-                meta: 'streamlit',
-                kw: 'monitoring anomaly project',
-                run: function() {
-                    ext('https://abhishek-tiwari-nitrr-system-performance-analyzer.streamlit.app/');
-                }
-            },
-            {
-                g: 'Projects',
-                ic: '⎇',
-                lbl: 'Telco Churn — live app',
-                meta: 'streamlit',
-                kw: 'churn prediction project',
-                run: function() {
-                    ext('https://abhishek-tiwari-nitrr-churn-prediction.streamlit.app/');
-                }
-            },
-            {
-                g: 'Projects',
-                ic: '⎇',
-                lbl: 'Thunderstorm Forecasting — live',
-                meta: 'streamlit',
-                kw: 'weather forecast project',
-                run: function() {
-                    ext('https://abhishek-tiwari-nitrr-thunderstorm-forecasting.streamlit.app/');
-                }
-            },
-            {
-                g: 'Links',
-                ic: '↗',
-                lbl: 'GitHub',
-                meta: 'profile',
-                kw: 'code repos git',
-                run: function() {
-                    ext('https://github.com/abhishek-tiwari-nitrr');
-                }
-            },
-            {
-                g: 'Links',
-                ic: '↗',
-                lbl: 'LinkedIn',
-                meta: 'profile',
-                kw: 'connect professional',
-                run: function() {
-                    ext('https://linkedin.com/in/abhishek-tiwari-nitrr');
-                }
-            },
-            {
-                g: 'Links',
-                ic: '↗',
-                lbl: 'Kaggle',
-                meta: 'profile',
-                kw: 'competitions data',
-                run: function() {
-                    ext('https://kaggle.com/abhishek20182');
-                }
-            },
-            {
-                g: 'Links',
-                ic: '↗',
-                lbl: 'Medium',
-                meta: 'profile',
-                kw: 'blog writing articles',
-                run: function() {
-                    ext('https://medium.com/@abhishek-tiwari-nitrr');
-                }
-            },
-            {
-                g: 'Fun',
-                ic: '▒',
-                lbl: 'Enter the Matrix',
-                meta: 'easter egg',
-                kw: 'matrix rain neo green hack code red pill',
-                run: enterMatrix
+            g: 'Navigate',
+            ic: '§',
+            lbl: 'Overview',
+            meta: '01',
+            kw: 'about intro who',
+            run: function () {
+                goTo('overview');
             }
+        },
+        {
+            g: 'Navigate',
+            ic: '§',
+            lbl: 'Stack',
+            meta: '02',
+            kw: 'skills tools python mlops methods',
+            run: function () {
+                goTo('stack');
+            }
+        },
+        {
+            g: 'Navigate',
+            ic: '§',
+            lbl: 'Experience',
+            meta: '03',
+            kw: 'work history exl jobs career',
+            run: function () {
+                goTo('experience');
+            }
+        },
+        {
+            g: 'Navigate',
+            ic: '§',
+            lbl: 'Selected work',
+            meta: '04',
+            kw: 'projects builds figures portfolio',
+            run: function () {
+                goTo('work');
+            }
+        },
+        {
+            g: 'Navigate',
+            ic: '§',
+            lbl: 'Recognition',
+            meta: '05',
+            kw: 'awards certifications honours kaggle gate',
+            run: function () {
+                goTo('recognition');
+            }
+        },
+        {
+            g: 'Navigate',
+            ic: '§',
+            lbl: 'Contact',
+            meta: '06',
+            kw: 'email message hire reach',
+            run: function () {
+                goTo('contact');
+            }
+        },
+        {
+            g: 'Actions',
+            ic: '✎',
+            lbl: 'Copy email address',
+            meta: 'clipboard',
+            kw: 'mail gmail copy contact',
+            run: function () {
+                goTo('contact');
+                copyEmail();
+            }
+        },
+        {
+            g: 'Actions',
+            ic: '↗',
+            lbl: 'Open résumé (PDF)',
+            meta: 'drive',
+            kw: 'cv resume download',
+            run: function () {
+                ext('https://drive.google.com/file/d/1tfrmLjwJ9vj1Opdlo-NNkDRwArTj2Nsd/view?usp=sharing');
+            }
+        },
+        {
+            g: 'Actions',
+            ic: '◐',
+            lbl: 'Toggle light / dark theme',
+            meta: 'theme',
+            kw: 'dark light mode colour color',
+            run: function () {
+                document.getElementById('themeToggle').click();
+            }
+        },
+        {
+            g: 'Projects',
+            ic: '⎇',
+            lbl: 'PhishGuard — live app',
+            meta: 'streamlit',
+            kw: 'phishing mlops project',
+            run: function () {
+                ext('https://abhishek-tiwari-nitrr-phishguard.streamlit.app/');
+            }
+        },
+        {
+            g: 'Projects',
+            ic: '⎇',
+            lbl: 'System Performance Analyzer — live',
+            meta: 'streamlit',
+            kw: 'monitoring anomaly project',
+            run: function () {
+                ext('https://abhishek-tiwari-nitrr-system-performance-analyzer.streamlit.app/');
+            }
+        },
+        {
+            g: 'Projects',
+            ic: '⎇',
+            lbl: 'Telco Churn — live app',
+            meta: 'streamlit',
+            kw: 'churn prediction project',
+            run: function () {
+                ext('https://abhishek-tiwari-nitrr-churn-prediction.streamlit.app/');
+            }
+        },
+        {
+            g: 'Projects',
+            ic: '⎇',
+            lbl: 'Thunderstorm Forecasting — live',
+            meta: 'streamlit',
+            kw: 'weather forecast project',
+            run: function () {
+                ext('https://abhishek-tiwari-nitrr-thunderstorm-forecasting.streamlit.app/');
+            }
+        },
+        {
+            g: 'Links',
+            ic: '↗',
+            lbl: 'GitHub',
+            meta: 'profile',
+            kw: 'code repos git',
+            run: function () {
+                ext('https://github.com/abhishek-tiwari-nitrr');
+            }
+        },
+        {
+            g: 'Links',
+            ic: '↗',
+            lbl: 'LinkedIn',
+            meta: 'profile',
+            kw: 'connect professional',
+            run: function () {
+                ext('https://linkedin.com/in/abhishek-tiwari-nitrr');
+            }
+        },
+        {
+            g: 'Links',
+            ic: '↗',
+            lbl: 'Kaggle',
+            meta: 'profile',
+            kw: 'competitions data',
+            run: function () {
+                ext('https://kaggle.com/abhishek20182');
+            }
+        },
+        {
+            g: 'Links',
+            ic: '↗',
+            lbl: 'Medium',
+            meta: 'profile',
+            kw: 'blog writing articles',
+            run: function () {
+                ext('https://medium.com/@abhishek-tiwari-nitrr');
+            }
+        },
+        {
+            g: 'Fun',
+            ic: '▒',
+            lbl: 'Enter the Matrix',
+            meta: 'easter egg',
+            kw: 'matrix rain neo green hack code red pill',
+            run: enterMatrix
+        }
         ];
 
         function render(q) {
             q = (q || '').trim().toLowerCase();
             var toks = q ? q.split(/\s+/) : [];
-            visible = items.filter(function(it) {
+            visible = items.filter(function (it) {
                 if (!toks.length) return true;
                 var hay = (it.lbl + ' ' + it.g + ' ' + it.kw + ' ' + it.meta).toLowerCase();
-                return toks.every(function(t) {
+                return toks.every(function (t) {
                     return hay.indexOf(t) !== -1;
                 });
             });
@@ -919,7 +913,7 @@ async function cachedJSON(url, key, hours) {
                 return;
             }
             var lastG = null;
-            visible.forEach(function(it, i) {
+            visible.forEach(function (it, i) {
                 if (it.g !== lastG) {
                     var gh = document.createElement('div');
                     gh.className = 'cmdk-group';
@@ -935,10 +929,10 @@ async function cachedJSON(url, key, hours) {
                 row.querySelector('.ic').textContent = it.ic;
                 row.querySelector('.lbl').textContent = it.lbl;
                 row.querySelector('.meta').textContent = it.meta;
-                row.addEventListener('mousemove', function() {
+                row.addEventListener('mousemove', function () {
                     setActive(i);
                 });
-                row.addEventListener('mousedown', function(e) {
+                row.addEventListener('mousedown', function (e) {
                     e.preventDefault();
                     choose(i);
                 });
@@ -955,7 +949,7 @@ async function cachedJSON(url, key, hours) {
             var r = rows();
             if (!r.length) return;
             active = (i + r.length) % r.length;
-            r.forEach(function(el, k) {
+            r.forEach(function (el, k) {
                 el.setAttribute('aria-selected', String(k === active));
             });
             input.setAttribute('aria-activedescendant', 'cmd-' + active);
@@ -1025,7 +1019,7 @@ async function cachedJSON(url, key, hours) {
             input.value = '';
             render('');
             startPH();
-            setTimeout(function() {
+            setTimeout(function () {
                 input.focus();
             }, 10);
         }
@@ -1043,7 +1037,7 @@ async function cachedJSON(url, key, hours) {
         var phEl = document.getElementById('paletteHint');
         if (phEl) phEl.addEventListener('click', open);
         backdrop.addEventListener('click', close);
-        input.addEventListener('input', function() {
+        input.addEventListener('input', function () {
             if (input.value) {
                 stopPH();
                 input.placeholder = '';
@@ -1052,7 +1046,7 @@ async function cachedJSON(url, key, hours) {
             }
             render(input.value);
         });
-        input.addEventListener('keydown', function(e) {
+        input.addEventListener('keydown', function (e) {
             if (e.key === 'ArrowDown') {
                 e.preventDefault();
                 setActive(active + 1);
@@ -1067,7 +1061,7 @@ async function cachedJSON(url, key, hours) {
                 close();
             }
         });
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
                 e.preventDefault();
                 isOpen() ? close() : open();
