@@ -189,7 +189,7 @@
     });
 
     let open = false, lastFocus = null;
-    const HELLO = `<p class="ask-hello">Ask a question about my work or pick one below.
+    const HELLO = `<p class="ask-hello">Ask a question about my work or pick one above.
     <span class="ask-note">Instant search \u00b7 runs entirely in your browser, works offline.</span></p>`;
     function reset() { input.value = ''; setBody(HELLO); input.focus(); }
     function show() { open = true; modal.hidden = false; lastFocus = document.activeElement; document.body.style.overflow = 'hidden'; reset(); setTimeout(() => input.focus(), 30); }
