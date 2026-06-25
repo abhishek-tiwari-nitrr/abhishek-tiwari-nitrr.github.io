@@ -25,7 +25,14 @@
     { tag: 'Recognition', id: 'recognition', text: 'Honours include Global rank #8 in HR Analytics (Analytics Vidhya, 2023), GATE 2025 qualified at AIR 155, the 4x Super Squad Award at EXL (2024-25), Global rank #67 in a Power Plant AI challenge, an AWS Machine Learning Scholarship and a Bertelsmann Technology Scholarship from Udacity, two Kaggle bronze notebook medals and 1st prize at Vigyaan 19.' },
     { tag: 'Certifications', id: 'recognition', text: 'Certifications: Appian Certified Associate Developer valid through May 2027, Machine Learning by Stanford and Andrew Ng on Coursera, EXL Hyperautomation training and three Udacity Nanodegrees in Data Analytics, AI with Python and Predictive Analytics.' },
     { tag: 'Contact', id: 'contact', text: 'You can reach Abhishek by email at abhishek.tiwari.nitrr@gmail.com or through the contact form on this site. He is on GitHub as abhishek-tiwari-nitrr, LinkedIn at in/abhishek-tiwari-nitrr, Kaggle as abhishek20182 and Medium.' },
-    { tag: 'Resume', id: 'contact', text: 'His resume is available as a PDF, linked from the top of the page and from the contact section.' }
+    { tag: 'Resume', id: 'contact', text: 'His resume is available as a PDF, linked from the top of the page and from the contact section.' },
+    { tag: 'Strengths', id: 'overview', text: 'What sets him apart: he ships production ML, not just notebooks - four live systems with REST or Streamlit serving, CI/CD, drift monitoring and test suites. Depth over breadth, with nearly four years and two promotions at one company, the 4x Super Squad Award, and a metrics-first habit of quoting ROC-AUC, recall, ROI and drift instead of vague claims.' },
+    { tag: 'Impact', id: 'work', text: 'Business impact in numbers: the Telco churn model protects about 19.4 lakh rupees of net ROI per cycle; an Agentic-AI short-term-disability claims POC improved productivity 15%; a Digital Quality Assurance MVP cut delivery time 10%. He frames models by the decision and the money they move, not accuracy alone.' },
+    { tag: 'GenAI experience', id: 'experience', text: 'Generative and Agentic AI experience: he built 15+ GenAI and Agentic-AI demos at EXL, led an Agentic-AI proof-of-concept for short-term-disability claims on Appian as an early-access collaborator with the Appian product team, and is extending toward LLM systems by learning LangChain and RAG.' },
+    { tag: 'MLOps depth', id: 'work', text: 'MLOps in practice, not just tools: PhishGuard runs a six-stage pipeline with KS-test data-drift detection and an F1-gated promotion step that only ships a model beating production by at least 2 percent; runs are tracked in MLflow and DagsHub; serving is FastAPI plus Streamlit; CI is GitHub Actions with pytest; packaging is Docker. That deployment-and-monitoring through-line repeats across his live projects.' },
+    { tag: 'Availability', id: 'contact', text: 'He is currently a Lead Assistant Manager at EXL Service, based in Noida, India and working remote-friendly, and is open to ML Engineer, Applied AI and Data Scientist roles. The fastest way to discuss specifics, timing or location is email or the contact form on this site.' },
+    { tag: 'Open source', id: 'work', text: 'Everything is inspectable: all six project repositories are public on GitHub at github.com/abhishek-tiwari-nitrr, and four run live with public Streamlit apps and YouTube walkthrough demos, so the code, the pipelines and the running products can all be opened and checked.' },
+    { tag: 'Strongest project', id: 'work', text: 'Where to start if you only look at one: PhishGuard is the fullest MLOps story - drift detection, gated promotion, REST serving and CI/CD - while Telco Customer Churn is the strongest modelling-and-business story, with ROC-AUC 0.8480 on 5-fold cross-validation, recall up 41.6 percent with SMOTE, about 19.4 lakh rupees ROI and SHAP explainability.' }
   ];
 
   const SUGGESTIONS = [
@@ -65,7 +72,20 @@
     performance: 'system analyzer telemetry monitoring anomaly', thunderstorm: 'weather forecasting atmospheric',
     looking: 'open seeking want available roles hire', open: 'looking seeking available roles',
     python: 'core ml programming language', sql: 'data database', who: 'profile abhishek about',
-    about: 'profile who abhishek', best: 'strongest top', strongest: 'best top', good: 'skills expert'
+    about: 'profile who abhishek', best: 'strongest top', strongest: 'best top', good: 'skills expert',
+    impact: 'roi business value money results outcome outcomes', roi: 'impact business value money return',
+    business: 'impact roi value', value: 'impact roi business worth',
+    strength: 'strengths differentiator standout apart why hire special', strengths: 'strength differentiator standout apart why',
+    why: 'strengths differentiator standout reason hire', special: 'strengths standout unique',
+    genai: 'generative agentic llm demos gpt', generative: 'genai agentic llm',
+    agentic: 'genai generative agents llm', gpt: 'genai generative llm chatbot',
+    availability: 'available notice location remote relocate join onsite hybrid', available: 'availability open remote join',
+    remote: 'availability location onsite hybrid work', location: 'availability remote based noida india where',
+    based: 'location where noida india remote', notice: 'availability join when period', relocate: 'availability relocation move location',
+    repo: 'github repository repositories open source code', repository: 'github repo open source code',
+    repositories: 'github repo open source code', codebase: 'code github repository open source',
+    deployment: 'mlops pipeline serving deploy production', deploy: 'deployment mlops serving production',
+    drift: 'mlops monitoring pipeline production', pipeline: 'mlops deployment serving drift', production: 'mlops deployment serving live'
   };
   function expand(q) {
     const base = tokens(q); const out = new Set(base);
@@ -105,8 +125,18 @@
       return { text: "Hi! I'm Abhishek's portfolio assistant. Ask me about his ML and MLOps work, the projects he's shipped (PhishGuard, Telco churn, the system performance analyzer, thunderstorm forecasting), his experience at EXL, what roles he's after or how to reach him.", srcs: [] };
     if (hit('what can you', 'who are you', 'what do you do', 'help me', 'how does this'))
       return { text: "I answer questions about Abhishek from the content of this portfolio. Try: \u201cWhat ML systems has he shipped?\u201d, \u201cWhat's his MLOps stack?\u201d, \u201cTell me about the churn model\u201d, \u201cWhat is he looking for?\u201d or \u201cHow do I contact him?\u201d", srcs: [] };
+    if (hit('why hire', 'why should', 'stand out', 'stands out', 'set him apart', 'sets him apart', 'strength', 'strengths', 'differentiator', 'unique', 'special', 'what makes him', 'better than'))
+      return pack(byTag('Strengths', 'Impact'));
+    if (hit('impact', 'roi', 'business value', 'business impact', 'bottom line', 'return on', 'outcomes', 'how much value', 'money saved'))
+      return pack(byTag('Impact'));
+    if (hit('genai', 'gen ai', 'generative', 'agentic', 'llm', 'llms', 'gpt', 'language model', 'chatbot'))
+      return pack(byTag('GenAI experience', 'Learning'));
     if (hit('contact', 'reach', 'email', 'get in touch', 'connect', 'linkedin', 'github', 'how do i', 'how can i'))
       return pack(byTag('Contact', 'Resume'));
+    if (hit('available', 'availability', 'notice period', 'relocate', 'relocation', 'remote', 'remotely', 'remote work', 'work remotely', 'work from home', 'wfh', 'onsite', 'on site', 'hybrid', 'where is he based', 'where does he', 'based in', 'located'))
+      return pack(byTag('Availability'));
+    if (hit('open source', 'opensource', 'repo', 'repos', 'repository', 'repositories', 'source code', 'codebase', 'public code'))
+      return pack(byTag('Open source'));
     if (hit('looking', 'open to', 'seeking', 'available', 'what role', 'which role', 'kind of role', 'hiring', 'wants', 'want', 'after'))
       return pack(byTag('Open to'));
     if (hit('phishguard', 'phishing')) return pack(byTag('PhishGuard'));
@@ -115,8 +145,12 @@
     if (hit('thunderstorm', 'weather', 'forecast', 'forecasting')) return pack(byTag('Thunderstorm Forecasting'));
     if (hit('retail', 'ecommerce')) return pack(byTag('Retail Data Insight'));
     if (hit('finance', 'financial')) return pack(byTag('Financial Tracker'));
+    if (hit('strongest', 'best project', 'flagship', 'which project', 'top project', 'most proud', 'favourite', 'favorite', 'start with', 'one project'))
+      return pack(byTag('Strongest project'));
+    if (hit('deployment', 'deploy', 'pipeline', 'drift', 'ci cd', 'cicd', 'monitoring', 'serving', 'production', 'promotion'))
+      return pack(byTag('MLOps depth', 'MLOps stack'));
     if (hit('projects', 'project', 'built', 'build', 'shipped', 'systems', 'apps', 'portfolio', 'live', 'demos', 'made', 'created', 'what has he', 'what did he'))
-      return pack(byTag('Live work'), 'Ask about any one for details - e.g. \u201cTell me about PhishGuard\u201d or \u201cthe churn model\u201d.');
+      return pack(byTag('Live work'), 'Ask about any one for details \u2014 e.g. \u201cTell me about PhishGuard\u201d or \u201cthe churn model\u201d.');
     if (hit('skill', 'skills', 'stack', 'tech', 'tools', 'technologies', 'good at', 'expertise', 'languages', 'know', 'frameworks'))
       return pack(byTag('ML stack', 'MLOps stack', 'Data stack'));
     if (hit('experience', 'career', 'background', 'work history', 'job', 'jobs', 'worked', 'company', 'promotion', 'promotions', 'years', 'exl'))
