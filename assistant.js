@@ -168,7 +168,7 @@
       </div>
       <div class="ask-sugs" id="askSugs"></div>
       <div class="ask-body" id="askBody">
-        <p class="ask-hello">Ask a question about my work or pick one below.
+        <p class="ask-hello">Ask a question about my work or pick one above.
           <span class="ask-note">Instant search \u00b7 runs entirely in your browser, works offline.</span></p>
       </div>
       <div class="ask-foot"><span>keyword search \u00b7 nothing leaves your browser</span></div>
