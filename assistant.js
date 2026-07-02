@@ -339,7 +339,7 @@
     let idleT = null, nudgeT = null, hintI = 0;
     function armIdle() {
       clearTimeout(idleT);
-      idleT = setTimeout(petNudge, 30000);
+      idleT = setTimeout(petNudge, 6000);
     }
     function petNudge() {
       if (!pet || !open || busy ||
@@ -347,7 +347,7 @@
       if (bub) bub.textContent = input.value.trim() ? 'press ↵ to ask' : HINTS[hintI++ % HINTS.length];
       pet.classList.add('nudge');
       clearTimeout(nudgeT);
-      nudgeT = setTimeout(() => pet.classList.remove('nudge'), 4200);
+      nudgeT = setTimeout(() => pet.classList.remove('nudge'), 4000);
       armIdle();
     }
 
