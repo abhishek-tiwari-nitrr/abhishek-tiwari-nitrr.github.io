@@ -341,11 +341,11 @@ async function cachedJSON(url, key, minutes) {
             })
         }).then(function (r) {
             if (!r.ok) throw new Error('http ' + r.status);
-            st.textContent = "✓ sent — I'll get back to you soon.";
+            st.textContent = "✓ sent - I'll get back to you soon.";
             st.classList.add('ok');
             f.reset();
         }).catch(function () {
-            st.textContent = "> couldn't send right now — email me directly instead.";
+            st.textContent = "> couldn't send right now - email me directly instead.";
             st.classList.add('err');
         }).then(function () {
             btn.disabled = false;
@@ -481,7 +481,7 @@ async function cachedJSON(url, key, minutes) {
         }, {
             name: 'Data validation',
             img: '2.%20data_validation_lld.png',
-            txt: 'Schema and data-quality checks — nothing unvalidated reaches training.'
+            txt: 'Schema and data-quality checks - nothing unvalidated reaches training.'
         }, {
             name: 'Data transformation',
             img: '3.%20data_transformation_lld.png',
@@ -493,7 +493,7 @@ async function cachedJSON(url, key, minutes) {
         }, {
             name: 'Model evaluation',
             img: '5.%20model_evaluation_lld.png',
-            txt: 'KS-test data-drift report plus an F1 comparison against production — promotion needs a ≥2% improvement.'
+            txt: 'KS-test data-drift report plus an F1 comparison against production - promotion needs a ≥2% improvement.'
         }, {
             name: 'Model pusher',
             img: '6.%20model_pusher_lld.png',
@@ -541,7 +541,7 @@ async function cachedJSON(url, key, minutes) {
         });
     })();
 
-    /* PhishGuard inline live demo — embeds the deployed Streamlit app on first open */
+    /* PhishGuard inline live demo - embeds the deployed Streamlit app on first open */
     (function () {
         var btn = document.getElementById('pgDemoBtn'),
             box = document.getElementById('pgDemo'),
@@ -558,7 +558,7 @@ async function cachedJSON(url, key, minutes) {
                 var f = document.createElement('iframe');
                 f.className = 'demo-frame';
                 f.src = 'https://abhishek-tiwari-nitrr-phishguard.streamlit.app/?embed=true';
-                f.title = 'PhishGuard live demo — deployed Streamlit app';
+                f.title = 'PhishGuard live demo - deployed Streamlit app';
                 f.loading = 'lazy';
                 f.allow = 'clipboard-write';
                 body.appendChild(f);
@@ -663,8 +663,8 @@ async function cachedJSON(url, key, minutes) {
             document.getElementById('lossDotRing').classList.remove('pulsing');
             if (acc) document.getElementById('accDotRing').classList.remove('pulsing');
             epochEl.textContent = '0';
-            lossEl.textContent = '—';
-            if (acc) accEl.textContent = '—';
+            lossEl.textContent = '-';
+            if (acc) accEl.textContent = '-';
             ready = false;
             begun = false;
         }
@@ -1010,7 +1010,7 @@ async function cachedJSON(url, key, minutes) {
         {
             g: 'Projects',
             ic: '⎇',
-            lbl: 'PhishGuard — live app',
+            lbl: 'PhishGuard - live app',
             meta: 'streamlit',
             kw: 'phishing mlops project',
             run: function () {
@@ -1020,7 +1020,7 @@ async function cachedJSON(url, key, minutes) {
         {
             g: 'Projects',
             ic: '⎇',
-            lbl: 'System Performance Analyzer — live',
+            lbl: 'System Performance Analyzer - live',
             meta: 'streamlit',
             kw: 'monitoring anomaly project',
             run: function () {
@@ -1030,7 +1030,7 @@ async function cachedJSON(url, key, minutes) {
         {
             g: 'Projects',
             ic: '⎇',
-            lbl: 'Telco Churn — live app',
+            lbl: 'Telco Churn - live app',
             meta: 'streamlit',
             kw: 'churn prediction project',
             run: function () {
@@ -1040,7 +1040,7 @@ async function cachedJSON(url, key, minutes) {
         {
             g: 'Projects',
             ic: '⎇',
-            lbl: 'Thunderstorm Forecasting — live',
+            lbl: 'Thunderstorm Forecasting - live',
             meta: 'streamlit',
             kw: 'weather forecast project',
             run: function () {
