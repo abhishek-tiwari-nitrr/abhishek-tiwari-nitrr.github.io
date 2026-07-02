@@ -33,10 +33,10 @@
     { tag: 'Strengths', id: 'overview', text: 'What sets him apart: he ships production ML, not just notebooks - four live systems with REST or Streamlit serving, CI/CD, drift monitoring and test suites. Depth over breadth, with nearly four years and two promotions at one company, the 4x Super Squad Award, and a metrics-first habit of quoting ROC-AUC, recall, ROI and drift instead of vague claims.' },
     { tag: 'Impact', id: 'work', text: 'Business impact in numbers: the Telco churn model protects about 19.4 lakh rupees of net ROI per cycle; an Agentic-AI short-term-disability claims POC improved productivity 15%; a Digital Quality Assurance MVP cut delivery time 10%. He frames models by the decision and the money they move, not accuracy alone.' },
     { tag: 'GenAI experience', id: 'experience', text: 'Generative and Agentic AI experience: he built 15+ GenAI and Agentic-AI demos at EXL, led an Agentic-AI proof-of-concept for short-term-disability claims on Appian as an early-access collaborator with the Appian product team, and is extending toward LLM systems by learning LangChain and RAG.' },
-    { tag: 'MLOps depth', id: 'work', text: 'MLOps in practice, not just tools: PhishGuard runs a six-stage pipeline with KS-test data-drift detection and an F1-gated promotion step that only ships a model beating production by at least 2 percent; runs are tracked in MLflow and DagsHub; serving is FastAPI plus Streamlit; CI is GitHub Actions with pytest; packaging is Docker. That deployment-and-monitoring through-line repeats across his live projects.' },
     { tag: 'Availability', id: 'contact', text: 'He is currently a Lead Assistant Manager at EXL Service, based in Noida, India and working remote-friendly, and is open to ML Engineer, Applied AI and Data Scientist roles. The fastest way to discuss specifics, timing or location is email or the contact form on this site.' },
     { tag: 'Open source', id: 'work', text: 'Everything is inspectable: all six project repositories are public on GitHub at github.com/abhishek-tiwari-nitrr, and four run live with public Streamlit apps and YouTube walkthrough demos, so the code, the pipelines and the running products can all be opened and checked.' },
-    { tag: 'Strongest project', id: 'work', text: 'Where to start if you only look at one: PhishGuard is the fullest MLOps story - drift detection, gated promotion, REST serving and CI/CD - while Telco Customer Churn is the strongest modelling-and-business story, with ROC-AUC 0.8480 on 5-fold cross-validation, recall up 41.6 percent with SMOTE, about 19.4 lakh rupees ROI and SHAP explainability.' }
+    { tag: 'Strongest project', id: 'work', text: 'Where to start if you only look at one: PhishGuard is the fullest MLOps story - drift detection, gated promotion, REST serving and CI/CD - while Telco Customer Churn is the strongest modelling-and-business story, with ROC-AUC 0.8480 on 5-fold cross-validation, recall up 41.6 percent with SMOTE, about 19.4 lakh rupees ROI and SHAP explainability.' },
+    { tag: 'Writing', id: 'writing', text: 'He writes long-form pieces about production ML on Medium - field notes on model drift, feature leakage and the gap between offline metrics and real-world behaviour. The Writing section of this site lists the latest posts.' }
   ];
 
   const SUGGESTIONS = [
@@ -46,6 +46,22 @@
     'What roles is he looking for?',
     'How do I get in touch?'
   ];
+
+  /* context-aware follow-ups, keyed by the top source section's id */
+  const DEFAULT_FU = [
+    'What ML systems has he shipped?',
+    "What's his MLOps stack?",
+    'What roles is he looking for?'
+  ];
+  const FOLLOWUPS = {
+    overview: ['What ML systems has he shipped?', 'Why should we hire him?', 'What roles is he looking for?'],
+    stack: ['What has he built with this stack?', 'How does he handle MLOps and deployment?', 'What is he currently learning?'],
+    experience: ['What was his biggest business impact?', 'Tell me about his GenAI and Agentic-AI work', 'What roles is he looking for?'],
+    work: ['How are these projects deployed?', 'Which project should I look at first?', "What's his strongest modelling result?"],
+    recognition: ['What ML systems has he shipped?', 'What certifications does he hold?', 'What is he looking for?'],
+    writing: ['What does he write about?', 'Which project should I look at first?', 'How do I get in touch?'],
+    contact: ['Is he open to remote work?', 'Where is he based?', 'What roles is he after?']
+  };
 
 
   const STOP = new Set('a an and the is are was were be of to in on for with at by from as it this that these those what which who whom how do does did can could would should will your my our you he his him she her they them their me us tell show about give more some any has have had'.split(' '));
@@ -99,7 +115,10 @@
     repo: 'github repository repositories open source code', repository: 'github repo open source code',
     repositories: 'github repo open source code', codebase: 'code github repository open source',
     deployment: 'mlops pipeline serving deploy production', deploy: 'deployment mlops serving production',
-    drift: 'mlops monitoring pipeline production', pipeline: 'mlops deployment serving drift', production: 'mlops deployment serving live'
+    drift: 'mlops monitoring pipeline production writing', pipeline: 'mlops deployment serving drift', production: 'mlops deployment serving live',
+    blog: 'writing medium articles posts', writes: 'writing medium articles blog', writing: 'medium articles blog posts field notes',
+    medium: 'writing articles blog posts', articles: 'writing medium blog posts', posts: 'writing medium blog articles',
+    leakage: 'writing feature medium'
   };
   function expand(q) {
     const base = tokens(q); const out = new Set(base);
@@ -181,7 +200,7 @@
     if (/^\s*(hi|hey|hello|yo|sup|hola|namaste|greetings|hii|hiii|heyy|heyyy)\b/.test(ql) && q.length < 18)
       return { text: "Hi! I'm Abhishek's portfolio assistant. Ask me about his ML and MLOps work, the projects he's shipped (PhishGuard, Telco churn, the system performance analyzer, thunderstorm forecasting), his experience at EXL, what roles he's after, or how to reach him.", srcs: [] };
     if (hit('what can you', 'who are you', 'what do you do', 'help me', 'how does this'))
-      return { text: "I answer questions about Abhishek from the content of this portfolio. Try: \u201cWhat ML systems has he shipped?\u201d, \u201cWhat's his MLOps stack?\u201d, \u201cTell me about the churn model\u201d, \u201cWhat is he looking for?\u201d or \u201cHow do I contact him?\u201d", srcs: [] };
+      return { text: 'I answer questions about Abhishek from the content of this portfolio. Try: “What ML systems has he shipped?”, “What\'s his MLOps stack?”, “Tell me about the churn model”, “What is he looking for?” or “How do I contact him?”', srcs: [] };
     if (hit('why hire', 'why should', 'stand out', 'stands out', 'set him apart', 'sets him apart', 'strength', 'strengths', 'differentiator', 'unique', 'special', 'what makes him', 'better than'))
       return pack(byTag('Strengths', 'Impact'));
     if (hit('impact', 'roi', 'business value', 'business impact', 'bottom line', 'return on', 'outcomes', 'how much value', 'money saved'))
@@ -194,6 +213,8 @@
       return pack(byTag('Availability'));
     if (hit('open source', 'opensource', 'repo', 'repos', 'repository', 'repositories', 'source code', 'codebase', 'public code'))
       return pack(byTag('Open source'));
+    if (hit('write', 'writes', 'writing', 'blog', 'medium', 'articles', 'article', 'posts', 'post', 'field notes'))
+      return pack(byTag('Writing'));
     if (hit('looking', 'open to', 'seeking', 'what role', 'which role', 'kind of role', 'hiring', 'wants', 'want', 'after'))
       return pack(byTag('Open to'));
     if (hit('phishguard', 'phishing')) return pack(byTag('PhishGuard'));
@@ -207,7 +228,7 @@
     if (hit('deployment', 'deploy', 'pipeline', 'drift', 'ci cd', 'cicd', 'monitoring', 'serving', 'production', 'promotion'))
       return pack(byTag('MLOps depth', 'MLOps stack'));
     if (hit('projects', 'project', 'built', 'build', 'shipped', 'systems', 'apps', 'portfolio', 'live', 'demos', 'made', 'created', 'what has he', 'what did he'))
-      return pack(byTag('Live work'), 'Ask about any one for details \u2014 e.g. \u201cTell me about PhishGuard\u201d or \u201cthe churn model\u201d.');
+      return pack(byTag('Live work'), 'Ask about any one for details - e.g. “Tell me about PhishGuard” or “the churn model”.');
     if (hit('skill', 'skills', 'stack', 'tech', 'tools', 'technologies', 'good at', 'expertise', 'languages', 'know', 'frameworks'))
       return pack(byTag('ML stack', 'MLOps stack', 'Data stack'));
     if (hit('experience', 'career', 'background', 'work history', 'job', 'jobs', 'worked', 'company', 'promotion', 'promotions', 'years', 'exl'))
@@ -228,7 +249,7 @@
     const hard = mode === 'semantic' ? 0.15 : 0.16;
     const soft = mode === 'semantic' ? 0.34 : 0.5;
     if (!top || top.s < hard)
-      return { text: "I don't have that specific detail in the portfolio. I can tell you about his ML/MLOps stack, the projects he's shipped (PhishGuard, churn, the performance analyzer, thunderstorm forecasting), his experience at EXL, his education, what roles he's after, or how to reach him \u2014 try one of those.", srcs: [] };
+      return { text: "I don't have that specific detail in the portfolio. I can tell you about his ML/MLOps stack, the projects he's shipped (PhishGuard, churn, the performance analyzer, thunderstorm forecasting), his experience at EXL, his education, what roles he's after, or how to reach him - try one of those.", srcs: [] };
     const parts = [top.c.text];
     if (hits[1] && hits[1].s > top.s * 0.72 && hits[1].c.tag !== top.c.tag) parts.push(hits[1].c.text);
     const seen = new Set(), srcs = [];
@@ -242,7 +263,9 @@
   function init() {
     if (typeof document === 'undefined') return;
 
-    const launch = el('button', 'ask-launch', '<span class="ask-spark">\u2726</span> Ask my portfolio');
+    const RMq = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    const launch = el('button', 'ask-launch', '<span class="ask-spark">✦</span> Ask my portfolio');
     launch.id = 'askLaunch'; launch.type = 'button'; launch.setAttribute('aria-label', 'Ask my portfolio');
 
     const modal = el('div', 'ask-modal'); modal.id = 'askModal'; modal.hidden = true;
@@ -250,25 +273,31 @@
     <div class="ask-backdrop" data-close></div>
     <div class="ask-panel" role="dialog" aria-modal="true" aria-label="Ask my portfolio">
       <div class="ask-head">
-        <span class="ask-title"><span class="ask-spark">\u2726</span> Ask my portfolio</span>
-        <button class="ask-x" data-close aria-label="Close">\u00d7</button>
-      </div>
-      <div class="ask-inputwrap">
-        <input class="ask-input" id="askInput" type="text" autocomplete="off" spellcheck="false"
-               placeholder="Ask about projects, ML stack, experience\u2026" />
-        <button class="ask-send" id="askSend" aria-label="Ask">\u2192</button>
+        <span class="ask-title"><span class="ask-spark">✦</span> Ask my portfolio</span>
+        <span class="ask-head-r">
+          <button class="ask-clear" id="askClear" type="button" hidden>↻ clear chat</button>
+          <button class="ask-x" data-close aria-label="Close">×</button>
+        </span>
       </div>
       <div class="ask-loading" id="askLoading" hidden>
         <span class="ask-spin"></span>
         <span id="askLoadingTxt">Loading the AI model… first time downloads ~25&nbsp;MB</span>
         <span class="ask-loadbar"><i id="askLoadBar"></i></span>
       </div>
-      <div class="ask-sugs" id="askSugs"></div>
       <div class="ask-body" id="askBody">
-        <p class="ask-hello">Ask a question about my work or pick one above.
-          <span class="ask-note" id="askNote">First question loads a small AI model in your browser (~25&nbsp;MB, once) — on a slow connection this can take a little while. Answers start instantly; they get smarter once it finishes.</span></p>
+        <div class="ask-hello" id="askHello">
+          <p>Retrieval-augmented chat over this portfolio. A sentence-embedding model runs in your browser, and every answer cites the section it came from.</p>
+          <span class="ask-note" id="askNote">First question loads a small AI model in your browser (~25&nbsp;MB, once) - on a slow connection this can take a little while. Answers start instantly; they get smarter once it finishes.</span>
+        </div>
+        <div class="ask-sugs" id="askSugs"></div>
+        <div class="ask-thread" id="askThread" aria-live="polite"></div>
       </div>
-      <div class="ask-foot"><span id="askMode">loads a tiny model on your first question \u00b7 nothing leaves your browser</span></div>
+      <div class="ask-inputwrap">
+        <input class="ask-input" id="askInput" type="text" autocomplete="off" spellcheck="false"
+               placeholder="Ask about projects, ML stack, experience…" />
+        <button class="ask-send" id="askSend" aria-label="Ask">→</button>
+      </div>
+      <div class="ask-foot"><span id="askMode">loads a tiny model on your first question · nothing leaves your browser</span></div>
     </div>`;
 
     document.body.appendChild(launch);
@@ -277,6 +306,9 @@
     const input = modal.querySelector('#askInput');
     const send = modal.querySelector('#askSend');
     const body = modal.querySelector('#askBody');
+    const thread = modal.querySelector('#askThread');
+    const hello = modal.querySelector('#askHello');
+    const clearBtn = modal.querySelector('#askClear');
     const sugs = modal.querySelector('#askSugs');
     const modeEl = modal.querySelector('#askMode');
     const loadEl = modal.querySelector('#askLoading');
@@ -285,17 +317,12 @@
 
     SUGGESTIONS.forEach(q => {
       const b = el('button', 'ask-sug', q); b.type = 'button';
-      b.addEventListener('click', () => { input.value = q; ask(); });
+      b.addEventListener('click', () => { askText(q); });
       sugs.appendChild(b);
     });
 
     let open = false, lastFocus = null;
-    function helloHTML() {
-      return `<p class="ask-hello">Ask a question about my work or pick one above.
-      <span class="ask-note" id="askNote">${noteText()}</span></p>`;
-    }
-    function reset() { input.value = ''; setBody(helloHTML()); input.focus(); }
-    function show() { open = true; modal.hidden = false; lastFocus = document.activeElement; document.body.style.overflow = 'hidden'; reset(); setTimeout(() => input.focus(), 30); }
+    function show() { open = true; modal.hidden = false; lastFocus = document.activeElement; document.body.style.overflow = 'hidden'; setTimeout(() => input.focus(), 30); }
     function hide() { open = false; modal.hidden = true; document.body.style.overflow = ''; if (lastFocus) try { lastFocus.focus(); } catch (e) { } }
 
     launch.addEventListener('click', show);
@@ -303,13 +330,15 @@
     modal.addEventListener('click', e => { if (e.target.hasAttribute('data-close')) hide(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) hide(); });
 
-    function setBody(html) { body.innerHTML = html; body.scrollTop = 0; }
+    clearBtn.addEventListener('click', () => {
+      thread.innerHTML = '';
+      hello.hidden = false; sugs.hidden = false; clearBtn.hidden = true;
+      input.value = ''; input.focus();
+    });
 
-    function hostileHTML(q) {
-      return '<div class="ask-q">' + q.replace(/</g, '&lt;') + '</div>'
-        + '<div class="ask-a"><p>Let\u2019s keep it professional \u2014 I\u2019m here to answer questions about Abhishek\u2019s work, projects and experience. Try \u201cWhat ML systems has he shipped?\u201d or \u201cHow do I get in touch?\u201d</p>'
-        + '<button type="button" class="ask-reset" id="askReset">\u21bb Ask another</button></div>';
-    }
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function paras(s) { return s.split('\n\n').map(p => '<p>' + esc(p) + '</p>').join(''); }
+    function scrollEnd() { body.scrollTop = body.scrollHeight; }
 
     let warming = false, warmed = false, busy = false;
     const MIN_LOAD_MS = 1400;
@@ -327,7 +356,7 @@
       function paint() {
         const v = Math.round(pct);
         if (loadBar) loadBar.style.width = v + '%';
-        setLoadTxt('Loading the AI model\u2026 ' + v + '%  (first visit only)');
+        setLoadTxt('Loading the AI model… ' + v + '%  (first visit only)');
       }
       paint();
       const crawl = setInterval(function () {
@@ -348,49 +377,104 @@
       if (loadEl) loadEl.hidden = true;
       warmed = true; warming = false;
       if (modeEl) modeEl.textContent = mode === 'semantic'
-        ? 'AI model ready \u00b7 runs locally, nothing leaves your browser'
-        : 'keyword mode \u00b7 nothing leaves your browser';
+        ? 'AI model ready · runs locally, nothing leaves your browser'
+        : 'keyword mode · nothing leaves your browser';
       const n = document.getElementById('askNote');
       if (n) n.textContent = noteText();
     }
 
-    function answerHTML(q, res) {
-      const ans = res.text.split('\n\n').map(p => `<p>${p}</p>`).join('');
-      const srcs = res.srcs.length
-        ? `<div class="ask-src"><span class="ask-srclbl">sources</span>${res.srcs.map(s => `<a href="#${s.id}" class="ask-chip" data-go="${s.id}">${s.tag}</a>`).join('')}</div>` : '';
-      return `<div class="ask-q">${q}</div><div class="ask-a">${ans}${srcs}<button type="button" class="ask-reset" id="askReset">\u21bb Ask another</button></div>`;
+    function addUser(q) {
+      const d = el('div', 'ask-q');
+      d.textContent = q;
+      thread.appendChild(d);
+      scrollEnd();
     }
 
-    function wireAfterAnswer() {
-      body.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', (ev) => {
+    function addTyping() {
+      const d = el('div', 'ask-typing', '<span class="ask-spin"></span><span>searching the portfolio…</span>');
+      thread.appendChild(d);
+      scrollEnd();
+      return d;
+    }
+
+    function wireSources(wrap) {
+      wrap.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', (ev) => {
         ev.preventDefault();
         const t = document.getElementById(a.getAttribute('data-go'));
         hide(); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }));
-      const rb = body.querySelector('#askReset');
-      if (rb) rb.addEventListener('click', reset);
     }
 
-    async function ask() {
-      const q = (input.value || '').trim();
+    function finishAnswer(wrap, res) {
+      if (res.srcs.length) {
+        const src = el('div', 'ask-src',
+          '<span class="ask-srclbl">sources</span>' +
+          res.srcs.map(s => `<a href="#${s.id}" class="ask-chip" data-go="${s.id}">${s.tag}</a>`).join(''));
+        wrap.appendChild(src);
+        wireSources(src);
+      }
+      const fu = (res.srcs[0] && FOLLOWUPS[res.srcs[0].id]) || DEFAULT_FU;
+      const fuWrap = el('div', 'ask-fu');
+      fu.forEach(q => {
+        const b = el('button', null, esc(q)); b.type = 'button';
+        b.addEventListener('click', () => { askText(q); });
+        fuWrap.appendChild(b);
+      });
+      wrap.appendChild(fuWrap);
+      scrollEnd();
+      busy = false;
+    }
+
+    function streamAnswer(res) {
+      const wrap = el('div', 'ask-a');
+      const txt = el('div', 'ask-a-txt');
+      wrap.appendChild(txt);
+      thread.appendChild(wrap);
+      const full = res.text;
+      if (RMq) {
+        txt.innerHTML = paras(full);
+        finishAnswer(wrap, res);
+        return;
+      }
+      let i = 0;
+      txt.classList.add('streaming');
+      (function tick() {
+        i = Math.min(full.length, i + 3);
+        txt.innerHTML = paras(full.slice(0, i));
+        scrollEnd();
+        if (i < full.length) setTimeout(tick, 12);
+        else { txt.classList.remove('streaming'); finishAnswer(wrap, res); }
+      })();
+    }
+
+    async function askText(q) {
+      q = (q || '').trim();
       if (!q || busy) return;
+      busy = true;
+      hello.hidden = true;
+      sugs.hidden = true;
+      clearBtn.hidden = false;
+      input.value = '';
+      addUser(q);
 
       if (isHostile(q)) {
-        setBody(hostileHTML(q));
-        wireAfterAnswer();
+        streamAnswer({ text: 'Let’s keep it professional - I’m here to answer questions about Abhishek’s work, projects and experience. Try “What ML systems has he shipped?” or “How do I get in touch?”', srcs: [] });
         return;
       }
 
-      busy = true; warm();
-      setBody('<div class="ask-load"><span class="ask-spin"></span><span>searching\u2026</span></div>');
+      warm();
+      const typing = addTyping();
       try {
         const hits = await retrieve(q, 4);
-        setBody(answerHTML(q, compose(q, hits)));
-        wireAfterAnswer();
+        typing.remove();
+        streamAnswer(compose(q, hits));
       } catch (e) {
-        setBody('<p class="ask-hello">Something went wrong answering that. Please try again.</p>');
-      } finally { busy = false; }
+        typing.remove();
+        streamAnswer({ text: 'Something went wrong answering that. Please try again.', srcs: [] });
+      }
     }
+
+    function ask() { askText(input.value); }
 
     send.addEventListener('click', ask);
     input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ask(); } });
@@ -399,7 +483,7 @@
   function noteText() {
     return mode === 'semantic'
       ? 'AI model ready - answers run locally in your browser, nothing leaves it.'
-      : 'First question loads a small AI model in your browser (~25\u00a0MB, once) — on a slow connection this can take a little while. Answers start instantly; they get smarter once it finishes.';
+      : 'First question loads a small AI model in your browser (~25 MB, once) - on a slow connection this can take a little while. Answers start instantly; they get smarter once it finishes.';
   }
 
   init();

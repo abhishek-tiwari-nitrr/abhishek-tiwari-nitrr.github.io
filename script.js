@@ -100,7 +100,7 @@ async function cachedJSON(url, key, minutes) {
     railLinks.forEach(function (a) {
         railMap[a.dataset.rail] = a;
     });
-    var ids = ['masthead', 'overview', 'stack', 'experience', 'work', 'recognition', 'contact'];
+    var ids = ['masthead', 'overview', 'stack', 'experience', 'work', 'recognition', 'writing', 'contact'];
     var spy = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
             if (en.isIntersecting) {
@@ -388,6 +388,188 @@ async function cachedJSON(url, key, minutes) {
             settle($('#ghContrib'), 850);
         });
 
+    var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    /* per-project live stats from the GitHub API - on failure we show nothing rather than invent numbers */
+    cachedJSON('https://api.github.com/users/' + USER + '/repos?per_page=100', 'gh-repolist', 60)
+        .then(function (list) {
+            if (!Array.isArray(list)) return;
+            var byName = {};
+            list.forEach(function (r) {
+                byName[String(r.name).toLowerCase()] = r;
+            });
+            $$('.fig[data-repo]').forEach(function (fig) {
+                var r = byName[fig.getAttribute('data-repo').toLowerCase()];
+                if (!r) return;
+                var head = $('.fig-head', fig);
+                if (!head) return;
+                var bits = [],
+                    d = new Date(r.pushed_at);
+                if (r.stargazers_count > 0) bits.push('★ ' + r.stargazers_count);
+                if (!isNaN(d)) bits.push('pushed ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear());
+                if (!bits.length) return;
+                var s = document.createElement('span');
+                s.className = 'fig-tele';
+                s.title = 'live from the GitHub API';
+                s.textContent = bits.join(' · ');
+                head.appendChild(s);
+            });
+        }).catch(function () { });
+
+    /* writing: latest Medium posts - live RSS refresh over a truthful static fallback */
+    (function () {
+        var listEl = document.getElementById('postList');
+        if (!listEl) return;
+        var FALLBACK = [{
+            title: 'Your Model Was Perfect. Then the World Changed.',
+            link: 'https://medium.com/@abhishek-tiwari-nitrr/your-model-was-perfect-then-the-world-changed-6a15c3642a03',
+            date: '2026-04-01'
+        }, {
+            title: "Your Model Got 99% Accuracy. That's the Problem.",
+            link: 'https://medium.com/@abhishek-tiwari-nitrr/your-model-got-99-accuracy-thats-the-problem-7f8d7f34fe1b',
+            date: '2026-03-25'
+        }];
+
+        function fmt(iso) {
+            var d = new Date(iso);
+            return isNaN(d) ? '' : MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+        }
+
+        function render(posts, live) {
+            listEl.innerHTML = '';
+            posts.slice(0, 4).forEach(function (p) {
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = p.link;
+                a.target = '_blank';
+                a.rel = 'noopener';
+                a.innerHTML = '<span class="t"></span><span class="m"></span>';
+                a.querySelector('.t').textContent = p.title;
+                a.querySelector('.m').textContent = (fmt(p.date) ? fmt(p.date) + ' · ' : '') + 'Medium ↗';
+                li.appendChild(a);
+                listEl.appendChild(li);
+            });
+            var tag = document.getElementById('postsSrc');
+            if (tag) tag.textContent = live ? 'live from the Medium RSS feed' : 'latest from Medium';
+        }
+        render(FALLBACK, false);
+        cachedJSON('https://api.rss2json.com/v1/api.json?rss_url=' +
+                encodeURIComponent('https://medium.com/feed/@abhishek-tiwari-nitrr'), 'medium-feed', 60)
+            .then(function (d) {
+                if (d && d.status === 'ok' && Array.isArray(d.items) && d.items.length) {
+                    render(d.items.map(function (it) {
+                        return {
+                            title: it.title,
+                            link: (it.link || '').split('?')[0],
+                            date: it.pubDate
+                        };
+                    }), true);
+                }
+            }).catch(function () { });
+    })();
+
+    /* PhishGuard interactive pipeline (FIG.01) - stage notes + LLD diagrams pulled from the repo */
+    (function () {
+        var pipe = document.getElementById('pgPipe');
+        if (!pipe) return;
+        var RAW = 'https://raw.githubusercontent.com/abhishek-tiwari-nitrr/PhishGuard/main/docs/2.%20Low%20Level%20Design/';
+        var GH = 'https://github.com/abhishek-tiwari-nitrr/PhishGuard/blob/main/docs/2.%20Low%20Level%20Design/';
+        var STAGES = [{
+            name: 'Data ingestion',
+            img: '1.%20data_ingestion_lld.png',
+            txt: 'Pulls the phishing dataset out of MongoDB and emits a typed ingestion artifact for the next stage.'
+        }, {
+            name: 'Data validation',
+            img: '2.%20data_validation_lld.png',
+            txt: 'Schema and data-quality checks — nothing unvalidated reaches training.'
+        }, {
+            name: 'Data transformation',
+            img: '3.%20data_transformation_lld.png',
+            txt: 'Feature engineering over 30 URL and page-level features; the preprocessing artifact is saved and reused at serving time.'
+        }, {
+            name: 'Model trainer',
+            img: '4.%20model_trainer_lld.png',
+            txt: 'Trains multiple candidate models with GridSearchCV; every run is tracked in MLflow / DagsHub.'
+        }, {
+            name: 'Model evaluation',
+            img: '5.%20model_evaluation_lld.png',
+            txt: 'KS-test data-drift report plus an F1 comparison against production — promotion needs a ≥2% improvement.'
+        }, {
+            name: 'Model pusher',
+            img: '6.%20model_pusher_lld.png',
+            txt: 'Ships the accepted model to production_model/, where the FastAPI + Streamlit serving layer picks it up.'
+        }];
+        var btns = $$('.pipe-stage', pipe),
+            panel = document.getElementById('pgDetail'),
+            txt = document.getElementById('pgTxt'),
+            media = document.getElementById('pgMedia'),
+            current = -1;
+
+        function openStage(i) {
+            if (i === current) {
+                current = -1;
+                panel.hidden = true;
+                btns[i].setAttribute('aria-selected', 'false');
+                return;
+            }
+            current = i;
+            btns.forEach(function (b, k) {
+                b.setAttribute('aria-selected', String(k === i));
+            });
+            var s = STAGES[i];
+            txt.innerHTML = '<b>' + (i + 1) + ' / 6 · ' + s.name + '.</b> ' + s.txt;
+            media.innerHTML = '';
+            var img = document.createElement('img');
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.src = RAW + s.img;
+            img.alt = s.name + ' low-level design diagram from the PhishGuard repo';
+            var cap = document.createElement('a');
+            cap.className = 'pipe-cap';
+            cap.href = GH + s.img;
+            cap.target = '_blank';
+            cap.rel = 'noopener';
+            cap.textContent = 'docs/2. Low Level Design/' + decodeURIComponent(s.img) + ' ↗';
+            media.appendChild(img);
+            media.appendChild(cap);
+            panel.hidden = false;
+        }
+        btns.forEach(function (b, i) {
+            b.addEventListener('click', function () {
+                openStage(i);
+            });
+        });
+    })();
+
+    /* PhishGuard inline live demo — embeds the deployed Streamlit app on first open */
+    (function () {
+        var btn = document.getElementById('pgDemoBtn'),
+            box = document.getElementById('pgDemo'),
+            body = document.getElementById('pgDemoBody'),
+            loaded = false;
+        if (!btn || !box) return;
+        btn.addEventListener('click', function () {
+            var open = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!open));
+            box.hidden = open;
+            btn.textContent = open ? '⚡ Run it here' : '⚡ Hide demo';
+            if (!loaded && !open) {
+                loaded = true;
+                var f = document.createElement('iframe');
+                f.className = 'demo-frame';
+                f.src = 'https://abhishek-tiwari-nitrr-phishguard.streamlit.app/?embed=true';
+                f.title = 'PhishGuard live demo — deployed Streamlit app';
+                f.loading = 'lazy';
+                f.allow = 'clipboard-write';
+                body.appendChild(f);
+            }
+            if (!open) box.scrollIntoView({
+                behavior: RM ? 'auto' : 'smooth',
+                block: 'nearest'
+            });
+        });
+    })();
+
     (function () {
         var statusEl = document.getElementById('trainStatus'),
             statusTxt = document.getElementById('statusTxt');
@@ -539,7 +721,7 @@ async function cachedJSON(url, key, minutes) {
             setTimeout(run, 450);
         }
 
-        /* interactive crosshair — hover the chart to read epoch / loss / acc */
+        /* interactive crosshair - hover the chart to read epoch / loss / acc */
         if (!coarse) {
             var svg = document.getElementById('lossPlot'),
                 plot = svg.parentNode;
@@ -766,11 +948,32 @@ async function cachedJSON(url, key, minutes) {
         {
             g: 'Navigate',
             ic: '§',
-            lbl: 'Contact',
+            lbl: 'Writing',
             meta: '06',
+            kw: 'blog posts medium articles field notes drift leakage',
+            run: function () {
+                goTo('writing');
+            }
+        },
+        {
+            g: 'Navigate',
+            ic: '§',
+            lbl: 'Contact',
+            meta: '07',
             kw: 'email message hire reach',
             run: function () {
                 goTo('contact');
+            }
+        },
+        {
+            g: 'Actions',
+            ic: '✦',
+            lbl: 'Ask my portfolio (AI chat)',
+            meta: 'assistant',
+            kw: 'ai chat ask question assistant semantic search',
+            run: function () {
+                var b = document.getElementById('askLaunch');
+                if (b) b.click();
             }
         },
         {
