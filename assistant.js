@@ -260,12 +260,25 @@
 
   function el(tag, cls, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
 
+  /* the little ghost-bot mascot, drawn in code so it follows the theme */
+  function petSVG(cls) {
+    return '<svg class="' + cls + '" viewBox="0 0 64 64" aria-hidden="true" focusable="false">'
+      + '<g class="pet-f">'
+      + '<path class="pet-body" d="M13 42 v-13 a19 19 0 0 1 38 0 v13 q-4.75 4.5 -9.5 0 q-4.75 -4.5 -9.5 0 q-4.75 4.5 -9.5 0 q-4.75 -4.5 -9.5 0 z"/>'
+      + '<ellipse class="pet-face" cx="32" cy="27" rx="13.5" ry="10.5"/>'
+      + '<g class="pet-eyes"><ellipse cx="26.5" cy="27" rx="2.6" ry="4.1"/><ellipse cx="37.5" cy="27" rx="2.6" ry="4.1"/></g>'
+      + '<g class="pet-smile"><path d="M23.5 28 q3 -4.5 6 0"/><path d="M34.5 28 q3 -4.5 6 0"/></g>'
+      + '<circle class="pet-gem" cx="32" cy="12" r="1.7"/>'
+      + '<text class="pet-q" x="49" y="15">?</text>'
+      + '</g></svg>';
+  }
+
   function init() {
     if (typeof document === 'undefined') return;
 
     const RMq = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-    const launch = el('button', 'ask-launch', '<span class="ask-spark">✦</span> Ask my portfolio');
+    const launch = el('button', 'ask-launch', petSVG('ask-pet-mini') + ' Ask my portfolio');
     launch.id = 'askLaunch'; launch.type = 'button'; launch.setAttribute('aria-label', 'Ask my portfolio');
 
     const modal = el('div', 'ask-modal'); modal.id = 'askModal'; modal.hidden = true;
@@ -293,6 +306,7 @@
         <div class="ask-thread" id="askThread" aria-live="polite"></div>
       </div>
       <div class="ask-inputwrap">
+        <div class="ask-pet" id="askPet" aria-hidden="true">${petSVG('pet-svg')}<span class="pet-bub" id="askBub"></span></div>
         <input class="ask-input" id="askInput" type="text" autocomplete="off" spellcheck="false"
                placeholder="Ask about projects, ML stack, experience…" />
         <button class="ask-send" id="askSend" aria-label="Ask">→</button>
@@ -304,7 +318,62 @@
     document.body.appendChild(modal);
 
     const input = modal.querySelector('#askInput');
+    const pet = modal.querySelector('#askPet');
     const send = modal.querySelector('#askSend');
+
+    /* mascot state machine: '' | typing | think | talk | happy */
+    function petState(s) {
+      if (!pet) return;
+      pet.classList.remove('typing', 'think', 'talk', 'happy', 'nudge');
+      if (s) pet.classList.add(s);
+    }
+
+    /* idle nudge: after 30s of silence the mascot asks for a question */
+    const HINTS = [
+      'psst… ask me anything',
+      'try “what has he shipped?”',
+      'I’ve read this whole portfolio',
+      'type a question - I’m quick'
+    ];
+    const bub = modal.querySelector('#askBub');
+    let idleT = null, nudgeT = null, hintI = 0;
+    function armIdle() {
+      clearTimeout(idleT);
+      idleT = setTimeout(petNudge, 30000);
+    }
+    function petNudge() {
+      if (!pet || !open || busy ||
+        pet.classList.contains('think') || pet.classList.contains('talk')) { armIdle(); return; }
+      if (bub) bub.textContent = input.value.trim() ? 'press ↵ to ask' : HINTS[hintI++ % HINTS.length];
+      pet.classList.add('nudge');
+      clearTimeout(nudgeT);
+      nudgeT = setTimeout(() => pet.classList.remove('nudge'), 4200);
+      armIdle();
+    }
+
+    /* one-shot reaction per keystroke: 'key' bounce or 'erase' shake.
+       Remove + reflow + re-add so the animation restarts on every key. */
+    function petPulse(cls) {
+      if (!pet || RMq) return;
+      pet.classList.remove('key', 'erase');
+      void pet.offsetWidth;
+      pet.classList.add(cls);
+    }
+
+    let petT = null, prevLen = 0;
+    input.addEventListener('input', () => {
+      if (RMq || !pet) return;
+      const len = input.value.length;
+      petPulse(len < prevLen ? 'erase' : 'key');
+      prevLen = len;
+      if (!pet.classList.contains('think') && !pet.classList.contains('talk')) petState('typing');
+      armIdle();
+      clearTimeout(petT);
+      petT = setTimeout(() => {
+        pet.classList.remove('key', 'erase');
+        if (pet.classList.contains('typing')) petState('');
+      }, 900);
+    });
     const body = modal.querySelector('#askBody');
     const thread = modal.querySelector('#askThread');
     const hello = modal.querySelector('#askHello');
@@ -322,8 +391,8 @@
     });
 
     let open = false, lastFocus = null;
-    function show() { open = true; modal.hidden = false; lastFocus = document.activeElement; document.body.style.overflow = 'hidden'; setTimeout(() => input.focus(), 30); }
-    function hide() { open = false; modal.hidden = true; document.body.style.overflow = ''; if (lastFocus) try { lastFocus.focus(); } catch (e) { } }
+    function show() { open = true; modal.hidden = false; lastFocus = document.activeElement; document.body.style.overflow = 'hidden'; armIdle(); setTimeout(() => input.focus(), 30); }
+    function hide() { open = false; modal.hidden = true; document.body.style.overflow = ''; clearTimeout(idleT); petState(''); if (lastFocus) try { lastFocus.focus(); } catch (e) { } }
 
     launch.addEventListener('click', show);
     launch.addEventListener('click', warm);
@@ -334,6 +403,8 @@
       thread.innerHTML = '';
       hello.hidden = false; sugs.hidden = false; clearBtn.hidden = true;
       input.value = ''; input.focus();
+      prevLen = 0;
+      petState('');
     });
 
     function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
@@ -423,9 +494,13 @@
       wrap.appendChild(fuWrap);
       scrollEnd();
       busy = false;
+      petState('happy');
+      setTimeout(() => { if (pet && pet.classList.contains('happy')) petState(''); }, 2200);
+      armIdle();
     }
 
     function streamAnswer(res) {
+      petState('talk');
       const wrap = el('div', 'ask-a');
       const txt = el('div', 'ask-a-txt');
       wrap.appendChild(txt);
@@ -455,7 +530,10 @@
       sugs.hidden = true;
       clearBtn.hidden = false;
       input.value = '';
+      prevLen = 0;
       addUser(q);
+      petState('think');
+      armIdle();
 
       if (isHostile(q)) {
         streamAnswer({ text: 'Let’s keep it professional - I’m here to answer questions about Abhishek’s work, projects and experience. Try “What ML systems has he shipped?” or “How do I get in touch?”', srcs: [] });

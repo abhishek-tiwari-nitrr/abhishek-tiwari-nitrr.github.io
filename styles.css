@@ -2786,8 +2786,300 @@ button.kbd-hint:hover kbd {
 }
 
 .ask-panel .ask-inputwrap {
+    position: relative;
     border-top: 1px solid var(--line-2);
     padding: .85rem 1.2rem .95rem
+}
+
+/* ——— assistant: ghost-bot mascot ——— */
+
+.ask-pet {
+    position: absolute;
+    right: 64px;
+    bottom: calc(100% - 1.2rem);
+    width: 44px;
+    height: 44px;
+    pointer-events: none;
+    z-index: 2;
+    transition: transform .3s ease;
+}
+
+.ask-pet svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.ask-pet-mini {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    overflow: visible;
+}
+
+.pet-f,
+.pet-eyes,
+.pet-smile,
+.pet-q {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+}
+
+.pet-body {
+    fill: #f7faf8;
+    stroke: var(--line);
+    stroke-width: 1.5;
+}
+
+html[data-theme="dark"] .pet-body {
+    fill: #e9eef2;
+    stroke: rgba(111, 141, 255, .4);
+}
+
+.pet-face {
+    fill: #14181a;
+}
+
+.pet-eyes ellipse {
+    fill: var(--signal);
+}
+
+.pet-eyes {
+    filter: drop-shadow(0 0 2.5px var(--signal));
+    animation: petBlink 4.6s infinite;
+}
+
+.pet-smile {
+    opacity: 0;
+    filter: drop-shadow(0 0 2.5px var(--signal));
+}
+
+.pet-smile path {
+    fill: none;
+    stroke: var(--signal);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+}
+
+.pet-gem {
+    fill: var(--signal);
+    opacity: .85;
+}
+
+.pet-q {
+    font: 700 14px var(--mono);
+    fill: var(--signal);
+    opacity: 0;
+}
+
+.pet-f {
+    animation: petBob 3.4s ease-in-out infinite;
+}
+
+@keyframes petBob {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg)
+    }
+
+    50% {
+        transform: translateY(-2.5px) rotate(-2deg)
+    }
+}
+
+@keyframes petBlink {
+
+    0%,
+    91%,
+    100% {
+        transform: scaleY(1)
+    }
+
+    94% {
+        transform: scaleY(.15)
+    }
+}
+
+/* typing: lean over the input, bob faster, eyes reading the text below */
+.ask-pet.typing {
+    transform: translateY(2px) rotate(-4deg)
+}
+
+.ask-pet.typing .pet-f {
+    animation-duration: 1.1s
+}
+
+.ask-pet.typing .pet-eyes {
+    animation: none;
+    transform: translate(-1px, 1.5px);
+}
+
+/* per-keystroke reactions: a press-bounce on write, a head-shake on delete */
+.ask-pet.key svg {
+    animation: petKey .18s ease;
+}
+
+.ask-pet.erase svg {
+    animation: petErase .26s ease;
+}
+
+.ask-pet.erase .pet-eyes {
+    animation: none;
+    transform: translateY(1px) scaleY(.45);
+}
+
+@keyframes petKey {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1)
+    }
+
+    40% {
+        transform: translateY(3px) scale(.95)
+    }
+}
+
+@keyframes petErase {
+
+    0%,
+    100% {
+        transform: translateX(0) rotate(0)
+    }
+
+    30% {
+        transform: translateX(-2.5px) rotate(-6deg)
+    }
+
+    70% {
+        transform: translateX(2.5px) rotate(6deg)
+    }
+}
+
+/* thinking: eyes up + a floating question mark (like the ref sheet's "?" pose) */
+.ask-pet.think .pet-eyes {
+    animation: none;
+    transform: translateY(-1.5px)
+}
+
+.ask-pet.think .pet-q {
+    opacity: 1;
+    animation: petQ 1.5s ease-in-out infinite
+}
+
+@keyframes petQ {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: .35
+    }
+
+    50% {
+        transform: translateY(-3px);
+        opacity: 1
+    }
+}
+
+/* talking: chattering eyes while the answer streams */
+.ask-pet.talk .pet-eyes {
+    animation: petTalk .55s ease-in-out infinite
+}
+
+@keyframes petTalk {
+
+    0%,
+    100% {
+        transform: scaleY(1)
+    }
+
+    50% {
+        transform: scaleY(.5)
+    }
+}
+
+/* idle nudge: speech bubble + attention wiggle after 30s of silence */
+.pet-bub {
+    position: absolute;
+    bottom: calc(100% + 3px);
+    right: -6px;
+    white-space: nowrap;
+    font-family: var(--mono);
+    font-size: .68rem;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 9px 9px 3px 9px;
+    padding: .32rem .6rem;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateY(5px) scale(.9);
+    transform-origin: bottom right;
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+.ask-pet.nudge .pet-bub {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.ask-pet.nudge svg {
+    animation: petKnock .95s ease 2;
+}
+
+@keyframes petKnock {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0)
+    }
+
+    18% {
+        transform: translateY(-4.5px) rotate(-7deg)
+    }
+
+    38% {
+        transform: translateY(1px) rotate(5deg)
+    }
+
+    58% {
+        transform: translateY(-3px) rotate(-4deg)
+    }
+
+    78% {
+        transform: translateY(.5px) rotate(2deg)
+    }
+}
+
+/* happy: ^ ^ eyes + a little hop when the answer lands */
+.ask-pet.happy .pet-eyes {
+    opacity: 0
+}
+
+.ask-pet.happy .pet-smile {
+    opacity: 1
+}
+
+.ask-pet.happy .pet-f {
+    animation: petHop .9s ease-in-out
+}
+
+@keyframes petHop {
+
+    0%,
+    100% {
+        transform: translateY(0)
+    }
+
+    35% {
+        transform: translateY(-6px) rotate(3deg)
+    }
+
+    65% {
+        transform: translateY(-1px)
+    }
 }
 
 .fig-tele {
